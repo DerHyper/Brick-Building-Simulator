@@ -32,7 +32,10 @@ public class Grid3D
         for (int x = 0; x < xMax; x++)
             for (int y = 0; y < yMax; y++)
                 for (int z = 0; z < zMax; z++)
-                    debugTextArray[x, y, z] = WorldText.CreateWorldText(gridArray[x, y, z].ToString(), GetWorldPosition(x, y, z), 10, Color.white);
+                {
+                    Vector3 textPosition = GetWorldPosition(x, y, z) + Vector3.one*0.5f;
+                    debugTextArray[x, y, z] = WorldText.CreateWorldText(gridArray[x, y, z].ToString(), textPosition, 10, Color.white);
+                }
     }
 
     private void DrawGridLines()
