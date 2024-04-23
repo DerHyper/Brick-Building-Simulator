@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ public static class CameraToWorld
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(ray, out RaycastHit raycastHit);
+        if (raycastHit.collider == null) throw new OutsideGridException();
         Vector3 positionAdjacentToBlock = raycastHit.point + distanceMultiplier*raycastHit.normal;
         Vector3Int flooredPosition = Vector3Int.FloorToInt(positionAdjacentToBlock);
         return flooredPosition;

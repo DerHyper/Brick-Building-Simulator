@@ -23,7 +23,16 @@ public class InputManager : MonoBehaviour
 
     private void BuildBlockAtMousePoint()
     {
-        Vector3Int gridPosition = CameraToWorld.GetMouseBlockPlacementPosition();
+        Vector3Int gridPosition;
+        try
+        {
+            gridPosition = CameraToWorld.GetMouseBlockPlacementPosition();
+        }
+        catch (OutsideGridException)
+        {
+            Debug.Log("Exception catched: Tried to place BuildingBrick outside the grid.");
+            return;
+        }
 
         gridManager.BuildBlock(gridPosition, block);
     }
