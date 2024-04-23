@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
+    public Vector3Int Size;
     private Grid3D grid;
     private void Start()
     {
-        grid = new Grid3D(2,2,2);
+        grid = new Grid3D(Size.x, Size.y, Size.z);
     }
 
     public void BuildBlock(Vector3Int position, GameObject value)
@@ -17,7 +18,7 @@ public class GridManager : MonoBehaviour
             Debug.Log(position.ToString() + " is not a valid Position to build.");
             return;
         }
-        
+
         GameObject block = Instantiate(value,position,Quaternion.identity);
         grid.SetGridObject(position, block);
     }

@@ -20,6 +20,7 @@ class WorldText
         gameObject.AddComponent<TextMesh>();
         Transform transform = gameObject.transform;
         transform.Rotate(90,0,0);
+        transform.localScale = Vector3.one*0.1f;
         transform.localPosition = localPosition;
 
         TextMesh textMesh = gameObject.GetComponent<TextMesh>();
