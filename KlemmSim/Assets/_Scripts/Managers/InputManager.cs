@@ -5,6 +5,7 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     GridManager gridManager;
+    public GameObject block;
 
     private void Start()
     {
@@ -24,7 +25,7 @@ public class InputManager : MonoBehaviour
     {
         Vector3Int gridPosition = CameraToWorld.GetMouseBlockPlacementPosition();
 
-        gridManager.BuildBlock(gridPosition, 99);
+        gridManager.BuildBlock(gridPosition, block);
     }
 
     

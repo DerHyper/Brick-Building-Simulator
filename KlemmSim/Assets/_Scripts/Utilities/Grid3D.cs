@@ -8,7 +8,7 @@ public class Grid3D
     private int xMax;
     private int yMax;
     private int zMax;
-    private int [,,] gridArray;
+    private GameObject [,,] gridArray;
     private TextMesh[,,] debugTextArray;
 
     // Constructor
@@ -18,9 +18,7 @@ public class Grid3D
         this.yMax = yMax;
         this.zMax = zMax;
         debugTextArray = new TextMesh[xMax, yMax, zMax];
-
-        gridArray = new int[xMax, yMax, zMax];
-
+        gridArray = new GameObject[xMax, yMax, zMax];
         
         DrawDebugText();
         DrawGridLines();
@@ -34,7 +32,14 @@ public class Grid3D
                 for (int z = 0; z < zMax; z++)
                 {
                     Vector3 textPosition = GetWorldPosition(x, y, z) + Vector3.one*0.5f;
-                    debugTextArray[x, y, z] = WorldText.CreateWorldText(gridArray[x, y, z].ToString(), textPosition, 10, Color.white);
+                    if (debugTextArray[x, y, z] != null)
+                    {
+                        debugTextArray[x, y, z] = WorldText.CreateWorldText(gridArray[x, y, z].name, textPosition, 10, Color.white);
+                    } 
+                    else 
+                    {
+                        debugTextArray[x, y, z] = WorldText.CreateWorldText("", textPosition, 10, Color.white);
+                    }
                 }
     }
 
@@ -61,20 +66,18 @@ public class Grid3D
         return new Vector3(x, y, z);
     }
 
-    public void SetGridObject(Vector3Int position, int value)
+    public void SetGridObject(Vector3Int position, GameObject value)
     {
-        if (isNotInBuildingLimit(position)) 
-            Debug.Log(position.ToString() + " is not a valid Position to build.");
         
         int x = position.x;
         int y = position.y;
         int z = position.z;
         
         gridArray[x,y,z] = value;
-        debugTextArray[x,y,z].text = value.ToString();
+        debugTextArray[x,y,z].text = value.name;
     }
 
-    private bool isNotInBuildingLimit(Vector3Int Position)
+    public bool isNotInBuildingLimit(Vector3Int Position)
     {
         if (Position.x < 0 || Position.x >= xMax) return true;
         if (Position.y < 0 || Position.y >= yMax) return true;

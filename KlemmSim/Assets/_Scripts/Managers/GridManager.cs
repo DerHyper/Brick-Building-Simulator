@@ -10,8 +10,15 @@ public class GridManager : MonoBehaviour
         grid = new Grid3D(2,2,2);
     }
 
-    public void BuildBlock(Vector3Int position, int value)
+    public void BuildBlock(Vector3Int position, GameObject value)
     {
-        grid.SetGridObject(position, value);
+        if (grid.isNotInBuildingLimit(position)) 
+        {
+            Debug.Log(position.ToString() + " is not a valid Position to build.");
+            return;
+        }
+        
+        GameObject block = Instantiate(value,position,Quaternion.identity);
+        grid.SetGridObject(position, block);
     }
 }
