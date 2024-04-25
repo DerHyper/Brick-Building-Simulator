@@ -8,7 +8,7 @@ public class Grid3D
     private int xMax;
     private int yMax;
     private int zMax;
-    private GameObject [,,] gridArray;
+    private BuildingBlockDisplay [,,] gridArray;
     private TextMesh[,,] debugTextArray;
 
     // Constructor
@@ -18,7 +18,7 @@ public class Grid3D
         this.yMax = yMax;
         this.zMax = zMax;
         debugTextArray = new TextMesh[xMax, yMax, zMax];
-        gridArray = new GameObject[xMax, yMax, zMax];
+        gridArray = new BuildingBlockDisplay[xMax, yMax, zMax];
         
         DrawDebugText();
         DrawGridLines();
@@ -66,7 +66,7 @@ public class Grid3D
         return new Vector3(x, y, z);
     }
 
-    public void SetGridObject(Vector3Int position, GameObject value)
+    public void SetGridObject(Vector3Int position, BuildingBlockDisplay value)
     {
         
         int x = position.x;

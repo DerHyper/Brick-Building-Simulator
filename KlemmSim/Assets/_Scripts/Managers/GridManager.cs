@@ -11,7 +11,7 @@ public class GridManager : MonoBehaviour
         grid = new Grid3D(Size.x, Size.y, Size.z);
     }
 
-    public void BuildBlock(Vector3Int position, GameObject value)
+    public void BuildBlock(Vector3Int position, BuildingBlock block)
     {
         if (grid.isNotInBuildingLimit(position)) 
         {
@@ -19,7 +19,11 @@ public class GridManager : MonoBehaviour
             return;
         }
 
-        GameObject block = Instantiate(value,position,Quaternion.identity);
-        grid.SetGridObject(position, block);
+        GameObject blockGameObject = Instantiate(block.model, position, Quaternion.identity).gameObject;
+        BuildingBlockDisplay blockDisplay = blockGameObject.AddComponent<BuildingBlockDisplay>();
+        blockDisplay.block = block;
+        blockDisplay.UpdateDisplay();
+       
+        grid.SetGridObject(position, blockDisplay);
     }
 }

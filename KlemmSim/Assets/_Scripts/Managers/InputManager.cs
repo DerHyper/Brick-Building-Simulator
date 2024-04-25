@@ -5,7 +5,7 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     GridManager gridManager;
-    public GameObject block;
+    public BuildingBlock block;
 
     private void Start()
     {
