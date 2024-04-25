@@ -27,4 +27,14 @@ public static class Finder
         }
         return gridManager;
     }
+
+    public static T FindOrCreateComponent<T>(GameObject target) where T : Component
+    {
+        T foundComponent = target.GetComponent<T>();
+        if (foundComponent == null)
+        {
+            return target.AddComponent<T>();
+        }
+        return foundComponent;
+    }
 }
