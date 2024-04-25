@@ -21,8 +21,7 @@ public class GridManager : MonoBehaviour
 
         GameObject blockGameObject = Instantiate(block.model, position, Quaternion.identity).gameObject;
         BuildingBlockDisplay blockDisplay = blockGameObject.AddComponent<BuildingBlockDisplay>();
-        blockDisplay.block = block;
-        blockDisplay.UpdateDisplay();
+        blockDisplay.UpdateDisplay(block);
        
         grid.SetGridObject(position, blockDisplay);
     }

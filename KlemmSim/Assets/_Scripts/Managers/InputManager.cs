@@ -34,6 +34,7 @@ public class InputManager : MonoBehaviour
             return;
         }
 
+        Debug.Log(gridPosition,this);
         gridManager.BuildBlock(gridPosition, block);
     }
 

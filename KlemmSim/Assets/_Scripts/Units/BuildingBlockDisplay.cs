@@ -12,21 +12,32 @@ public class BuildingBlockDisplay : MonoBehaviour
     public Transform model;
     private BoxCollider boxCollider;
     
-    void Start()
+    public void UpdateDisplay(BuildingBlock block)
     {
-        UpdateDisplay();
+        this.block = block;
+        UpdateVariables();
+        UpdateCollider();
+        UpdatePosition();
     }
 
-    public void UpdateDisplay()
+    private void UpdateCollider()
+    {
+        Vector3 dimendions = new Vector3(block.sizeX, block.sizeY, block.sizeZ);
+        boxCollider = Finder.FindOrCreateComponent<BoxCollider>(gameObject);
+        boxCollider.size = dimendions;
+    }
+
+     private void UpdatePosition()
+    {
+        Vector3 dimendions = new Vector3(block.sizeX, block.sizeY, block.sizeZ);
+        gameObject.transform.localPosition += dimendions*0.5f;
+    }
+
+    private void UpdateVariables()
     {
         this.sizeX = block.sizeX;
         this.sizeY = block.sizeY;
         this.sizeZ = block.sizeZ;
         this.model = block.model;
-        Vector3 dimendions = new Vector3(block.sizeX, block.sizeY, block.sizeZ);
-        boxCollider = Finder.FindOrCreateComponent<BoxCollider>(gameObject);
-        boxCollider.size = dimendions;
-        boxCollider.center = dimendions*0.5f;
     }
-
 }

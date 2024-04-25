@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sizeX: 1
   sizeY: 1
-  sizeZ: 1
-  model: {fileID: 3390214410558127982, guid: e9fbed17eb318b34b9f3066c73eab9f7, type: 3}
+  sizeZ: 2
+  model: {fileID: 2839844531585939936, guid: f7a213adc20f921409e78c272df50c6c, type: 3}
