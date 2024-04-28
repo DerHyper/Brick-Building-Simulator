@@ -32,13 +32,13 @@ public class Grid3D
                 for (int z = 0; z < zMax; z++)
                 {
                     Vector3 textPosition = GetWorldPosition(x, y, z) + Vector3.one*0.5f;
-                    if (debugTextArray[x, y, z] != null)
+                    if (debugTextArray[x, y, z] && gridArray[x,y,z])
                     {
-                        debugTextArray[x, y, z] = WorldText.CreateWorldText(gridArray[x, y, z].name, textPosition, 10, Color.white);
+                        debugTextArray[x, y, z] = WorldText.CreateDebugText(gridArray[x, y, z].name, textPosition);
                     } 
                     else 
                     {
-                        debugTextArray[x, y, z] = WorldText.CreateWorldText("", textPosition, 10, Color.white);
+                        debugTextArray[x, y, z] = WorldText.CreateDebugText("", textPosition);
                     }
                 }
     }
