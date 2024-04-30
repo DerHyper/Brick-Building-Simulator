@@ -8,8 +8,9 @@ public class Grid3D
     private int xMax;
     private int yMax;
     private int zMax;
-    private BuildingBlockDisplay [,,] gridArray;
-    private TextMesh[,,] debugTextArray;
+    private BuildingBlockDisplay [,,] buildingBlocks;
+    private TextMesh[,,] debugTexts;
+    private bool[,,] isOccupied;
 
     // Constructor
     public Grid3D (int xMax, int yMax, int zMax)
@@ -17,12 +18,13 @@ public class Grid3D
         this.xMax = xMax;
         this.yMax = yMax;
         this.zMax = zMax;
-        debugTextArray = new TextMesh[xMax, yMax, zMax];
-        gridArray = new BuildingBlockDisplay[xMax, yMax, zMax];
+
+        debugTexts = new TextMesh[xMax, yMax, zMax];
+        buildingBlocks = new BuildingBlockDisplay[xMax, yMax, zMax];
+        isOccupied = new bool[xMax, yMax, zMax];
         
         DrawDebugText();
         DrawGridLines();
-
     }
 
     private void DrawDebugText()
@@ -32,13 +34,13 @@ public class Grid3D
                 for (int z = 0; z < zMax; z++)
                 {
                     Vector3 textPosition = GetWorldPosition(x, y, z) + Vector3.one*0.5f;
-                    if (debugTextArray[x, y, z] && gridArray[x,y,z])
+                    if (debugTexts[x, y, z] && buildingBlocks[x,y,z])
                     {
-                        debugTextArray[x, y, z] = WorldText.CreateDebugText(gridArray[x, y, z].name, textPosition);
+                        debugTexts[x, y, z] = WorldText.CreateDebugText(buildingBlocks[x, y, z].name, textPosition);
                     } 
                     else 
                     {
-                        debugTextArray[x, y, z] = WorldText.CreateDebugText("", textPosition);
+                        debugTexts[x, y, z] = WorldText.CreateDebugText("", textPosition);
                     }
                 }
     }
@@ -73,15 +75,22 @@ public class Grid3D
         int y = position.y;
         int z = position.z;
         
-        gridArray[x,y,z] = value;
-        debugTextArray[x,y,z].text = value.name;
+        buildingBlocks[x,y,z] = value;
+        debugTexts[x,y,z].text = value.name;
+        isOccupied[x,y,z] = true;
     }
 
-    public bool isNotInBuildingLimit(Vector3Int Position)
+    public bool IsNotInBuildingLimit(Vector3Int position)
     {
-        if (Position.x < 0 || Position.x >= xMax) return true;
-        if (Position.y < 0 || Position.y >= yMax) return true;
-        if (Position.z < 0 || Position.z >= zMax) return true;
+        if (position.x < 0 || position.x >= xMax) return true;
+        if (position.y < 0 || position.y >= yMax) return true;
+        if (position.z < 0 || position.z >= zMax) return true;
         return false;
     }
+
+    public bool IsOccupied(Vector3Int position)
+    {
+        return isOccupied[position.x, position.y, position.z];
+    }
+
 }
