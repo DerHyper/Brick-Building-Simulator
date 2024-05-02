@@ -25,4 +25,13 @@ public static class CameraToWorld
         Vector3 raycastHitPoint = raycastHit.point;
         return raycastHitPoint;
     }
+
+    public static GameObject GetGameObjectAtMousePosition()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Physics.Raycast(ray, out RaycastHit raycastHit);
+        if (raycastHit.collider == null) throw new OutsideGridException();
+        GameObject raycastHitGameObject = raycastHit.collider.gameObject;
+        return raycastHitGameObject;
+    }
 }
