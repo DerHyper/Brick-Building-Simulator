@@ -6,15 +6,17 @@ using UnityEngine;
 public class BuildingBlockDisplay : MonoBehaviour
 {
     public BuildingBlock block;
+    public Vector3Int position;
     public int sizeX;
     public int sizeY;
     public int sizeZ;
     public Transform model;
     private BoxCollider boxCollider;
     
-    public void UpdateDisplay(BuildingBlock block)
+    public void UpdateDisplay(Vector3Int position, BuildingBlock block)
     {
         this.block = block;
+        this.position = position;
         UpdateVariables();
         UpdateCollider();
         UpdatePosition();

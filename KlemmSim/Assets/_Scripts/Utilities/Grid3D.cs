@@ -93,4 +93,15 @@ public class Grid3D
         return isOccupied[position.x, position.y, position.z];
     }
 
+    public void DestroyGridObject(Vector3Int position)
+    {
+        
+        int x = position.x;
+        int y = position.y;
+        int z = position.z;
+        
+        buildingBlocks[x,y,z] = null;
+        debugTexts[x,y,z].text = "";
+        isOccupied[x,y,z] = false;
+    }
 }

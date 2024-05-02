@@ -72,8 +72,28 @@ public class GridManager : MonoBehaviour
 
         GameObject blockGameObject = Instantiate(block.model, position, Quaternion.identity, parent).gameObject;
         BuildingBlockDisplay blockDisplay = blockGameObject.AddComponent<BuildingBlockDisplay>();
-        blockDisplay.UpdateDisplay(block);
+        blockDisplay.UpdateDisplay(position, block);
 
         return blockDisplay;
+    }
+
+    public void DestroyBlock(BuildingBlockDisplay target)
+    {
+        Vector3Int position = target.position;
+        BuildingBlock block = target.block;
+        DestroyGridObjects(position, block);
+        Destroy(target.gameObject);
+    }
+
+    private void DestroyGridObjects(Vector3Int position, BuildingBlock block)
+    {
+        for (int xOffset = 0; xOffset < block.sizeX; xOffset++)
+            for (int yOffset = 0; yOffset < block.sizeY; yOffset++)
+                for (int zOffset = 0; zOffset < block.sizeZ; zOffset++)
+                {
+                    Vector3Int offset = new Vector3Int(xOffset, yOffset, zOffset);
+                    Vector3Int positionWithOffset = position + offset;
+                    grid.DestroyGridObject(positionWithOffset);
+                }
     }
 }

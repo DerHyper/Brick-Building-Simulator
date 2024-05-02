@@ -19,6 +19,10 @@ public class InputManager : MonoBehaviour
         {
             BuildBlockAtMousePoint();
         }
+        if (Input.GetMouseButtonDown(1))
+        {
+            DestroyBlockAtMousePoint();
+        }
     }
 
     private void BuildBlockAtMousePoint()
@@ -38,5 +42,31 @@ public class InputManager : MonoBehaviour
         gridManager.BuildBlock(gridPosition, block);
     }
 
+    private void DestroyBlockAtMousePoint()
+    {
+        GameObject target;
+
+        try
+        {
+            target = CameraToWorld.GetGameObjectAtMousePosition();
+        }
+        catch (OutsideGridException)
+        {
+            Debug.Log("Exception catched: Tried to destroy BuildingBlock outside the grid.");
+            return;
+        }
+
+        Debug.Log(target,this);
+        BuildingBlockDisplay targetBlock = target.GetComponent<BuildingBlockDisplay>();
+
+
+        if (targetBlock == null)
+        {
+            Debug.Log("Tried to destroy GameObject, that is not a BuildingBlock.");
+            return;
+        } 
+
+        gridManager.DestroyBlock(targetBlock);
+    }
     
 }
