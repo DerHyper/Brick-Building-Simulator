@@ -7,10 +7,11 @@ public class BuildingBlockDisplay : MonoBehaviour
 {
     public BuildingBlock block;
     public Vector3Int position;
-    public int sizeX;
-    public int sizeY;
-    public int sizeZ;
-    public Transform model;
+    public new string name;
+    private int sizeX;
+    private int sizeY;
+    private int sizeZ;
+    private Transform model;
     private BoxCollider boxCollider;
     
     public void UpdateDisplay(Vector3Int position, BuildingBlock block)
@@ -41,5 +42,6 @@ public class BuildingBlockDisplay : MonoBehaviour
         this.sizeY = block.sizeY;
         this.sizeZ = block.sizeZ;
         this.model = block.model;
+        this.name = block.name;
     }
 }
