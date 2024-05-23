@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using System;
 using System.Linq;
@@ -21,7 +23,15 @@ public class SaveManager : MonoBehaviour
 
         string saveData = GetSaveData();
 
-        File.WriteAllText(saveFileLocation, saveData);
+        // Depending on the current platform either download or write the file
+        #if UNITY_WEBGL && !UNITY_EDITOR
+            throw new NotImplementedException(); // TODO: Add download for WebGL
+
+        #else
+            File.WriteAllText(saveFileLocation, saveData);
+
+        #endif
+
     }
 
     private string OpenExportFileBrowser()
