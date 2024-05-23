@@ -3,19 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using SFB;
+using System.IO;
 
 public class SaveManager : MonoBehaviour
 {
-    GridManager gridManager;
-
-    private void Start() 
-    {
-        gridManager = Finder.FindGridManager();    
-    }
+    // Filter to only show relevant file extentions
+    private readonly ExtensionFilter[] extensions = new ExtensionFilter[] {
+        new ExtensionFilter("Constructions", "json"),
+        new ExtensionFilter("All Files", "*" ),
+    };
 
     public void Export()
     {
+        string saveFileLocation = OpenExportFileBrowser();
+        if (saveFileLocation == "") return; // Cancel: No Path was selected
+
         string saveData = GetSaveData();
+
+        File.WriteAllText(saveFileLocation, saveData);
+    }
+
+    private string OpenExportFileBrowser()
+    {
+        string saveFileLocation = StandaloneFileBrowser.SaveFilePanel("Export your construction", "", "New Contruction", extensions);
+        return saveFileLocation;
     }
 
     private string GetSaveData()
