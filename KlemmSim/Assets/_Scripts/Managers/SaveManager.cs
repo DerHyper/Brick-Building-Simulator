@@ -16,12 +16,76 @@ public class SaveManager : MonoBehaviour
         new ExtensionFilter("All Files", "*" ),
     };
 
+    public void Import()
+    {   
+        string saveData;
+
+        // Depending on the current platform either upload or load the file
+        #if UNITY_WEBGL && !UNITY_EDITOR
+            throw new NotImplementedException(); // TODO: Add download for WebGL
+
+        #else
+            string saveFileLocation = OpenImportFileBrowser();
+            if (saveFileLocation == "") return; // Cancel: No Path was selected
+
+            saveData = ReadJsonToString(saveFileLocation);
+        #endif
+
+        // Deserialize the JSON file in a format readable to C#
+        LoadSaveData(saveData);
+    }
+
+    private string ReadJsonToString(string saveFileLocation)
+    {
+        string saveData = "";
+
+        // Read each line of the file at saveFileLocation into saveData
+        StreamReader streamReader = new StreamReader(saveFileLocation);
+        while(!streamReader.EndOfStream) saveData += streamReader.ReadLine();
+        streamReader.Close( ); 
+
+        Debug.Log("Collected Data from file: "+saveData);
+        return saveData;
+    }
+
+    private void LoadSaveData(string saveData)
+    {
+        // Deserialize the saveData
+        JsonData jsonData = JsonUtility.FromJson<JsonData>(saveData);
+
+        // Get relevant managers
+        GridManager gridManager = Finder.FindGridManager();
+        InventoryManager inventoryManager = Finder.FindInventoryManager(); 
+
+        // Build all blocks saved in jsonData
+        foreach (JsonData.JsonDataBlockInfo blockInfo in jsonData.jsonDataBlockInfos)
+        {
+            // get block information
+            Vector3Int position = blockInfo.position;
+            string name = blockInfo.name;
+            BuildingBlock blockType = inventoryManager.GetBuildingBlockFromName(name);
+            
+            gridManager.BuildBlock(position, blockType);
+        }
+    }
+
+    private string OpenImportFileBrowser()
+    {
+        // Open file browser for loading the construction, using the std. path and only showing relevant file extentions
+        // Only one file can be selected
+        string[] saveFileLocation = StandaloneFileBrowser.OpenFilePanel("Import your construction", "", extensions, false);
+        
+        // Catching errors if no file was selected
+        if(saveFileLocation.Length == 0) return "";
+        else return saveFileLocation[0];
+    }
+
     public void Export()
     {
         string saveFileLocation = OpenExportFileBrowser();
         if (saveFileLocation == "") return; // Cancel: No Path was selected
 
-        string saveData = GetSaveData();
+        string saveData = SaveDataToJSON();
 
         // Depending on the current platform either download or write the file
         #if UNITY_WEBGL && !UNITY_EDITOR
@@ -36,11 +100,12 @@ public class SaveManager : MonoBehaviour
 
     private string OpenExportFileBrowser()
     {
+        // Open file browser for saving the construction, using the std. path and only showing relevant file extentions
         string saveFileLocation = StandaloneFileBrowser.SaveFilePanel("Export your construction", "", "New Contruction", extensions);
         return saveFileLocation;
     }
 
-    private string GetSaveData()
+    private string SaveDataToJSON()
     {
         // Find BuildingBlocks 
         GameObject buildingblockParent = Finder.FindOrCreateGameObjectWithTag("BuildingBlocks");

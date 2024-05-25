@@ -27,9 +27,9 @@ public class JsonData
     public class JsonDataBlockInfo
     {
         [SerializeField]
-        string name;
+        public string name;
         [SerializeField]
-        Vector3Int position;
+        public Vector3Int position;
 
         public JsonDataBlockInfo(string name, Vector3Int position)
         {

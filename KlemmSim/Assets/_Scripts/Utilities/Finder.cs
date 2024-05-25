@@ -5,8 +5,6 @@ using UnityEngine;
 
 public static class Finder
 {
-
-
     public static InputManager FindInputManager()
     {
         InputManager inputManager = GameObject.FindObjectOfType<InputManager>();
@@ -27,6 +25,17 @@ public static class Finder
             return go.AddComponent<GridManager>();
         }
         return gridManager;
+    }
+
+    public static InventoryManager FindInventoryManager()
+    {
+        InventoryManager inventoryManager = GameObject.FindObjectOfType<InventoryManager>();
+        if (inventoryManager == null)
+        {
+            GameObject go = GameObject.Instantiate(new GameObject());
+            return go.AddComponent<InventoryManager>();
+        }
+        return inventoryManager;
     }
 
     public static T FindOrCreateComponent<T>(GameObject target) where T : Component
