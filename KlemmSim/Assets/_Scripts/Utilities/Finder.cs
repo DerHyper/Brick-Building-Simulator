@@ -50,7 +50,6 @@ public static class Finder
 
     public static GameObject FindOrCreateGameObjectWithTag(string tag)
     {
-        
         GameObject foundGameObject = GameObject.FindGameObjectWithTag(tag);
         if (foundGameObject == null)
         {
@@ -64,7 +63,6 @@ public static class Finder
 
     public static GameObject FindOrCreateGameObjectWithName(string name)
     {
-        
         GameObject foundGameObject = GameObject.Find(name);
         if (foundGameObject == null)
         {
@@ -73,5 +71,15 @@ public static class Finder
             return newGameObject;
         }
         return foundGameObject;
+    }
+
+    // Finds all BuildingBlocks under the BuildingBlocks parent.
+    // May return an empty Array
+    public static BuildingBlockDisplay[] FindBuildingBlocks()
+    {
+        GameObject buildingblockParent = Finder.FindOrCreateGameObjectWithTag("BuildingBlocks");
+        BuildingBlockDisplay[] blocks = buildingblockParent.GetComponentsInChildren<BuildingBlockDisplay>();
+
+        return blocks;
     }
 }

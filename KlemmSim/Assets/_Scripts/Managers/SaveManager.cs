@@ -107,9 +107,8 @@ public class SaveManager : MonoBehaviour
 
     private string SaveDataToJSON()
     {
-        // Find BuildingBlocks 
-        GameObject buildingblockParent = Finder.FindOrCreateGameObjectWithTag("BuildingBlocks");
-        BuildingBlockDisplay[] blocks = buildingblockParent.GetComponentsInChildren<BuildingBlockDisplay>();
+        // Get all Building Blocks
+        BuildingBlockDisplay[] blocks = Finder.FindBuildingBlocks();
         
         // Put the BuildingBlocks in a format that can be serialized into a JSON file
         JsonData jsonData = new JsonData(blocks);
