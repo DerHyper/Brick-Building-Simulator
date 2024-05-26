@@ -10,11 +10,21 @@ using System.IO;
 
 public class SaveManager : MonoBehaviour
 {
+    private GridManager gridManager;
+    private InventoryManager inventoryManager;
+
     // Filter to only show relevant file extentions
     private readonly ExtensionFilter[] extensions = new ExtensionFilter[] {
         new ExtensionFilter("Constructions", "json"),
         new ExtensionFilter("All Files", "*" ),
     };
+
+    public void Start() 
+    {
+        // Get relevant managers
+        gridManager = Finder.FindGridManager();
+        inventoryManager = Finder.FindInventoryManager();
+    }
 
     public void Import()
     {   
@@ -31,10 +41,11 @@ public class SaveManager : MonoBehaviour
             saveData = ReadJsonToString(saveFileLocation);
         #endif
 
-        // Deserialize the JSON file in a format readable to C#
+        gridManager.ClearGrid();
         LoadSaveData(saveData);
     }
 
+    // Deserialize the JSON file in a format readable to C#
     private string ReadJsonToString(string saveFileLocation)
     {
         string saveData = "";
@@ -51,14 +62,10 @@ public class SaveManager : MonoBehaviour
     private void LoadSaveData(string saveData)
     {
         // Deserialize the saveData
-        JsonData jsonData = JsonUtility.FromJson<JsonData>(saveData);
-
-        // Get relevant managers
-        GridManager gridManager = Finder.FindGridManager();
-        InventoryManager inventoryManager = Finder.FindInventoryManager(); 
+        JsonData jsonData = JsonUtility.FromJson<JsonData>(saveData); 
 
         // Build all blocks saved in jsonData
-        foreach (JsonData.JsonDataBlockInfo blockInfo in jsonData.jsonDataBlockInfos)
+        foreach(JsonData.JsonDataBlockInfo blockInfo in jsonData.jsonDataBlockInfos)
         {
             // get block information
             Vector3Int position = blockInfo.position;

@@ -77,16 +77,33 @@ public class GridManager : MonoBehaviour
         return blockDisplay;
     }
 
+    // Destroys every Block that can be found in this Grid
+    public void ClearGrid()
+    {
+        BuildingBlockDisplay[] blocks = Finder.FindBuildingBlocks();
+        DestroyBlocks(blocks);
+    }
+
+    public void DestroyBlocks(BuildingBlockDisplay[] targets)
+    {
+        foreach (BuildingBlockDisplay target in targets)
+        {
+            DestroyBlock(target);
+        }
+    }
+
     public void DestroyBlock(BuildingBlockDisplay target)
     {
-        Vector3Int position = target.position;
-        BuildingBlock block = target.block;
-        DestroyGridObjects(position, block);
+        DeleteBlockReferencesInGrid(target);
         Destroy(target.gameObject);
     }
 
-    private void DestroyGridObjects(Vector3Int position, BuildingBlock block)
+    // Delets all references in the grid to a given block
+    private void DeleteBlockReferencesInGrid(BuildingBlockDisplay target)
     {
+        Vector3Int position = target.position;
+        BuildingBlock block = target.block;
+
         for (int xOffset = 0; xOffset < block.sizeX; xOffset++)
             for (int yOffset = 0; yOffset < block.sizeY; yOffset++)
                 for (int zOffset = 0; zOffset < block.sizeZ; zOffset++)
