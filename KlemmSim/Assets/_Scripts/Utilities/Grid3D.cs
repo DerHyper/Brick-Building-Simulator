@@ -103,16 +103,16 @@ public class Grid3D
         voxels[x,y,z].UpdateVoxel(referenceBlock.block, referenceBlock.name, true);
     }
 
-    public bool IsNotInBuildingLimit(Vector3Int position)
+    public bool IsInsideBuildingLimit(Vector3Int position)
     {
         int xMax = voxels.GetLength(0);
         int yMax = voxels.GetLength(1);
         int zMax = voxels.GetLength(2);
 
-        if (position.x < 0 || position.x >= xMax) return true;
-        if (position.y < 0 || position.y >= yMax) return true;
-        if (position.z < 0 || position.z >= zMax) return true;
-        return false;
+        if (position.x < 0 || position.x >= xMax) return false;
+        if (position.y < 0 || position.y >= yMax) return false;
+        if (position.z < 0 || position.z >= zMax) return false;
+        return true;
     }
 
     public bool IsOccupied(Vector3Int position)
@@ -120,7 +120,7 @@ public class Grid3D
         return voxels[position.x, position.y, position.z].isOccupied;
     }
 
-    public void DestroyGridObject(Vector3Int position)
+    public void ResetVoxel(Vector3Int position)
     {
         int x = position.x;
         int y = position.y;

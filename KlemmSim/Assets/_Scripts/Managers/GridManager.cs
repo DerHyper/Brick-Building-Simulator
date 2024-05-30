@@ -28,7 +28,7 @@ public class GridManager : MonoBehaviour
 
     private bool ContainsBuildErrors(Vector3Int position, BuildingBlock block)
     {
-        if (grid.IsNotInBuildingLimit(position))
+        if (!grid.IsInsideBuildingLimit(position))
         {
             Debug.Log(position.ToString() + " is not a valid Position to build.");
             return true;
@@ -103,7 +103,7 @@ public class GridManager : MonoBehaviour
                 {
                     Vector3Int offset = new Vector3Int(xOffset, yOffset, zOffset);
                     Vector3Int positionWithOffset = position + offset;
-                    grid.DestroyGridObject(positionWithOffset);
+                    grid.ResetVoxel(positionWithOffset);
                 }
     }
 }
