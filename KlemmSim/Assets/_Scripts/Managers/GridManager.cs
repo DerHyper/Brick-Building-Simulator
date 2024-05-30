@@ -22,7 +22,7 @@ public class GridManager : MonoBehaviour
 
         BuildingBlockDisplay blockDisplay = InstantiateBuildingBlock(position, block);
 
-        grid.SetGridTiles(position, block, blockDisplay);
+        grid.SetVoxels(position, block, blockDisplay);
 
     }
 
