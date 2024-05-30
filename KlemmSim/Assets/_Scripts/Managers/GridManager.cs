@@ -3,10 +3,17 @@ using UnityEngine;
 public class GridManager : MonoBehaviour
 {
     public Vector3Int Size;
+    [SerializeField]
+    private bool showDebug = false; 
     private Grid3D grid;
     private void Start()
     {
         grid = new Grid3D(Size.x, Size.y, Size.z);
+        if (showDebug)
+        {
+            grid.DrawGridLines();
+            grid.DrawDebugText();
+        }
     }
 
     public void InstantiateBuildingBlockAtPosition(Vector3Int position, BuildingBlock block)
@@ -15,20 +22,8 @@ public class GridManager : MonoBehaviour
 
         BuildingBlockDisplay blockDisplay = InstantiateBuildingBlock(position, block);
 
-        SetGridObjects(position, block, blockDisplay);
+        grid.SetGridTiles(position, block, blockDisplay);
 
-    }
-
-    private void SetGridObjects(Vector3Int position, BuildingBlock block, BuildingBlockDisplay blockDisplay)
-    {
-        for (int xOffset = 0; xOffset < block.sizeX; xOffset++)
-            for (int yOffset = 0; yOffset < block.sizeY; yOffset++)
-                for (int zOffset = 0; zOffset < block.sizeZ; zOffset++)
-                {
-                    Vector3Int offset = new Vector3Int(xOffset, yOffset, zOffset);
-                    Vector3Int positionWithOffset = position + offset;
-                    grid.SetGridObject(positionWithOffset, blockDisplay);
-                }
     }
 
     private bool ContainsBuildErrors(Vector3Int position, BuildingBlock block)
