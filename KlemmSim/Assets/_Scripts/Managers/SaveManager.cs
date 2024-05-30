@@ -110,7 +110,7 @@ public class SaveManager : MonoBehaviour
     private string OpenExportFileBrowser()
     {
         // Open file browser for saving the construction, using the std. path and only showing relevant file extentions
-        string saveFileLocation = StandaloneFileBrowser.SaveFilePanel("Export your construction", "", "New Contruction", extensions);
+        string saveFileLocation = StandaloneFileBrowser.SaveFilePanel("Export your construction", "", "New Construction", extensions);
         return saveFileLocation;
     }
 
