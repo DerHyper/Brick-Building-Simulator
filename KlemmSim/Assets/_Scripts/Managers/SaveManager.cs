@@ -22,8 +22,8 @@ public class SaveManager : MonoBehaviour
     public void Start() 
     {
         // Get relevant managers
-        gridManager = Finder.FindGridManager();
-        inventoryManager = Finder.FindInventoryManager();
+        gridManager = Finder.FindOrCreateObjectOfType<GridManager>();
+        inventoryManager = Finder.FindOrCreateObjectOfType<InventoryManager>();
     }
 
     public void Import()
@@ -65,7 +65,7 @@ public class SaveManager : MonoBehaviour
         JsonData jsonData = JsonUtility.FromJson<JsonData>(saveData); 
 
         // Build all blocks saved in jsonData
-        foreach(JsonData.JsonDataBlockInfo blockInfo in jsonData.jsonDataBlockInfos)
+        foreach(JsonData.RelevantBlockData blockInfo in jsonData.jsonDataBlockInfos)
         {
             // get block information
             Vector3Int position = blockInfo.position;
@@ -89,9 +89,11 @@ public class SaveManager : MonoBehaviour
 
     public void Export()
     {
+        // Open save panle and get save path
         string saveFileLocation = OpenExportFileBrowser();
         if (saveFileLocation == "") return; // Cancel: No Path was selected
 
+        // Serialize every block on the grid into one JSON string
         string saveData = SaveDataToJSON();
 
         // Depending on the current platform either download or write the file

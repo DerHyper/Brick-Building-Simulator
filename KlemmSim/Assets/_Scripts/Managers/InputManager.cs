@@ -9,7 +9,7 @@ public class InputManager : MonoBehaviour
 
     private void Start()
     {
-        gridManager = Finder.FindGridManager();
+        gridManager = Finder.FindOrCreateObjectOfType<GridManager>();
     }
 
     // Could be exchanged for an event system

@@ -5,37 +5,15 @@ using UnityEngine;
 
 public static class Finder
 {
-    public static InputManager FindInputManager()
+    public static T FindOrCreateObjectOfType<T>() where T : Component
     {
-        InputManager inputManager = GameObject.FindObjectOfType<InputManager>();
-        if (inputManager == null)
+        T foundObject = GameObject.FindObjectOfType<T>();
+        if (foundObject == null)
         {
             GameObject go = GameObject.Instantiate(new GameObject());
-            return go.AddComponent<InputManager>();
+            return go.AddComponent<T>();
         }
-        return inputManager;
-    }
-
-    public static GridManager FindGridManager()
-    {
-        GridManager gridManager = GameObject.FindObjectOfType<GridManager>();
-        if (gridManager == null)
-        {
-            GameObject go = GameObject.Instantiate(new GameObject());
-            return go.AddComponent<GridManager>();
-        }
-        return gridManager;
-    }
-
-    public static InventoryManager FindInventoryManager()
-    {
-        InventoryManager inventoryManager = GameObject.FindObjectOfType<InventoryManager>();
-        if (inventoryManager == null)
-        {
-            GameObject go = GameObject.Instantiate(new GameObject());
-            return go.AddComponent<InventoryManager>();
-        }
-        return inventoryManager;
+        return foundObject;
     }
 
     public static T FindOrCreateComponent<T>(GameObject target) where T : Component
