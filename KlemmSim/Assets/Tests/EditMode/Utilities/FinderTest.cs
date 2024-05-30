@@ -31,7 +31,7 @@ public class FinderTest
     {
         TestMonoBehaviour foundComponent = Finder.FindOrCreateObjectOfType<TestMonoBehaviour>();
 
-        Assert.IsNotInstanceOf<TestMonoBehaviour>(foundComponent);
+        Assert.IsInstanceOf<TestMonoBehaviour>(foundComponent);
     }
 
     [Test]
