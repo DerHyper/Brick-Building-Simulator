@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
@@ -34,12 +32,12 @@ public class InputManager : MonoBehaviour
         }
         catch (OutsideGridException)
         {
-            Debug.Log("Exception catched: Tried to place BuildingBrick outside the grid.");
+            Debug.Log("Exception catched: Tried to place BuildingBlock outside the grid.");
             return;
         }
 
         Debug.Log(gridPosition,this);
-        gridManager.BuildBlock(gridPosition, block);
+        gridManager.InstantiateBuildingBlockAtPosition(gridPosition, block);
     }
 
     private void DestroyBlockAtMousePoint()

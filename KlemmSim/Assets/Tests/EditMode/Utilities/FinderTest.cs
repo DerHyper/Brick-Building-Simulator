@@ -1,11 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 using UnityEngine;
-using UnityEngine.TestTools;
 
 public class FinderTest
 {
@@ -16,7 +11,7 @@ public class FinderTest
     // This is because Unity does not allow to access tags directly.
 
     [Test]
-    public void TestFindOrCreateObjectOfType_ObjectExists_ReturnSameObject()
+    public void FindOrCreateObjectOfType_ObjectExists_ReturnSameObject()
     {
         GameObject testObject = new GameObject();
         TestMonoBehaviour realComponent = testObject.AddComponent<TestMonoBehaviour>();
@@ -27,7 +22,7 @@ public class FinderTest
     }
 
     [Test]
-    public void TestFindOrCreateObjectOfType_ObjectDoesntExists_ReturnObject()
+    public void FindOrCreateObjectOfType_ObjectDoesntExists_ReturnObject()
     {
         TestMonoBehaviour foundComponent = Finder.FindOrCreateObjectOfType<TestMonoBehaviour>();
 
@@ -35,7 +30,7 @@ public class FinderTest
     }
 
     [Test]
-    public void TestFindOrCreateComponent_ComponentExists_ReturnSameComponent()
+    public void FindOrCreateComponent_ComponentExists_ReturnSameComponent()
     {
         GameObject testObject = new GameObject();
         var component = testObject.AddComponent<TestMonoBehaviour>();
@@ -46,7 +41,7 @@ public class FinderTest
     }
 
     [Test]
-    public void TestFindOrCreateComponent_ComponentDoesntExist_ReturnComponent()
+    public void FindOrCreateComponent_ComponentDoesntExist_ReturnComponent()
     {
         GameObject go = new GameObject();
         
@@ -57,7 +52,7 @@ public class FinderTest
     }
 
     [Test]
-    public void TestFindOrCreateGameObjectWithName_NameExists_ReturnSameObject()
+    public void FindOrCreateGameObjectWithName_NameExists_ReturnSameObject()
     {
         string testName = "TestName1";
         GameObject realObject = new GameObject{name = testName};
@@ -68,7 +63,7 @@ public class FinderTest
     }
 
     [Test]
-    public void TestFindOrCreateGameObjectWithName_NameDoesntExist_ReturnObjectWithSameName()
+    public void FindOrCreateGameObjectWithName_NameDoesntExist_ReturnObjectWithSameName()
     {
         string testName = "TestName2";
 

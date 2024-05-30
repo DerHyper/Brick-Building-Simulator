@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GridManager : MonoBehaviour
@@ -11,7 +9,7 @@ public class GridManager : MonoBehaviour
         grid = new Grid3D(Size.x, Size.y, Size.z);
     }
 
-    public void BuildBlock(Vector3Int position, BuildingBlock block)
+    public void InstantiateBuildingBlockAtPosition(Vector3Int position, BuildingBlock block)
     {
         if (ContainsBuildErrors(position, block)) return;
 

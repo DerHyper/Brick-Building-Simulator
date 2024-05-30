@@ -1,10 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
-using System.Runtime.InteropServices;
 using UnityEngine;
-using System;
-using System.Linq;
 using SFB;
 using System.IO;
 
@@ -72,7 +66,7 @@ public class SaveManager : MonoBehaviour
             string name = blockInfo.name;
             BuildingBlock blockType = inventoryManager.GetBuildingBlockFromName(name);
             
-            gridManager.BuildBlock(position, blockType);
+            gridManager.InstantiateBuildingBlockAtPosition(position, blockType);
         }
     }
 
