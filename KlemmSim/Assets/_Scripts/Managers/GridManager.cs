@@ -1,19 +1,37 @@
 using UnityEngine;
 
-public class GridManager : MonoBehaviour
+public class GridManager : MonoBehaviour, IGridManager
 {
-    public Vector3Int Size;
+    [SerializeField]
+    private Vector3Int size = new Vector3Int(5,5,5);
     [SerializeField]
     private bool showDebug = false; 
     private Grid3D grid;
     private void Start()
     {
-        grid = new Grid3D(Size.x, Size.y, Size.z);
+        CreateOrReplaceGrid(size);
         if (showDebug)
         {
             grid.DrawGridLines();
             grid.DrawDebugText();
         }
+    }
+
+    // Generates a new Grid3D
+    public void CreateOrReplaceGrid(Vector3Int size)
+    {
+        if(grid != null) ClearGrid();
+        
+        this.size = size;
+        grid = new Grid3D(size.x, size.y, size.z);
+    }
+
+    public void CreateOrReplaceGrid(Grid3D grid)
+    {
+        if(grid != null) ClearGrid();
+        
+        this.size = grid.GetSize();
+        this.grid = grid;
     }
 
     public void InstantiateBuildingBlockAtPosition(Vector3Int position, BuildingBlock block)
@@ -105,5 +123,10 @@ public class GridManager : MonoBehaviour
                     Vector3Int positionWithOffset = position + offset;
                     grid.ResetVoxel(positionWithOffset);
                 }
+    }
+
+    public Vector3Int GetSize()
+    {
+        return size;
     }
 }

@@ -128,4 +128,15 @@ public class Grid3D
         
         voxels[x,y,z].UpdateVoxel(null, "", false);
     }
+
+    // Return the size of the gird
+    public Vector3Int GetSize()
+    {
+        int x = voxels.GetLength(0);
+        int y = voxels.GetLength(1);
+        int z = voxels.GetLength(2);
+        Vector3Int size = new Vector3Int(x,y,z);
+
+        return size;
+    }
 }
