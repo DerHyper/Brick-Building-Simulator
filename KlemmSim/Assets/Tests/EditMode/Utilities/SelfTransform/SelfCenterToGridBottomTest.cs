@@ -30,7 +30,7 @@ public class SelfCenterToGridBottomTest
         testComponent.UpdatePosition(gridManager, distanceFromBottom);
 
         // Assert
-        Assert.AreEqual(testObject.transform.position, expectedPosition);
+        Assert.AreEqual(expectedPosition, testObject.transform.position);
     }
 
     [Test]
@@ -50,6 +50,6 @@ public class SelfCenterToGridBottomTest
         testComponent.UpdatePosition(gridManager, distanceFromBottom);
 
         // Assert
-        Assert.AreEqual(testObject.transform.position, expectedPosition);
+        Assert.AreEqual(expectedPosition, testObject.transform.position);
     }
 }
