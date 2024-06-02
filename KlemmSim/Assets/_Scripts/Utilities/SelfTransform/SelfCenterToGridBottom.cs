@@ -2,17 +2,22 @@ using UnityEngine;
 
 public class SelfCenterToGridBottom : MonoBehaviour
 {
-    public int distanceFromBottom;
+    [SerializeField]
+    private int distanceFromBottom;
     void Start()
     {
-        UpdatePosition();
+        GridManager gridManager = Finder.FindOrCreateObjectOfType<GridManager>();
+        UpdatePosition(gridManager, distanceFromBottom);
     }
 
-    public void UpdatePosition()
+    public void UpdatePosition(GridManager gridManager, int distanceFromBottom)
     {
-        Vector3Int gridSize = Finder.FindOrCreateObjectOfType<GridManager>().Size;
+        // Get designated position
+        Vector3Int gridSize = gridManager.GetSize();
         Vector3 gridCenter = new Vector3(gridSize.x, 0, gridSize.z) * 0.5f;
         Vector3 levitatedGridCenter = gridCenter + Vector3.up * distanceFromBottom;
+
+        // Transform object
         gameObject.transform.position = levitatedGridCenter;
     }
 }
