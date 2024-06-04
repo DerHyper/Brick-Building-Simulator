@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Linq;
 using NUnit.Framework;
@@ -43,6 +42,27 @@ public class GridManagerTest
         // Assert
         BuildingBlock blockReferenceInGrid = grid.GetBuildingBlock(position);
         Assert.AreEqual(originalBlock, blockReferenceInGrid);
+        yield return null;
+    }
+
+    [UnityTest] // Test: Block can't be placed, if it clipps out of the grid
+    public IEnumerator InstantiateBuildingBlockAtPosition_ClippingOutGrid_NoBlockInstantiated()
+    {
+        // Arrange
+        // Instantiate Grid and GridManager
+        Grid3D grid = new Grid3D(5,5,5);
+        GridManager gridManager = new GameObject().AddComponent<GridManager>();
+        yield return null; // Skiping Frame: Wait for start Method to run
+        gridManager.CreateOrReplaceGrid(grid);
+        // Instantiate Building Block
+        BuildingBlock originalBlock = InitiateBuildingBlock(new Vector3Int(1,1,4)); // 1x1x4 block 
+        Vector3Int position = new Vector3Int(2,2,2); // block should be clipping out at 2;2;5
+
+        // Act
+        gridManager.InstantiateBuildingBlockAtPosition(position, originalBlock);
+
+        // Assert
+        Assert.IsEmpty(Finder.FindBuildingBlocks());
         yield return null;
     }
 
@@ -101,6 +121,8 @@ public class GridManagerTest
         Assert.AreSame(originalBlock, blockReferenceInGrid);
         yield return null;
     }
+
+
 
     [UnityTest] // Test: Clearing grid doesnt with no objets doesnt throw exceptions
     public IEnumerator ClearGrid_EmptyGrid_NoException()

@@ -104,6 +104,20 @@ public class Grid3D
         voxels[x,y,z].UpdateVoxel(referenceBlock.block, referenceBlock.name, true);
     }
 
+    public bool IsInsideBuildingLimit(Vector3Int blockOriginPoint, BuildingBlock block)
+    {
+        // Check for every Voxel, that would be covered by the Block, if it is inside the building limit
+        for (int xOffset = 0; xOffset < block.sizeX; xOffset++)
+            for (int yOffset = 0; yOffset < block.sizeY; yOffset++)
+                for (int zOffset = 0; zOffset < block.sizeZ; zOffset++)
+                {
+                    Vector3Int offset = new Vector3Int(xOffset, yOffset, zOffset);
+                    Vector3Int positionOfCoveredVoxel = blockOriginPoint + offset;
+                    if (!IsInsideBuildingLimit(positionOfCoveredVoxel)) return false;
+                }
+        return true;
+    }
+
     public bool IsInsideBuildingLimit(Vector3Int position)
     {
         int xMax = voxels.GetLength(0);

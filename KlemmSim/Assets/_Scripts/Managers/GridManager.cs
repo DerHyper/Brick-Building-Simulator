@@ -46,15 +46,16 @@ public class GridManager : MonoBehaviour, IGridManager
 
     private bool ContainsBuildErrors(Vector3Int position, BuildingBlock block)
     {
-        if (!grid.IsInsideBuildingLimit(position))
+
+        if (!grid.IsInsideBuildingLimit(position, block))
         {
-            Debug.Log(position.ToString() + " is not a valid Position to build.");
+            Debug.Log("Placing a block at "+position.ToString() + " is invalid, since it would clip out of the grid");
             return true;
         }
 
         if (!CanOccupieSpace(position, block))
         {
-            Debug.Log("Block '" + block.name + "' is overlaping another Block near " + position.ToString());
+            Debug.Log("Block '" + block.name + "' is overlapping another block at " + position.ToString());
             return true;
         }
 

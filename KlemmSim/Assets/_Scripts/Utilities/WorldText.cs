@@ -14,7 +14,7 @@ static class WorldText
     }
 
 
-    // Create Text in World
+    // Create Text in Scene
     // Source: https://youtu.be/waEsGu--9P8?si=GNZfMSbodwKZ8iKo&t=336
     public static TextMesh CreateWorldText(
         string text,
