@@ -82,6 +82,7 @@ public class Grid3D
         return new Vector3(x, y, z);
     }
 
+    // For every Voxel, occupied by the BuildingBlockDisplay, set the Voxel accordingly 
     public void SetVoxels(Vector3Int position, BuildingBlock block, BuildingBlockDisplay blockDisplay)
     {
         for (int xOffset = 0; xOffset < block.sizeX; xOffset++)
@@ -138,5 +139,14 @@ public class Grid3D
         Vector3Int size = new Vector3Int(x,y,z);
 
         return size;
+    }
+
+    public BuildingBlock GetBuildingBlock(Vector3Int position)
+    {
+        int x = position.x;
+        int y = position.y;
+        int z = position.z;
+
+        return voxels[x,y,z].buildingBlock;
     }
 }

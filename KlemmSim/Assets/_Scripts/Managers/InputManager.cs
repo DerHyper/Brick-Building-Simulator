@@ -13,11 +13,11 @@ public class InputManager : MonoBehaviour
     // Could be exchanged for an event system
     private void Update() 
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)) // Left click
         {
             BuildBlockAtMousePoint();
         }
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1)) // Right click
         {
             DestroyBlockAtMousePoint();
         }
