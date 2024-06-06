@@ -57,7 +57,7 @@ public class GridManagerTest
         // Instantiate Building Block
         BuildingBlock originalBlock = InitiateBuildingBlock(new Vector3Int(1,1,4)); // 1x1x4 block 
         Vector3Int position = new Vector3Int(2,2,2); // block should be clipping out at 2;2;5
-
+        yield return null; // Skip another frame to ensure that the block is initialized correctly
         // Act
         gridManager.InstantiateBuildingBlockAtPosition(position, originalBlock);
 
