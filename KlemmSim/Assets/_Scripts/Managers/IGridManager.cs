@@ -15,7 +15,7 @@ public interface IGridManager
 
     public Vector3Int GetSize();
 
-    public void CreateOrReplaceGrid(Vector3Int size);
-    public void CreateOrReplaceGrid(Grid3D grid);
+    public void ReplaceGrid(Vector3Int size);
+    public void ReplaceGrid(Grid3D grid);
 
 }

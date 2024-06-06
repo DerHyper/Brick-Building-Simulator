@@ -30,7 +30,7 @@ public class SaveManager : MonoBehaviour
 
         #else
             string saveFileLocation = OpenImportFileBrowser();
-            if (saveFileLocation == "") return; // Cancel: No Path was selected
+            if (saveFileLocation == "") return; // Cancel: No path was selected
 
             saveData = ReadJsonToString(saveFileLocation);
         #endif
@@ -72,8 +72,10 @@ public class SaveManager : MonoBehaviour
 
     private string OpenImportFileBrowser()
     {
-        // Open file browser for loading the construction, using the std. path and only showing relevant file extentions
-        // Only one file can be selected
+        // Open file browser for loading the construction with the following settings:
+        // - Use the standard path (Windows: C:\Users\<Username>\Documents) 
+        // - Only show relevant file extentions (.json)
+        // - Only one file can be selected
         string[] saveFileLocation = StandaloneFileBrowser.OpenFilePanel("Import your construction", "", extensions, false);
         
         // Catching errors if no file was selected
@@ -103,7 +105,9 @@ public class SaveManager : MonoBehaviour
 
     private string OpenExportFileBrowser()
     {
-        // Open file browser for saving the construction, using the std. path and only showing relevant file extentions
+        // Open file browser for saving the construction with the following settings:
+        // - Use the standard path (Windows: C:\Users\<Username>\Documents) 
+        // - Only show relevant file extentions (.json)
         string saveFileLocation = StandaloneFileBrowser.SaveFilePanel("Export your construction", "", "New Construction", extensions);
         return saveFileLocation;
     }

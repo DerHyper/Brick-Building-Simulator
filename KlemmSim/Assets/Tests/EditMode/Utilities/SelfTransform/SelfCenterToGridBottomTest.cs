@@ -7,10 +7,9 @@ public class SelfCenterToGridBottomTest
     {
         GameObject gameObject = new GameObject();
         GridManager gridManager = gameObject.AddComponent<GridManager>();
-        gridManager.CreateOrReplaceGrid(size);
+        gridManager.ReplaceGrid(size);
 
         return gridManager;
-        
     }
 
     [Test]

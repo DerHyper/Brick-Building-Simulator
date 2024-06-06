@@ -10,7 +10,7 @@ public class InputManager : MonoBehaviour
         gridManager = Finder.FindOrCreateObjectOfType<GridManager>();
     }
 
-    // Could be exchanged for an event system
+    // TODO: This could be exchanged for an event system
     private void Update() 
     {
         if (Input.GetMouseButtonDown(0)) // Left click
@@ -25,6 +25,8 @@ public class InputManager : MonoBehaviour
 
     private void BuildBlockAtMousePoint()
     {
+        // TODO: This should be exchanged for normal error handling
+        // Exceptions use to much memory to be used in one Frame
         Vector3Int gridPosition;
         try
         {
@@ -42,8 +44,9 @@ public class InputManager : MonoBehaviour
 
     private void DestroyBlockAtMousePoint()
     {
+        // TODO: This should be exchanged for normal error handling
+        // Exceptions use to much memory to be used in one Frame
         GameObject target;
-
         try
         {
             target = CameraToWorld.GetGameObjectAtMousePosition();

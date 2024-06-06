@@ -9,7 +9,7 @@ public class GridManager : MonoBehaviour, IGridManager
     private Grid3D grid;
     private void Start()
     {
-        CreateOrReplaceGrid(size);
+        ReplaceGrid(size);
         if (showDebug)
         {
             grid.DrawGridLines();
@@ -17,8 +17,7 @@ public class GridManager : MonoBehaviour, IGridManager
         }
     }
 
-    // Generates a new Grid3D
-    public void CreateOrReplaceGrid(Vector3Int size)
+    public void ReplaceGrid(Vector3Int size)
     {
         if(grid != null) ClearGrid();
         
@@ -26,7 +25,7 @@ public class GridManager : MonoBehaviour, IGridManager
         grid = new Grid3D(size.x, size.y, size.z);
     }
 
-    public void CreateOrReplaceGrid(Grid3D grid)
+    public void ReplaceGrid(Grid3D grid)
     {
         if(grid != null) ClearGrid();
         
@@ -34,32 +33,32 @@ public class GridManager : MonoBehaviour, IGridManager
         this.grid = grid;
     }
 
-    public void InstantiateBuildingBlockAtPosition(Vector3Int position, BuildingBlock block)
+    public void InstantiateBuildingBlockAtPosition(Vector3Int originPosition, BuildingBlock block)
     {
-        if (ContainsBuildErrors(position, block)) return;
+        if (!InstantiationAllowed(originPosition, block)) return;
 
-        BuildingBlockDisplay blockDisplay = InstantiateBuildingBlock(position, block);
+        BuildingBlockDisplay blockDisplay = InstantiateBuildingBlock(originPosition, block);
 
-        grid.SetVoxels(position, block, blockDisplay);
+        grid.SetVoxels(originPosition, block, blockDisplay);
 
     }
 
-    private bool ContainsBuildErrors(Vector3Int position, BuildingBlock block)
+    // Returns true if the block can be instantiated at the given position 
+    private bool InstantiationAllowed(Vector3Int originPosition, BuildingBlock block)
     {
-
-        if (!grid.IsInsideBuildingLimit(position, block))
+        if (!grid.IsInsideBuildingLimit(originPosition, block))
         {
-            Debug.Log("Placing a block at "+position.ToString() + " is invalid, since it would clip out of the grid");
-            return true;
+            Debug.Log("Placing a block at "+originPosition.ToString() + " is invalid, since it would clip out of the grid");
+            return false;
         }
 
-        if (!CanOccupieSpace(position, block))
+        if (!CanOccupieSpace(originPosition, block))
         {
-            Debug.Log("Block '" + block.name + "' is overlapping another block at " + position.ToString());
-            return true;
+            Debug.Log("Block '" + block.name + "' is overlapping another block at " + originPosition.ToString());
+            return false;
         }
 
-        return false;
+        return true;
     }
 
     // Returns false if any block inside the specified space is being occupied.
@@ -89,7 +88,7 @@ public class GridManager : MonoBehaviour, IGridManager
         return blockDisplay;
     }
 
-    // Destroys every Block that can be found in this Grid
+    // Destroys every block that can be found in this grid
     public void ClearGrid()
     {
         BuildingBlockDisplay[] blocks = Finder.FindBuildingBlocks();

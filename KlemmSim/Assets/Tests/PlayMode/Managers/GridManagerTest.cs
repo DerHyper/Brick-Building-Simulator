@@ -9,7 +9,7 @@ public class GridManagerTest
     private GridManager InitiateGridManager(Grid3D grid)
     {
         GridManager gridManager = new GameObject().AddComponent<GridManager>();
-        gridManager.CreateOrReplaceGrid(grid);
+        gridManager.ReplaceGrid(grid);
         return gridManager;
     }
     private BuildingBlock InitiateBuildingBlock(Vector3Int size)
@@ -31,7 +31,7 @@ public class GridManagerTest
         Grid3D grid = new Grid3D(5,5,5);
         GridManager gridManager = new GameObject().AddComponent<GridManager>();
         yield return null; // Skiping Frame: Wait for start Method to run
-        gridManager.CreateOrReplaceGrid(grid);
+        gridManager.ReplaceGrid(grid);
         // Instantiate Building Block
         BuildingBlock originalBlock = InitiateBuildingBlock(Vector3Int.one);
         Vector3Int position = new Vector3Int(2,2,2);
@@ -53,7 +53,7 @@ public class GridManagerTest
         Grid3D grid = new Grid3D(5,5,5);
         GridManager gridManager = new GameObject().AddComponent<GridManager>();
         yield return null; // Skiping Frame: Wait for start Method to run
-        gridManager.CreateOrReplaceGrid(grid);
+        gridManager.ReplaceGrid(grid);
         // Instantiate Building Block
         BuildingBlock originalBlock = InitiateBuildingBlock(new Vector3Int(1,1,4)); // 1x1x4 block 
         Vector3Int position = new Vector3Int(2,2,2); // block should be clipping out at 2;2;5
@@ -66,7 +66,7 @@ public class GridManagerTest
         yield return null;
     }
 
-    [UnityTest] // Test: Block can't be placed inside overlaping block
+    [UnityTest] // Test: Block can't be placed inside another block
     public IEnumerator InstantiateBuildingBlockAtPosition_SameSpaceOccupied_NoOverride()
     {
         // Arrange
@@ -74,7 +74,7 @@ public class GridManagerTest
         Grid3D grid = new Grid3D(5,5,5);
         GridManager gridManager = new GameObject().AddComponent<GridManager>();
         yield return null; // Skiping Frame: Wait for start Method to run
-        gridManager.CreateOrReplaceGrid(grid);
+        gridManager.ReplaceGrid(grid);
         // Instantiate original Block
         BuildingBlock originalBlock = InitiateBuildingBlock(Vector3Int.one);
         Vector3Int originalPosition = Vector3Int.zero;
@@ -102,7 +102,7 @@ public class GridManagerTest
         Grid3D grid = new Grid3D(5,5,5);
         GridManager gridManager = new GameObject().AddComponent<GridManager>();
         yield return null; // Skiping Frame: Wait for start Method to run
-        gridManager.CreateOrReplaceGrid(grid);
+        gridManager.ReplaceGrid(grid);
         // Instantiate original Block that overrides the whole Grid
         BuildingBlock originalBlock = InitiateBuildingBlock(new Vector3Int(3,3,3));
         Vector3Int originalPosition = Vector3Int.zero;
@@ -189,7 +189,7 @@ public class GridManagerTest
         Grid3D grid = new Grid3D(5,5,5);
         GridManager gridManager = new GameObject().AddComponent<GridManager>();
         yield return null; // Skiping Frame: Wait for start Method to run
-        gridManager.CreateOrReplaceGrid(grid);
+        gridManager.ReplaceGrid(grid);
         BuildingBlock blockData = InitiateBuildingBlock(Vector3Int.one);
         Vector3Int position0 = new Vector3Int(2,2,1);
         Vector3Int position1 = new Vector3Int(2,2,2);

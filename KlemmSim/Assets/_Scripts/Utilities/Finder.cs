@@ -23,6 +23,10 @@ public static class Finder
         return foundComponent;
     }
 
+    // If a GameObject with the given tag exists, this method returns it.
+    // Else a new GameObject is instantiated with the name <tag>Object
+    // Note: Unity does not allow to access the tags directly
+    // so this method might throw an exception if an invalid tag is used.
     public static GameObject FindOrCreateGameObjectWithTag(string tag)
     {
         GameObject foundGameObject = GameObject.FindGameObjectWithTag(tag);
@@ -49,7 +53,7 @@ public static class Finder
     }
 
     // Finds all BuildingBlocks under the BuildingBlocks parent.
-    // May return an empty Array
+    // Note: May return an empty Array
     public static BuildingBlockDisplay[] FindBuildingBlocks()
     {
         GameObject buildingblockParent = Finder.FindOrCreateGameObjectWithTag("BuildingBlocks");

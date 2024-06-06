@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// 3-dimensional grid that consists of voxels
 public class Grid3D 
 {
     private Voxel[,,] voxels;
@@ -16,6 +17,7 @@ public class Grid3D
                     voxels[x,y,z] = new Voxel();
     }
 
+    // Each voxel contains data about the BuildingBlock that occupies it.
     private class Voxel
     {
         public BuildingBlock buildingBlock;
@@ -39,6 +41,7 @@ public class Grid3D
         }
     }
 
+    // Can be seen in Edit Mode and Runtime
     public void DrawDebugText()
     {
         int xMax = voxels.GetLength(0);
@@ -55,6 +58,7 @@ public class Grid3D
                 }
     }
 
+    // Can only be seen in Edit Mode
     public void DrawGridLines()
     {
         int xMax = voxels.GetLength(0);
@@ -77,12 +81,13 @@ public class Grid3D
                 Debug.DrawLine(GetWorldPosition(x, y, 0), GetWorldPosition(x, y, zMax), Color.white, 100f);
     }
 
+    // Converts the index of the grid to the position in the scene
     private Vector3 GetWorldPosition(int x, int y, int z)
     {
         return new Vector3(x, y, z);
     }
 
-    // For every Voxel, occupied by the BuildingBlockDisplay, set the Voxel accordingly 
+    // For every voxel, occupied by the BuildingBlockDisplay, set the voxel accordingly 
     public void SetVoxels(Vector3Int position, BuildingBlock block, BuildingBlockDisplay blockDisplay)
     {
         for (int xOffset = 0; xOffset < block.sizeX; xOffset++)
@@ -106,7 +111,7 @@ public class Grid3D
 
     public bool IsInsideBuildingLimit(Vector3Int blockOriginPoint, BuildingBlock block)
     {
-        // Check for every Voxel, that would be covered by the Block, if it is inside the building limit
+        // Check for every voxel, that would be covered by the block, if it is inside the building limit
         for (int xOffset = 0; xOffset < block.sizeX; xOffset++)
             for (int yOffset = 0; yOffset < block.sizeY; yOffset++)
                 for (int zOffset = 0; zOffset < block.sizeZ; zOffset++)
@@ -118,6 +123,7 @@ public class Grid3D
         return true;
     }
 
+    // returns true if the position is inside the building limit
     public bool IsInsideBuildingLimit(Vector3Int position)
     {
         int xMax = voxels.GetLength(0);
@@ -144,7 +150,6 @@ public class Grid3D
         voxels[x,y,z].UpdateVoxel(null, "", false);
     }
 
-    // Return the size of the gird
     public Vector3Int GetSize()
     {
         int x = voxels.GetLength(0);
