@@ -5,7 +5,7 @@ using System.IO;
 public class SaveManager : MonoBehaviour
 {
     private GridManager gridManager;
-    private InventoryManager inventoryManager;
+    private BlockReferenceManager blockReferenceManager;
 
     // Filter to only show relevant file extentions
     private readonly ExtensionFilter[] extensions = new ExtensionFilter[] {
@@ -17,7 +17,7 @@ public class SaveManager : MonoBehaviour
     {
         // Get relevant managers
         gridManager = Finder.FindOrCreateObjectOfType<GridManager>();
-        inventoryManager = Finder.FindOrCreateObjectOfType<InventoryManager>();
+        blockReferenceManager = Finder.FindOrCreateObjectOfType<BlockReferenceManager>();
     }
 
     public void Import()
@@ -64,7 +64,7 @@ public class SaveManager : MonoBehaviour
             // get block information
             Vector3Int position = blockInfo.position;
             string name = blockInfo.name;
-            BuildingBlock blockType = inventoryManager.GetBuildingBlockFromName(name);
+            BuildingBlock blockType = blockReferenceManager.GetBuildingBlockByName(name);
             
             gridManager.InstantiateBuildingBlockAtPosition(position, blockType);
         }
