@@ -11,7 +11,7 @@ public class Item : MonoBehaviour
     private TMP_Text currentNumber;
     private Image currentIcon;
 
-    private void Start() 
+    private void Awake() 
     {
         SetReferences();
     }
@@ -41,6 +41,7 @@ public class Item : MonoBehaviour
     {
         this.block = block;
         UpdateIconDisplay();
+        UpdateAmountDisplay();
     }
 
     public int IncreaseAmount()
