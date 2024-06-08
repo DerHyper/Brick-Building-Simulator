@@ -11,7 +11,7 @@ public class BlockReferenceManager : MonoBehaviour
     // Note: Names in a map should never be used twice!
     private Dictionary<string,BuildingBlock> buildingBlockMap;
 
-    private void Start()
+    private void Awake()
     {
         InializeDictionary();
     }
