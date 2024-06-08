@@ -4,5 +4,101 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
+    private Item selectedItem;
+    [SerializeField]
+    private int maxInventorySize = 15;
+    private Transform itemParent; // This should be located in the hierarchy at "Canvases/Inventory/Viewport/Content"
+    [SerializeField]
+    private GameObject itemPrefab; // This should be located in the project at "Assets/Prefabs/Item"
+    private Dictionary<BuildingBlock, Item> items;
 
+    private void Start() 
+    {
+        items = new Dictionary<BuildingBlock, Item>();
+        itemParent = Finder.FindOrCreateGameObjectWithTag("ItemParent").transform;
+        BuildingBlock block = Finder.FindOrCreateObjectOfType<BlockReferenceManager>().GetBuildingBlockByName("1x1x1");
+        Add(block);
+        Add(block);
+        Add(block);
+        block = Finder.FindOrCreateObjectOfType<BlockReferenceManager>().GetBuildingBlockByName("1x1x2");
+        Add(block);
+        Add(block);
+    }
+
+    // Add the block to the inventory as a new item.
+    // If the item already exists, increase the current amount
+    public void Add(BuildingBlock block)
+    {
+        Item item;
+        if(items.TryGetValue(block, out item))
+        {
+            item.IncreaseAmount();
+        } 
+        else
+        {
+            item = AddNewItem(block);
+        }
+
+        item?.UpdateItemDisplay();
+    }
+
+    // Instantiate new Item and add it to the Dictionary
+    private Item AddNewItem(BuildingBlock block)
+    {
+        if (items.Count() <= maxInventorySize)
+        {
+            Item newItem = Instantiate(itemPrefab,itemParent).GetComponent<Item>();
+            newItem.block = block;
+            items.Add(block, newItem);
+            return newItem;
+        }
+        else
+        {
+            Debug.LogWarning("Inventory full!");
+            return null;
+        }
+    }
+
+    // Decrease the amount in the item to the coresponding block.
+    // If amount hits zero, remove the item entirely
+    public void Remove(BuildingBlock block)
+    {
+        Item item;
+        if(items.TryGetValue(block, out item))
+        {
+            if (item.amount > 1)
+            {
+                item.DecreaseAmount();
+                item.UpdateItemDisplay();
+            }
+            else 
+            {
+                Destroy(item.gameObject);
+                items.Remove(block);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Could not find "+block.name+"in inventory");
+        }
+    }
+    
+    public void SetSelectedItem(Item item)
+    {
+        selectedItem = item;
+        Debug.Log("Item selected: "+item);
+    }
+
+    public BuildingBlock GetSelectedBuildingBlock()
+    {
+        if (selectedItem != null)
+        {
+            BuildingBlock selecedBlock = selectedItem.block;
+            return selecedBlock;
+        }
+        else
+        {
+            return null;
+        }
+    }
 }
