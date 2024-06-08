@@ -7,4 +7,5 @@ public class BuildingBlock : ScriptableObject
     public int sizeY;
     public int sizeZ;
     public Transform model;
+    public Sprite icon;
 }
