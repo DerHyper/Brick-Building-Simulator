@@ -33,14 +33,14 @@ public class GridManager : MonoBehaviour, IGridManager
         this.grid = grid;
     }
 
-    public void InstantiateBuildingBlockAtPosition(Vector3Int originPosition, BuildingBlock block)
+    public bool TryInstantiateBuildingBlock(Vector3Int originPosition, BuildingBlock block)
     {
-        if (!InstantiationAllowed(originPosition, block)) return;
+        if (!InstantiationAllowed(originPosition, block)) return false;
 
         BuildingBlockDisplay blockDisplay = InstantiateBuildingBlock(originPosition, block);
 
         grid.SetVoxels(originPosition, block, blockDisplay);
-
+        return true;
     }
 
     // Returns true if the block can be instantiated at the given position 

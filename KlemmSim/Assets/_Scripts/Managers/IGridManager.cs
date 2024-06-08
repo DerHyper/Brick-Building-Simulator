@@ -2,7 +2,7 @@ using UnityEngine;
 
 public interface IGridManager
 {
-    public void InstantiateBuildingBlockAtPosition(Vector3Int position, BuildingBlock block);
+    public bool TryInstantiateBuildingBlock(Vector3Int position, BuildingBlock block);
 
     // Destroys every Block that can be found in this Grid
     public void ClearGrid();

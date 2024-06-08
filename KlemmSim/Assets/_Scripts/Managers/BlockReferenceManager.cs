@@ -31,8 +31,9 @@ public class BlockReferenceManager : MonoBehaviour
 
     public BuildingBlock GetBuildingBlockByName(string name)
     {
-        // If Key is invalid, get an alternative block (fist is not realy first, scince it is a HashMap)
-        // If alternative block is also not working create a new one
+        // If the key is invalid, get an alternative block
+        // Note: The first block is not necessarily the first block added since it is a hash map.
+        // If alternative block is also not working, create a new one
         if(!buildingBlockMap.TryGetValue(name, out BuildingBlock block))
         {
             Debug.LogWarning("Could get value from key: '"+name+"'.", this);

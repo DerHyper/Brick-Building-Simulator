@@ -66,7 +66,7 @@ public class SaveManager : MonoBehaviour
             string name = blockInfo.name;
             BuildingBlock blockType = blockReferenceManager.GetBuildingBlockByName(name);
             
-            gridManager.InstantiateBuildingBlockAtPosition(position, blockType);
+            gridManager.TryInstantiateBuildingBlock(position, blockType);
         }
     }
 

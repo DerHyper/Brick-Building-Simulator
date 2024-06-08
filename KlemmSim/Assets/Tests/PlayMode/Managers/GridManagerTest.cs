@@ -37,7 +37,7 @@ public class GridManagerTest
         Vector3Int position = new Vector3Int(2,2,2);
 
         // Act
-        gridManager.InstantiateBuildingBlockAtPosition(position, originalBlock);
+        gridManager.TryInstantiateBuildingBlock(position, originalBlock);
 
         // Assert
         BuildingBlock blockReferenceInGrid = grid.GetBuildingBlock(position);
@@ -59,7 +59,7 @@ public class GridManagerTest
         Vector3Int position = new Vector3Int(2,2,2); // block should be clipping out at 2;2;5
         yield return null; // Skip another frame to ensure that the block is initialized correctly
         // Act
-        gridManager.InstantiateBuildingBlockAtPosition(position, originalBlock);
+        gridManager.TryInstantiateBuildingBlock(position, originalBlock);
 
         // Assert
         Assert.IsEmpty(Finder.FindBuildingBlocks());
@@ -78,13 +78,13 @@ public class GridManagerTest
         // Instantiate original Block
         BuildingBlock originalBlock = InitiateBuildingBlock(Vector3Int.one);
         Vector3Int originalPosition = Vector3Int.zero;
-        gridManager.InstantiateBuildingBlockAtPosition(originalPosition, originalBlock);
+        gridManager.TryInstantiateBuildingBlock(originalPosition, originalBlock);
         // Instantiate blocked Block
         BuildingBlock blockedBlock = InitiateBuildingBlock(Vector3Int.one);
         
         // Act
         // Try override original block
-        gridManager.InstantiateBuildingBlockAtPosition(originalPosition, blockedBlock);
+        gridManager.TryInstantiateBuildingBlock(originalPosition, blockedBlock);
 
         // Assert
         // No override happened
@@ -106,14 +106,14 @@ public class GridManagerTest
         // Instantiate original Block that overrides the whole Grid
         BuildingBlock originalBlock = InitiateBuildingBlock(new Vector3Int(3,3,3));
         Vector3Int originalPosition = Vector3Int.zero;
-        gridManager.InstantiateBuildingBlockAtPosition(originalPosition, originalBlock);
+        gridManager.TryInstantiateBuildingBlock(originalPosition, originalBlock);
         // Instantiate blocked Block
         BuildingBlock blockedBlock = InitiateBuildingBlock(Vector3Int.one);
         Vector3Int blockedPosition = new Vector3Int(2,2,2);
         
         // Act
         // Try override overlaping block
-        gridManager.InstantiateBuildingBlockAtPosition(blockedPosition, blockedBlock);
+        gridManager.TryInstantiateBuildingBlock(blockedPosition, blockedBlock);
 
         // Assert
         // No override happened
@@ -150,7 +150,7 @@ public class GridManagerTest
         BuildingBlock block = InitiateBuildingBlock(Vector3Int.one);
         Vector3Int position = new Vector3Int(2,2,2);
         // Place Block in Grid
-        gridManager.InstantiateBuildingBlockAtPosition(position, block);
+        gridManager.TryInstantiateBuildingBlock(position, block);
 
         // Act
         gridManager.ClearGrid();
@@ -170,7 +170,7 @@ public class GridManagerTest
         BuildingBlock block = InitiateBuildingBlock(Vector3Int.one);
         Vector3Int position = new Vector3Int(2,2,2);
         // Place Block in Grid, then get it
-        gridManager.InstantiateBuildingBlockAtPosition(position, block);
+        gridManager.TryInstantiateBuildingBlock(position, block);
         BuildingBlockDisplay justPlacedBlock = Finder.FindBuildingBlocks()[0];
 
         // Act
@@ -195,9 +195,9 @@ public class GridManagerTest
         Vector3Int position1 = new Vector3Int(2,2,2);
         Vector3Int position2 = new Vector3Int(2,2,3);
         // Place 3 Block in Grid, then get them
-        gridManager.InstantiateBuildingBlockAtPosition(position0, blockData);
-        gridManager.InstantiateBuildingBlockAtPosition(position1, blockData);
-        gridManager.InstantiateBuildingBlockAtPosition(position2, blockData);
+        gridManager.TryInstantiateBuildingBlock(position0, blockData);
+        gridManager.TryInstantiateBuildingBlock(position1, blockData);
+        gridManager.TryInstantiateBuildingBlock(position2, blockData);
         BuildingBlockDisplay[] justPlacedBlocks = Finder.FindBuildingBlocks();
         BuildingBlockDisplay[] blocksToDestroy = justPlacedBlocks.Take(2).ToArray(); // First 2 Blocks
         BuildingBlockDisplay blockThatShouldNotBeDestroyed = justPlacedBlocks.Last();
