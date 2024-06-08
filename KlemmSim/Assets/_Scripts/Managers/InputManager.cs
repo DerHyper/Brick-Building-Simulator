@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    GridManager gridManager;
-    public BuildingBlock block;
+    private GridManager gridManager;
+    private InventoryManager inventoryManager;
 
     private void Start()
     {
         gridManager = Finder.FindOrCreateObjectOfType<GridManager>();
+        inventoryManager = Finder.FindOrCreateObjectOfType<InventoryManager>();
     }
 
     // TODO: This could be exchanged for an event system
@@ -23,6 +24,7 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    // Check if position is valid, if so, place the currently selected block and remove it from inventory
     private void BuildBlockAtMousePoint()
     {
         // TODO: This should be exchanged for normal error handling
@@ -37,9 +39,17 @@ public class InputManager : MonoBehaviour
             Debug.Log("Exception catched: Tried to place BuildingBlock outside the grid.");
             return;
         }
-
         Debug.Log(gridPosition,this);
-        gridManager.InstantiateBuildingBlockAtPosition(gridPosition, block);
+
+        // Get the currently selected block
+        BuildingBlock block = inventoryManager.GetSelectedBuildingBlock();
+        if (block != null) 
+        {
+            if (gridManager.TryInstantiateBuildingBlock(gridPosition, block))
+            {
+                inventoryManager.Remove(block);
+            }
+        }
     }
 
     private void DestroyBlockAtMousePoint()
@@ -67,6 +77,7 @@ public class InputManager : MonoBehaviour
             return;
         } 
 
+        inventoryManager.Add(targetBlock.block);
         gridManager.DestroyBlock(targetBlock);
     }
     
