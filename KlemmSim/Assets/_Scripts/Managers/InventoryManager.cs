@@ -38,8 +38,6 @@ public class InventoryManager : MonoBehaviour
         {
             item = AddNewItem(block);
         }
-
-        item?.UpdateItemDisplay();
     }
 
     // Instantiate new Item and add it to the Dictionary
@@ -48,7 +46,7 @@ public class InventoryManager : MonoBehaviour
         if (items.Count() <= maxInventorySize)
         {
             Item newItem = Instantiate(itemPrefab,itemParent).GetComponent<Item>();
-            newItem.block = block;
+            newItem.SetBlock(block);
             items.Add(block, newItem);
             return newItem;
         }
@@ -69,7 +67,6 @@ public class InventoryManager : MonoBehaviour
             if (item.amount > 1)
             {
                 item.DecreaseAmount();
-                item.UpdateItemDisplay();
             }
             else 
             {
