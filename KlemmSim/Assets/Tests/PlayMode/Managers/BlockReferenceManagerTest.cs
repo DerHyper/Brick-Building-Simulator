@@ -5,10 +5,10 @@ using UnityEngine.TestTools;
 
 public class BlockReferenceManagerTest
 {
-    // Note: This tests expects that the scene already has
-    // a BlockReferenceManager with a block named "1x1x1" in it
-    // and that no block with the name "NonExistingBlock" is in it.
-    // This is because we do not have acces to any blocks in memory
+    // Note: These tests expect that the scene already has
+    // a BlockReferenceManager with a block named "1x1x1" in it
+    // and that no block with the name "NonExistingBlock" is in it.
+    // This is because we do not have access to any blocks in memory
 
     [SetUp]
     public void SetUpScene()
