@@ -18,8 +18,8 @@ public class Item : MonoBehaviour
 
     private void SetReferences()
     {
-        currentNumber = gameObject.transform.Find("NumberBox/Number").GetComponent<TMP_Text>();
-        currentIcon = gameObject.transform.Find("Icon").GetComponent<Image>();
+        currentNumber = gameObject.transform.Find("NumberBox/Number")?.GetComponent<TMP_Text>();
+        currentIcon = gameObject.transform.Find("Icon")?.GetComponent<Image>();
     }
 
     public void SelectThisItem()
