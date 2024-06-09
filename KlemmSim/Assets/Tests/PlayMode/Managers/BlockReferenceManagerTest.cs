@@ -13,7 +13,7 @@ public class BlockReferenceManagerTest
     [SetUp]
     public void SetUpScene()
     {
-        SceneManager.LoadScene("BuildingScene");
+        SceneManager.LoadScene("TestScene");
     }
 
     [UnityTest]
