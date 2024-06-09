@@ -16,13 +16,6 @@ public class InventoryManager : MonoBehaviour
     {
         items = new Dictionary<BuildingBlock, Item>();
         itemParent = Finder.FindOrCreateGameObjectWithTag("ItemParent").transform;
-        BuildingBlock block = Finder.FindOrCreateObjectOfType<BlockReferenceManager>().GetBuildingBlockByName("1x1x1");
-        Add(block);
-        Add(block);
-        Add(block);
-        block = Finder.FindOrCreateObjectOfType<BlockReferenceManager>().GetBuildingBlockByName("1x1x2");
-        Add(block);
-        Add(block);
     }
 
     // Add the block to the inventory as a new item.
