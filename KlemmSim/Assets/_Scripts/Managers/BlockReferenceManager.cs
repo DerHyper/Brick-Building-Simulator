@@ -46,4 +46,9 @@ public class BlockReferenceManager : MonoBehaviour
 
         return block;
     }
+
+    public List<BuildingBlock> GetBuildingBlocks()
+    {
+        return buildingBlocks;
+    }
 }

@@ -224,7 +224,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 68465106}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.11902035, y: 0.8780597, z: -0.28734046, w: -0.36370435}
+  m_LocalRotation: {x: -0.11902034, y: 0.8780597, z: -0.28734043, w: -0.36370435}
   m_LocalPosition: {x: 6.7528706, y: 7, z: 6.7528696}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -425,6 +425,7 @@ Transform:
   - {fileID: 1966553779}
   - {fileID: 1946154132}
   - {fileID: 1592464873}
+  - {fileID: 1474614421}
   - {fileID: 1902549183}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -704,7 +705,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.11902035, y: 0.8780597, z: -0.28734046, w: -0.36370435}
+  m_LocalRotation: {x: -0.11902034, y: 0.8780597, z: -0.28734043, w: -0.36370435}
   m_LocalPosition: {x: 6.7528706, y: 7, z: 6.7528696}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -967,6 +968,52 @@ Transform:
   - {fileID: 1937895041}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1474614420
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1474614421}
+  - component: {fileID: 1474614422}
+  m_Layer: 0
+  m_Name: InventoryRandomizer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1474614421
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474614420}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 555727480}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1474614422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474614420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad873688ac565df44a8fe992fe591a16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalNumberOfBlocks: 20
+  numberOfBlockTypes: 2
 --- !u!1 &1509606462
 GameObject:
   m_ObjectHideFlags: 0
@@ -1145,7 +1192,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3bc720606fe2fd4da2219e81fe3a000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedItem: {fileID: 0}
   maxInventorySize: 15
   itemPrefab: {fileID: 5052702666643941984, guid: da42b288469e5bf4f936c186bb190ea4, type: 3}
 --- !u!1 &1644705644
@@ -2095,7 +2141,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19bba44544b48d4fac19a2f4ec2325d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  block: {fileID: 11400000, guid: e3f4ba0a498559049a15f8ecd820ab3e, type: 2}
 --- !u!1 &1984606889
 GameObject:
   m_ObjectHideFlags: 0

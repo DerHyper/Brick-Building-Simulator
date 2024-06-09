@@ -12,7 +12,7 @@ public class InventoryManager : MonoBehaviour
     private GameObject itemPrefab; // This should be located in the project at "Assets/Prefabs/Item"
     private Dictionary<BuildingBlock, Item> items;
 
-    private void Start() 
+    private void Awake() 
     {
         items = new Dictionary<BuildingBlock, Item>();
         itemParent = Finder.FindOrCreateGameObjectWithTag("ItemParent").transform;
