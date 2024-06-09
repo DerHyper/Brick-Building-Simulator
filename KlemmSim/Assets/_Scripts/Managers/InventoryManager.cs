@@ -59,7 +59,8 @@ public class InventoryManager : MonoBehaviour
 
     // Decrease the amount in the item to the coresponding block.
     // If amount hits zero, remove the item entirely
-    public void Remove(BuildingBlock block)
+    // return true if the removal was successful.
+    public bool Remove(BuildingBlock block)
     {
         Item item;
         if(items.TryGetValue(block, out item))
@@ -73,10 +74,12 @@ public class InventoryManager : MonoBehaviour
                 Destroy(item.gameObject);
                 items.Remove(block);
             }
+            return true;
         }
         else
         {
             Debug.LogWarning("Could not find "+block.name+"in inventory");
+            return false;
         }
     }
     
