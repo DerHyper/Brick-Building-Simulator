@@ -92,4 +92,15 @@ public class InventoryManager : MonoBehaviour
             return null;
         }
     }
+
+    public void ClearInventory()
+    {
+        // Destory every item in the Dictionary
+        foreach (var pair in items)
+        {
+            Item item = pair.Value;
+            Destroy(item.gameObject);
+        }
+        items.Clear();
+    }
 }

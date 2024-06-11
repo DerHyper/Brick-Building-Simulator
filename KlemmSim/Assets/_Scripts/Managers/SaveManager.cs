@@ -5,6 +5,7 @@ using System.IO;
 public class SaveManager : MonoBehaviour
 {
     public GridManager gridManager;
+    public InventoryManager inventoryManager;
     public BlockReferenceManager blockReferenceManager;
 
     // Filter to only show relevant file extentions
@@ -29,6 +30,7 @@ public class SaveManager : MonoBehaviour
         #endif
 
         gridManager.ClearGrid();
+        inventoryManager.ClearInventory();
         LoadSaveData(saveData);
     }
 

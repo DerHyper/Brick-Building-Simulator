@@ -2062,6 +2062,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridManager: {fileID: 2108848118}
+  inventoryManager: {fileID: 1592464874}
   blockReferenceManager: {fileID: 1902549184}
 --- !u!1 &1966553778
 GameObject:
