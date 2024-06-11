@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class InventoryRandomizer : MonoBehaviour
@@ -16,6 +17,7 @@ public class InventoryRandomizer : MonoBehaviour
     {
         // Generate block types and distrobution
         List<BuildingBlock> pickedBlockTypes = PickRandomBlocks(blockReferenceManager.GetBuildingBlocks(), numberOfBlockTypes);
+        Debug.Log("Picked block example:"+pickedBlockTypes.First(), this);
         int[] distribution = GenerateDistrobutionOfBlocks(totalNumberOfBlocks, numberOfBlockTypes);
         AddAllBlocksToInventory(pickedBlockTypes, distribution);
     }
@@ -49,33 +51,21 @@ public class InventoryRandomizer : MonoBehaviour
         return distribution;
     }
 
-    // Generate a copy of the originalBlocks and pop random elements into a new list
-    private List<BuildingBlock> PickRandomBlocks(List<BuildingBlock> originalBlocks, int numberOfBlocks)
+    private List<BuildingBlock> PickRandomBlocks(List<BuildingBlock> possibleBlocks, int numberOfBlocks)
     {
-        List<BuildingBlock> possibleBlocksCopy = GenerateListCopy(originalBlocks);
         List<BuildingBlock> pickedBlocks = new List<BuildingBlock>();
 
         for (int i = 0; i < numberOfBlocks; i++)
         {
-            int randomIndex = UnityEngine.Random.Range(0, possibleBlocksCopy.Count);
-            BuildingBlock randomBlockCopy = Instantiate(possibleBlocksCopy[randomIndex]);
-            possibleBlocksCopy.Remove(possibleBlocksCopy[randomIndex]);
+            // Pick a random Block
+            int randomIndex = UnityEngine.Random.Range(0, possibleBlocks.Count);
+            BuildingBlock randomBlockCopy = possibleBlocks[randomIndex];
+            
+            // Pop it into the list of pickedBlocks
+            possibleBlocks.Remove(possibleBlocks[randomIndex]);
             pickedBlocks.Add(randomBlockCopy);
         }
 
         return pickedBlocks;
-    }
-
-    private List<BuildingBlock> GenerateListCopy(List<BuildingBlock> original)
-    {
-        List<BuildingBlock> copy = new List<BuildingBlock>();
-        // Copy each element of the original into the Copy
-        foreach (BuildingBlock block in original)
-        {
-            BuildingBlock blockCopy = Instantiate(block);
-            copy.Add(blockCopy);
-        }
-
-        return copy;
     }
 }
