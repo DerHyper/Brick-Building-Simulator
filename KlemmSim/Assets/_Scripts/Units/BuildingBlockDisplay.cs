@@ -5,10 +5,6 @@ public class BuildingBlockDisplay : MonoBehaviour
     public BuildingBlock block;
     public Vector3Int position;
     public new string name;
-    private int sizeX;
-    private int sizeY;
-    private int sizeZ;
-    private Transform model;
     private BoxCollider boxCollider;
     
     public void UpdateDisplay(Vector3Int position, BuildingBlock block)
@@ -35,10 +31,12 @@ public class BuildingBlockDisplay : MonoBehaviour
 
     private void UpdateVariables()
     {
-        this.sizeX = block.sizeX;
-        this.sizeY = block.sizeY;
-        this.sizeZ = block.sizeZ;
-        this.model = block.model;
         this.name = block.name;
+    }
+
+    public new string ToString()
+    {
+        string info = "{Name: "+name+", BuildingBlock: "+block+", Position: "+position+"}";
+        return info;
     }
 }

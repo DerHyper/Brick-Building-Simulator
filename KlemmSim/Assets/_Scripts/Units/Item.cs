@@ -59,4 +59,10 @@ public class Item : MonoBehaviour
         UpdateAmountDisplay();
         return amount;
     }
+
+    public new string ToString()
+    {
+        string info = "{Name: "+name+", BuildingBlock: "+block+", Amount: "+amount+"}";
+        return info;
+    }
 }

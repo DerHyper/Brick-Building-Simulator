@@ -8,4 +8,10 @@ public class BuildingBlock : ScriptableObject
     public int sizeZ;
     public Transform model;
     public Sprite icon;
+
+    public new string ToString()
+    {
+        string info = "{Name: "+name+", Size: ("+sizeX+","+sizeX+","+sizeX+")}";
+        return info;
+    }
 }

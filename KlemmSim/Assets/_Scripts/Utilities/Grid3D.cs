@@ -191,4 +191,16 @@ public class Grid3D
                     ResetVoxel(positionWithOffset);
                 }
     }
+
+    public new string ToString()
+    {
+        string info = "";
+        foreach (var block in blocks)
+        {
+            info += block.ToString()+"\n";
+        }
+
+        
+        return "{"+info+"}";
+    }
 }

@@ -17,7 +17,6 @@ public class InventoryRandomizer : MonoBehaviour
     {
         // Generate block types and distrobution
         List<BuildingBlock> pickedBlockTypes = PickRandomBlocks(blockReferenceManager.GetBuildingBlocks(), numberOfBlockTypes);
-        Debug.Log("Picked block example:"+pickedBlockTypes.First(), this);
         int[] distribution = GenerateDistrobutionOfBlocks(totalNumberOfBlocks, numberOfBlockTypes);
         AddAllBlocksToInventory(pickedBlockTypes, distribution);
     }
