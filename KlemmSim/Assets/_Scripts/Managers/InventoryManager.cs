@@ -7,15 +7,13 @@ public class InventoryManager : MonoBehaviour
     private Item selectedItem;
     [SerializeField]
     private int maxInventorySize = 15;
-    private Transform itemParent; // This should be located in the hierarchy at "Canvases/Inventory/Viewport/Content"
-    [SerializeField]
-    private GameObject itemPrefab; // This should be located in the project at "Assets/Prefabs/Item"
+    public Transform itemParent; // This should be located in the hierarchy at "Canvases/Inventory/Viewport/Content"
+    public GameObject itemPrefab; // This should be located in the project at "Assets/Prefabs/Item"
     private Dictionary<BuildingBlock, Item> items;
 
     private void Awake() 
     {
         items = new Dictionary<BuildingBlock, Item>();
-        itemParent = Finder.FindOrCreateGameObjectWithTag("ItemParent").transform;
     }
 
     // Add the block to the inventory as a new item.
@@ -38,7 +36,7 @@ public class InventoryManager : MonoBehaviour
     {
         if (items.Count() <= maxInventorySize)
         {
-            Item newItem = Instantiate(itemPrefab,itemParent).GetComponent<Item>();
+            Item newItem = Instantiate(itemPrefab, itemParent).GetComponent<Item>();
             newItem.SetBlock(block);
             items.Add(block, newItem);
             return newItem;

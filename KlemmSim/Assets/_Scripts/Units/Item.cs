@@ -7,6 +7,7 @@ public class Item : MonoBehaviour
 {
     public BuildingBlock block{get; private set;} = null;
     public int amount {get; private set;} = 1; // amount should only be set via set-methods
+    public InventoryManager inventoryManager;
 
     private TMP_Text currentNumber;
     private Image currentIcon;
@@ -18,13 +19,14 @@ public class Item : MonoBehaviour
 
     private void SetReferences()
     {
+        inventoryManager = GameObject.FindObjectOfType<InventoryManager>();
         currentNumber = gameObject.transform.Find("NumberBox/Number")?.GetComponent<TMP_Text>();
         currentIcon = gameObject.transform.Find("Icon")?.GetComponent<Image>();
     }
 
     public void SelectThisItem()
     {
-        Finder.FindOrCreateObjectOfType<InventoryManager>().SetSelectedItem(this);
+        inventoryManager.SetSelectedItem(this);
     }
 
     private void UpdateAmountDisplay()

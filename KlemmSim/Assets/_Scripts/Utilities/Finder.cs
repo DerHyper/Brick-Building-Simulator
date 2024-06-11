@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public static class Finder
+public static class Finder // This class should not be used to find Managers 
 {
     public static T FindOrCreateObjectOfType<T>() where T : Component
     {

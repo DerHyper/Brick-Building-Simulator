@@ -4,9 +4,9 @@ public class SelfCenterToGridBottom : MonoBehaviour
 {
     [SerializeField]
     private int distanceFromBottom;
+    public GridManager gridManager;
     void Start()
     {
-        GridManager gridManager = Finder.FindOrCreateObjectOfType<GridManager>();
         UpdatePosition(gridManager, distanceFromBottom);
     }
 

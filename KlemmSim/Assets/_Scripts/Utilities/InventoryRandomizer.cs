@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,11 +5,10 @@ public class InventoryRandomizer : MonoBehaviour
 {
     public int totalNumberOfBlocks = 40;
     public int numberOfBlockTypes = 5;
-    private InventoryManager inventoryManager;
-    private BlockReferenceManager blockReferenceManager;
+    public InventoryManager inventoryManager;
+    public BlockReferenceManager blockReferenceManager;
     private void Start()
     {
-        InitReferences();
         InitInventory();
     }
 
@@ -80,11 +77,5 @@ public class InventoryRandomizer : MonoBehaviour
         }
 
         return copy;
-    }
-
-    private void InitReferences()
-    {
-        inventoryManager = Finder.FindOrCreateObjectOfType<InventoryManager>();
-        blockReferenceManager = Finder.FindOrCreateObjectOfType<BlockReferenceManager>();
     }
 }

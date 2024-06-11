@@ -4,21 +4,14 @@ using System.IO;
 
 public class SaveManager : MonoBehaviour
 {
-    private GridManager gridManager;
-    private BlockReferenceManager blockReferenceManager;
+    public GridManager gridManager;
+    public BlockReferenceManager blockReferenceManager;
 
     // Filter to only show relevant file extentions
     private readonly ExtensionFilter[] extensions = new ExtensionFilter[] {
         new ExtensionFilter("Constructions", "json"),
         new ExtensionFilter("All Files", "*" ),
     };
-
-    public void Start() 
-    {
-        // Get relevant managers
-        gridManager = Finder.FindOrCreateObjectOfType<GridManager>();
-        blockReferenceManager = Finder.FindOrCreateObjectOfType<BlockReferenceManager>();
-    }
 
     public void Import()
     {   
@@ -115,7 +108,7 @@ public class SaveManager : MonoBehaviour
     private string SaveDataToJSON()
     {
         // Get all Building Blocks
-        BuildingBlockDisplay[] blocks = Finder.FindBuildingBlocks();
+        BuildingBlockDisplay[] blocks = gridManager.GetBlocksInGrid();
         
         // Put the BuildingBlocks in a format that can be serialized into a JSON file
         JsonData jsonData = new JsonData(blocks);

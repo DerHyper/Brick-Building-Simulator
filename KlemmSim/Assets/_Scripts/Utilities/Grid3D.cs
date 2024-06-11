@@ -1,20 +1,22 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 // 3-dimensional grid that consists of voxels
 public class Grid3D 
 {
-    private Voxel[,,] voxels;
+    public List<BuildingBlockDisplay> blocks {get; private set;} = new List<BuildingBlockDisplay>();
+    private Voxel[,,] voxel;
 
     // Constructor 
     public Grid3D (int xMax, int yMax, int zMax)
     {
-        voxels = new Voxel[xMax,yMax,zMax];
+        voxel = new Voxel[xMax,yMax,zMax];
         
         // Initialize every voxel in voxels
         for (int x = 0; x < xMax; x++)
             for (int y = 0; y < yMax; y++)
                 for (int z = 0; z < zMax; z++)
-                    voxels[x,y,z] = new Voxel();
+                    voxel[x,y,z] = new Voxel();
     }
 
     // Each voxel contains data about the BuildingBlock that occupies it.
@@ -44,9 +46,9 @@ public class Grid3D
     // Can be seen in Edit Mode and Runtime
     public void DrawDebugText()
     {
-        int xMax = voxels.GetLength(0);
-        int yMax = voxels.GetLength(1);
-        int zMax = voxels.GetLength(2);
+        int xMax = voxel.GetLength(0);
+        int yMax = voxel.GetLength(1);
+        int zMax = voxel.GetLength(2);
 
         // Draw debug text for every voxel in voxels
         for (int x = 0; x < xMax; x++)
@@ -54,16 +56,16 @@ public class Grid3D
                 for (int z = 0; z < zMax; z++)
                 {
                     Vector3 textPosition = GetWorldPosition(x, y, z) + Vector3.one*0.5f;
-                    voxels[x, y, z].debugText = WorldText.CreateDebugText("", textPosition);
+                    voxel[x, y, z].debugText = WorldText.CreateDebugText("", textPosition);
                 }
     }
 
     // Can only be seen in Edit Mode
     public void DrawGridLines()
     {
-        int xMax = voxels.GetLength(0);
-        int yMax = voxels.GetLength(1);
-        int zMax = voxels.GetLength(2);
+        int xMax = voxel.GetLength(0);
+        int yMax = voxel.GetLength(1);
+        int zMax = voxel.GetLength(2);
 
         // Draw Lines in x direction
         for (int y = 0; y < yMax+1; y++)
@@ -88,8 +90,12 @@ public class Grid3D
     }
 
     // For every voxel, occupied by the BuildingBlockDisplay, set the voxel accordingly 
-    public void SetVoxels(Vector3Int position, BuildingBlock block, BuildingBlockDisplay blockDisplay)
+    public void AddBlock(Vector3Int position, BuildingBlockDisplay blockDisplay)
     {
+        blocks.Add(blockDisplay);
+
+        // Set every voxel covered by the block 
+        BuildingBlock block = blockDisplay.block;
         for (int xOffset = 0; xOffset < block.sizeX; xOffset++)
             for (int yOffset = 0; yOffset < block.sizeY; yOffset++)
                 for (int zOffset = 0; zOffset < block.sizeZ; zOffset++)
@@ -106,7 +112,7 @@ public class Grid3D
         int y = position.y;
         int z = position.z;
         
-        voxels[x,y,z].UpdateVoxel(referenceBlock.block, referenceBlock.name, true);
+        voxel[x,y,z].UpdateVoxel(referenceBlock.block, referenceBlock.name, true);
     }
 
     public bool IsInsideBuildingLimit(Vector3Int blockOriginPoint, BuildingBlock block)
@@ -126,9 +132,9 @@ public class Grid3D
     // returns true if the position is inside the building limit
     public bool IsInsideBuildingLimit(Vector3Int position)
     {
-        int xMax = voxels.GetLength(0);
-        int yMax = voxels.GetLength(1);
-        int zMax = voxels.GetLength(2);
+        int xMax = voxel.GetLength(0);
+        int yMax = voxel.GetLength(1);
+        int zMax = voxel.GetLength(2);
 
         if (position.x < 0 || position.x >= xMax) return false;
         if (position.y < 0 || position.y >= yMax) return false;
@@ -138,23 +144,23 @@ public class Grid3D
 
     public bool IsOccupied(Vector3Int position)
     {
-        return voxels[position.x, position.y, position.z].isOccupied;
+        return voxel[position.x, position.y, position.z].isOccupied;
     }
 
-    public void ResetVoxel(Vector3Int position)
+    private void ResetVoxel(Vector3Int position)
     {
         int x = position.x;
         int y = position.y;
         int z = position.z;
         
-        voxels[x,y,z].UpdateVoxel(null, "", false);
+        voxel[x,y,z].UpdateVoxel(null, "", false);
     }
 
     public Vector3Int GetSize()
     {
-        int x = voxels.GetLength(0);
-        int y = voxels.GetLength(1);
-        int z = voxels.GetLength(2);
+        int x = voxel.GetLength(0);
+        int y = voxel.GetLength(1);
+        int z = voxel.GetLength(2);
         Vector3Int size = new Vector3Int(x,y,z);
 
         return size;
@@ -166,6 +172,23 @@ public class Grid3D
         int y = position.y;
         int z = position.z;
 
-        return voxels[x,y,z].buildingBlock;
+        return voxel[x,y,z].buildingBlock;
+    }
+
+    // Delets all references in list and voxel
+    public void DeleteBlock(BuildingBlockDisplay target)
+    {
+        blocks.Remove(target);
+        Vector3Int position = target.position;
+        BuildingBlock block = target.block;
+
+        for (int xOffset = 0; xOffset < block.sizeX; xOffset++)
+            for (int yOffset = 0; yOffset < block.sizeY; yOffset++)
+                for (int zOffset = 0; zOffset < block.sizeZ; zOffset++)
+                {
+                    Vector3Int offset = new Vector3Int(xOffset, yOffset, zOffset);
+                    Vector3Int positionWithOffset = position + offset;
+                    ResetVoxel(positionWithOffset);
+                }
     }
 }

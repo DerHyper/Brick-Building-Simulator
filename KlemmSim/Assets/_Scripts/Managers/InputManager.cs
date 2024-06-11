@@ -2,14 +2,8 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    private GridManager gridManager;
-    private InventoryManager inventoryManager;
-
-    private void Start()
-    {
-        gridManager = Finder.FindOrCreateObjectOfType<GridManager>();
-        inventoryManager = Finder.FindOrCreateObjectOfType<InventoryManager>();
-    }
+    public GridManager gridManager;
+    public InventoryManager inventoryManager;
 
     // TODO: This could be exchanged for an event system
     private void Update() 
