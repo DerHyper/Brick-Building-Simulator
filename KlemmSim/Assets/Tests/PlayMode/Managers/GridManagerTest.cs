@@ -2,10 +2,26 @@ using System.Collections;
 using System.Linq;
 using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
+
 
 public class GridManagerTest
 {
+    // Note: These tests expect that the scene already has
+    // a GridManager with a BuildingBlockParent in it
+    [SetUp]
+    public void SetUpScene()
+    {
+        SceneManager.LoadScene("InventoryTestScene");
+    }
+
+    [TearDown]
+    public void TearDownScene()
+    {
+        SceneManager.UnloadSceneAsync("InventoryTestScene");
+    }
+
     private GridManager InitiateGridManager(Grid3D grid)
     {
         GridManager gridManager = new GameObject().AddComponent<GridManager>();

@@ -12,14 +12,19 @@ public class InventoryManagerTest
     [SetUp]
     public void SetUpScene()
     {
-        SceneManager.LoadScene("TestScene");
+        SceneManager.LoadScene("InventoryTestScene");
     }
 
+    [TearDown]
+    public void TearDownScene()
+    {
+        SceneManager.UnloadSceneAsync("InventoryTestScene");
+    }
 
     [UnityTest] // Add block, Remove same block returns "true"
     public IEnumerator Remove_RemoveExistingBlock_ReturnTrue()
     {
-        InventoryManager inventoryManager = Finder.FindOrCreateObjectOfType<InventoryManager>();
+        InventoryManager inventoryManager = GameObject.FindObjectOfType<InventoryManager>();
         yield return null; // Wait for initialization
         BuildingBlock existingBlock = new BuildingBlock();
         inventoryManager.Add(existingBlock);

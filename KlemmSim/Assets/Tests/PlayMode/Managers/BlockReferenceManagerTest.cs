@@ -1,5 +1,6 @@
 using System.Collections;
 using NUnit.Framework;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
@@ -13,7 +14,13 @@ public class BlockReferenceManagerTest
     [SetUp]
     public void SetUpScene()
     {
-        SceneManager.LoadScene("TestScene");
+        SceneManager.LoadScene("BlockReferenceTestScene");
+    }
+
+    [TearDown]
+    public void TearDownScene()
+    {
+        SceneManager.UnloadSceneAsync("BlockReferenceTestScene");
     }
 
     [UnityTest]

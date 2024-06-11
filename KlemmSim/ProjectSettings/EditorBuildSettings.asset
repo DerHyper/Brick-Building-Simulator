@@ -9,6 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/BuildingScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/TestScene.unity
+    path: Assets/Scenes/TestScenes/InventoryTestScene.unity
     guid: b30990f8eee1cd743a86c3beb3723332
+  - enabled: 1
+    path: Assets/Scenes/TestScenes/BlockReferenceTestScene.unity
+    guid: 068673d536908ca4ca2f3e6e73a7ed51
+  - enabled: 1
+    path: Assets/Scenes/TestScenes/GridManagerTestScene.unity
+    guid: 1224c26598ca4ba4189744796d92a5af
   m_configObjects: {}
