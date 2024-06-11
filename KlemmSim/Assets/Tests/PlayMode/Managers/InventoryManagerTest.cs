@@ -1,5 +1,6 @@
 using System.Collections;
 using NUnit.Framework;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
@@ -33,7 +34,7 @@ public class InventoryManagerTest
     [UnityTest] // Remove not existing block returns "false"
     public IEnumerator Remove_RemoveNotExistingBlock_ReturnFalse()
     {
-        InventoryManager inventoryManager = Finder.FindOrCreateObjectOfType<InventoryManager>();
+        InventoryManager inventoryManager = GameObject.FindObjectOfType<InventoryManager>();
         yield return null; // Wait for initialization
         BuildingBlock notExistingBlock = new BuildingBlock();
         // No item was added
@@ -47,7 +48,7 @@ public class InventoryManagerTest
     [UnityTest] // Add block, remove other block returns "false"
     public IEnumerator Remove_RemoveOtherBlock_ReturnFalse()
     {
-        InventoryManager inventoryManager = Finder.FindOrCreateObjectOfType<InventoryManager>();
+        InventoryManager inventoryManager = GameObject.FindObjectOfType<InventoryManager>();
         yield return null; // Wait for initialization
         BuildingBlock existingBlock = new BuildingBlock();
         inventoryManager.Add(existingBlock);
@@ -63,7 +64,7 @@ public class InventoryManagerTest
     [UnityTest] // Add 2 block, remove 3 returns {true, true, false}
     public IEnumerator Remove_AddAndRemoveMultibleBlocks_ReturnWorksAccordingly()
     {
-        InventoryManager inventoryManager = Finder.FindOrCreateObjectOfType<InventoryManager>();
+        InventoryManager inventoryManager = GameObject.FindObjectOfType<InventoryManager>();
         yield return null; // Wait for initialization
         BuildingBlock[] blocks = InitBlocks(3);
         inventoryManager.Add(blocks[0]);

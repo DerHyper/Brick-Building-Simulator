@@ -19,7 +19,7 @@ public class BlockReferenceManagerTest
     [UnityTest]
     public IEnumerator GetBuildingBlockByName_BlockExists_ReturnBlock()
     {
-        BlockReferenceManager blockReferenceManager = Finder.FindOrCreateObjectOfType<BlockReferenceManager>();
+        BlockReferenceManager blockReferenceManager = Object.FindObjectOfType<BlockReferenceManager>();
         string nameOfExistingBlock = "1x1x1";
 
         BuildingBlock block = blockReferenceManager.GetBuildingBlockByName(nameOfExistingBlock);
@@ -31,7 +31,7 @@ public class BlockReferenceManagerTest
     [UnityTest]
     public IEnumerator GetBuildingBlockByName_BlockDoesNotExist_ReturnOtherBlock()
     {
-        BlockReferenceManager blockReferenceManager = Finder.FindOrCreateObjectOfType<BlockReferenceManager>();
+        BlockReferenceManager blockReferenceManager = Object.FindObjectOfType<BlockReferenceManager>();
         string nameOfBlock = "NonExistingBlock";
 
         BuildingBlock block = blockReferenceManager.GetBuildingBlockByName(nameOfBlock);

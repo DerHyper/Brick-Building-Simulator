@@ -62,7 +62,8 @@ public class GridManagerTest
         gridManager.TryInstantiateBuildingBlock(position, originalBlock);
 
         // Assert
-        Assert.IsEmpty(Finder.FindBuildingBlocks());
+        BuildingBlockDisplay[] blocksInGrid = gridManager.GetBlocksInGrid();
+        Assert.IsEmpty(blocksInGrid);
         yield return null;
     }
 
@@ -157,7 +158,8 @@ public class GridManagerTest
         yield return null; // Skiping Frame: Destroying Objects happens at the and of a frame
 
         // Assert
-        Assert.IsEmpty(Finder.FindBuildingBlocks());
+        BuildingBlockDisplay[] blocksInGrid = gridManager.GetBlocksInGrid();
+        Assert.IsEmpty(blocksInGrid);
     }
 
     [UnityTest] // Test DestroyBlock works for one block
@@ -171,14 +173,15 @@ public class GridManagerTest
         Vector3Int position = new Vector3Int(2,2,2);
         // Place Block in Grid, then get it
         gridManager.TryInstantiateBuildingBlock(position, block);
-        BuildingBlockDisplay justPlacedBlock = Finder.FindBuildingBlocks()[0];
+        BuildingBlockDisplay justPlacedBlock = gridManager.GetBlocksInGrid()[0];
 
         // Act
         gridManager.DestroyBlock(justPlacedBlock);
         yield return null; // Skiping Frame: Destroying Objects happens at the and of a frame
 
         // Assert
-        Assert.IsEmpty(Finder.FindBuildingBlocks());
+        BuildingBlockDisplay[] blocksInGrid = gridManager.GetBlocksInGrid();
+        Assert.IsEmpty(blocksInGrid);
     }
 
     [UnityTest] // Test DestroyBlocks Destroys exactly the mentioned Blocks
@@ -198,7 +201,7 @@ public class GridManagerTest
         gridManager.TryInstantiateBuildingBlock(position0, blockData);
         gridManager.TryInstantiateBuildingBlock(position1, blockData);
         gridManager.TryInstantiateBuildingBlock(position2, blockData);
-        BuildingBlockDisplay[] justPlacedBlocks = Finder.FindBuildingBlocks();
+        BuildingBlockDisplay[] justPlacedBlocks = gridManager.GetBlocksInGrid();
         BuildingBlockDisplay[] blocksToDestroy = justPlacedBlocks.Take(2).ToArray(); // First 2 Blocks
         BuildingBlockDisplay blockThatShouldNotBeDestroyed = justPlacedBlocks.Last();
 
@@ -208,6 +211,7 @@ public class GridManagerTest
 
         // Assert
         // Only the one Block should not be destroyed
-        Assert.AreSame(blockThatShouldNotBeDestroyed, Finder.FindBuildingBlocks()[0]);
+        BuildingBlockDisplay blockFoundInGrid = gridManager.GetBlocksInGrid()[0];
+        Assert.AreSame(blockThatShouldNotBeDestroyed, blockFoundInGrid);
     }
 }
