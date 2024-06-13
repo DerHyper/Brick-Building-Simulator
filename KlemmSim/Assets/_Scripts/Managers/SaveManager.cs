@@ -34,6 +34,26 @@ public class SaveManager : MonoBehaviour
         LoadSaveData(saveData);
     }
 
+    public void Export()
+    {
+        // Open save panle and get save path
+        string saveFileLocation = OpenExportFileBrowser();
+        if (saveFileLocation == "") return; // Cancel: No Path was selected
+
+        // Serialize every block on the grid into one JSON string
+        string saveData = SaveDataToJSON();
+
+        // Depending on the current platform either download or write the file
+        #if UNITY_WEBGL && !UNITY_EDITOR
+            throw new NotImplementedException(); // TODO: Add download for WebGL
+
+        #else
+            File.WriteAllText(saveFileLocation, saveData);
+
+        #endif
+
+    }
+
     // Deserialize the JSON file in a format readable to C#
     private string ReadJsonToString(string saveFileLocation)
     {
@@ -76,26 +96,6 @@ public class SaveManager : MonoBehaviour
         // Catching errors if no file was selected
         if(saveFileLocation.Length == 0) return "";
         else return saveFileLocation[0];
-    }
-
-    public void Export()
-    {
-        // Open save panle and get save path
-        string saveFileLocation = OpenExportFileBrowser();
-        if (saveFileLocation == "") return; // Cancel: No Path was selected
-
-        // Serialize every block on the grid into one JSON string
-        string saveData = SaveDataToJSON();
-
-        // Depending on the current platform either download or write the file
-        #if UNITY_WEBGL && !UNITY_EDITOR
-            throw new NotImplementedException(); // TODO: Add download for WebGL
-
-        #else
-            File.WriteAllText(saveFileLocation, saveData);
-
-        #endif
-
     }
 
     private string OpenExportFileBrowser()

@@ -16,19 +16,6 @@ public class BlockReferenceManager : MonoBehaviour
         InializeDictionary();
     }
 
-    // Inialize the Dictionary by mapping from the name of the block to the block 
-    private void InializeDictionary()
-    {
-        _buildingBlockMap = new Dictionary<string, BuildingBlock>();
-        foreach (BuildingBlock buildingBlock in _buildingBlocks)
-        {
-            if(!_buildingBlockMap.TryAdd(buildingBlock.name, buildingBlock))
-            {
-                Debug.LogWarning("Could not initilize BuildingBlockMap", this);
-            }
-        }
-    }
-
     public BuildingBlock GetBuildingBlockByName(string name)
     {
         // If the key is invalid, get an alternative block
@@ -50,5 +37,18 @@ public class BlockReferenceManager : MonoBehaviour
     public List<BuildingBlock> GetBuildingBlocks()
     {
         return _buildingBlocks;
+    }
+
+    // Inialize the Dictionary by mapping from the name of the block to the block 
+    private void InializeDictionary()
+    {
+        _buildingBlockMap = new Dictionary<string, BuildingBlock>();
+        foreach (BuildingBlock buildingBlock in _buildingBlocks)
+        {
+            if(!_buildingBlockMap.TryAdd(buildingBlock.name, buildingBlock))
+            {
+                Debug.LogWarning("Could not initilize BuildingBlockMap", this);
+            }
+        }
     }
 }

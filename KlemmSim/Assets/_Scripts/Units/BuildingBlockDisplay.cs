@@ -16,6 +16,12 @@ public class BuildingBlockDisplay : MonoBehaviour
         UpdatePosition();
     }
 
+    public new string ToString()
+    {
+        string info = "{Name: "+name+", BuildingBlock: "+Block+", Position: "+Position+"}";
+        return info;
+    }
+
     private void UpdateCollider()
     {
         Vector3 dimendions = new Vector3(Block.SizeX, Block.SizeY, Block.SizeZ);
@@ -23,7 +29,7 @@ public class BuildingBlockDisplay : MonoBehaviour
         _boxCollider.size = dimendions;
     }
 
-     private void UpdatePosition()
+    private void UpdatePosition()
     {
         Vector3 dimendions = new Vector3(Block.SizeX, Block.SizeY, Block.SizeZ);
         gameObject.transform.localPosition += dimendions*0.5f;
@@ -32,11 +38,5 @@ public class BuildingBlockDisplay : MonoBehaviour
     private void UpdateVariables()
     {
         this.name = Block.name;
-    }
-
-    public new string ToString()
-    {
-        string info = "{Name: "+name+", BuildingBlock: "+Block+", Position: "+Position+"}";
-        return info;
     }
 }

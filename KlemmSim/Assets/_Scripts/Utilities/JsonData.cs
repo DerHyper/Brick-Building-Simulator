@@ -6,8 +6,6 @@ using System;
 [Serializable]
 public class JsonData
 {
-    public List<RelevantBlockData> JsonDataBlockInfos;
-
     // Constructor creates a List entry for every BuildingBlockDisplay in the given Array.
     // Each entry contains data, relevant for saving and loading blocks into the scene
     public JsonData(BuildingBlockDisplay[] blocks)
@@ -20,7 +18,9 @@ public class JsonData
         }
     }
 
-    // relevant data for saving and loading blocks into the scene
+    public List<RelevantBlockData> JsonDataBlockInfos;
+
+    // Relevant data for saving and loading blocks into the scene
     [Serializable]
     public class RelevantBlockData
     {

@@ -16,35 +16,10 @@ public class Item : MonoBehaviour
         SetReferences();
     }
 
-    private void SetReferences()
-    {
-        InventoryManager = GameObject.FindObjectOfType<InventoryManager>();
-        _currentNumber = gameObject.transform.Find("NumberBox/Number")?.GetComponent<TMP_Text>();
-        _currentIcon = gameObject.transform.Find("Icon")?.GetComponent<Image>();
-    }
-
     public void SelectThisItem()
     {
         InventoryManager.SetSelectedItem(this);
     }
-
-    private void UpdateAmountDisplay()
-    {
-        _currentNumber.text = Amount.ToString();
-    }
-
-    private void UpdateIconDisplay()
-    {
-        if (Block.Icon != null) _currentIcon.sprite = Block.Icon;
-    }
-
-    public void SetBlock(BuildingBlock block)
-    {
-        this.Block = block;
-        UpdateIconDisplay();
-        UpdateAmountDisplay();
-    }
-
     public int IncreaseAmount()
     {
         Amount++;
@@ -63,5 +38,28 @@ public class Item : MonoBehaviour
     {
         string info = "{Name: "+name+", BuildingBlock: "+Block+", Amount: "+Amount+"}";
         return info;
+    }
+    private void SetReferences()
+    {
+        InventoryManager = GameObject.FindObjectOfType<InventoryManager>();
+        _currentNumber = gameObject.transform.Find("NumberBox/Number")?.GetComponent<TMP_Text>();
+        _currentIcon = gameObject.transform.Find("Icon")?.GetComponent<Image>();
+    }
+
+    private void UpdateAmountDisplay()
+    {
+        _currentNumber.text = Amount.ToString();
+    }
+
+    private void UpdateIconDisplay()
+    {
+        if (Block.Icon != null) _currentIcon.sprite = Block.Icon;
+    }
+
+    public void SetBlock(BuildingBlock block)
+    {
+        this.Block = block;
+        UpdateIconDisplay();
+        UpdateAmountDisplay();
     }
 }

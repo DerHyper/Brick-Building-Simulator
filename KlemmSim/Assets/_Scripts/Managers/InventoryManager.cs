@@ -30,23 +30,6 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    // Instantiate new Item and add it to the Dictionary
-    private Item AddNewItem(BuildingBlock block)
-    {
-        if (_items.Count() <= _maxInventorySize)
-        {
-            Item newItem = Instantiate(ItemPrefab, ItemParent).GetComponent<Item>();
-            newItem.SetBlock(block);
-            _items.Add(block, newItem);
-            return newItem;
-        }
-        else
-        {
-            Debug.LogWarning("Inventory full!");
-            return null;
-        }
-    }
-
     // Decrease the amount in the item to the coresponding block.
     // If amount hits zero, remove the item entirely
     // return true if the removal was successful.
@@ -101,5 +84,22 @@ public class InventoryManager : MonoBehaviour
             Destroy(item.gameObject);
         }
         _items.Clear();
+    }
+
+    // Instantiate new Item and add it to the Dictionary
+    private Item AddNewItem(BuildingBlock block)
+    {
+        if (_items.Count() <= _maxInventorySize)
+        {
+            Item newItem = Instantiate(ItemPrefab, ItemParent).GetComponent<Item>();
+            newItem.SetBlock(block);
+            _items.Add(block, newItem);
+            return newItem;
+        }
+        else
+        {
+            Debug.LogWarning("Inventory full!");
+            return null;
+        }
     }
 }
