@@ -1,10 +1,13 @@
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class InventoryRandomizer : MonoBehaviour
 {
-    public int totalNumberOfBlocks = 40;
+    public int meanNumberOfBlocks = 40; // Mean amount of blocks of one type
+    public int standardDeviation = 5;
+    public int minBlocks = 2;
+    public int maxBlocks = 20;
     public int numberOfBlockTypes = 5;
     public InventoryManager inventoryManager;
     public BlockReferenceManager blockReferenceManager;
@@ -17,10 +20,11 @@ public class InventoryRandomizer : MonoBehaviour
     {
         // Generate block types and distrobution
         List<BuildingBlock> pickedBlockTypes = PickRandomBlocks(blockReferenceManager.GetBuildingBlocks(), numberOfBlockTypes);
-        int[] distribution = GenerateDistrobutionOfBlocks(totalNumberOfBlocks, numberOfBlockTypes);
+        int[] distribution = GenerateDistrobutionOfBlocks();
         AddAllBlocksToInventory(pickedBlockTypes, distribution);
     }
 
+    // Add the multible blocks multible times
     private void AddAllBlocksToInventory(List<BuildingBlock> pickedBlockTypes, int[] distribution)
     {
         for (int i = 0; i < distribution.Length; i++)
@@ -31,23 +35,29 @@ public class InventoryRandomizer : MonoBehaviour
         }
     }
 
+    // Add the same block multible times
     private void AddBlocks(BuildingBlock block, int times)
     {
         for (int i = 0; i < times; i++)
             inventoryManager.Add(block);
     }
 
-    private int[] GenerateDistrobutionOfBlocks(int totalNumberOfBlocks, int numberOfBlockTypes)
+    private int[] GenerateDistrobutionOfBlocks()
     {
-        // TODO: Right now, the distribution is an equal distribution and should be exchanged later.
-        // Note: The sum is not equal to totalNumberOfBlocks when not evenly devidable by numberOfBlockTypes
         int[] distribution = new int[numberOfBlockTypes];
         for (int i = 0; i < numberOfBlockTypes; i++)
-        {
-            distribution[i] = totalNumberOfBlocks/numberOfBlockTypes;
-        }
-
+            distribution[i] = NormalRange(meanNumberOfBlocks, standardDeviation, minBlocks, maxBlocks);
+        
         return distribution;
+    }
+
+    // Generates a pick from a normal distrobution within a range
+    private int NormalRange(float mean, float standardDeviation, int minBlocks, int maxBlocks)
+    {
+        int pick = (int)PickNormalDistribution(mean, standardDeviation);
+        int limitedPick = Math.Max(minBlocks, Math.Min(maxBlocks, pick)); // minBlocks <= limitedPick <= maxBlocks
+
+        return limitedPick;
     }
 
     private List<BuildingBlock> PickRandomBlocks(List<BuildingBlock> possibleBlocks, int numberOfBlocks)
@@ -66,5 +76,20 @@ public class InventoryRandomizer : MonoBehaviour
         }
 
         return pickedBlocks;
+    }
+
+    // Generates a pick from a normal distrubution using the Box–Muller transform for one dimension
+    // Reference: https://de.wikipedia.org/wiki/Box-Muller-Methode
+    private double PickNormalDistribution(float mean, float standardDeviation)
+    {
+        // Generate two random numbers [0,1]
+        float u1 = UnityEngine.Random.Range(0,1.0f); 
+        float u2 = UnityEngine.Random.Range(0,1.0f);
+
+        // Generate a random number from normal distrubution
+        float z0 =  (float)(Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Cos(2.0 * Math.PI * u2));
+        double x0 = mean + standardDeviation * z0;
+
+        return x0;
     }
 }
