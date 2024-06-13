@@ -5,34 +5,34 @@ public class GridManager : MonoBehaviour
     public Transform BuildingBlocksParent; // This should be located in the hierarchy at "Environment/Building Blocks"
 
     [SerializeField]
-    private Vector3Int size = new Vector3Int(5,5,5);
+    private Vector3Int _size = new(5,5,5);
     [SerializeField]
-    private bool showDebug = false; 
-    private Grid3D grid;
+    private bool _showDebug = false; 
+    private Grid3D _grid;
     private void Awake()
     {
-        ReplaceGrid(size);
-        if (showDebug)
+        ReplaceGrid(_size);
+        if (_showDebug)
         {
-            grid.DrawGridLines();
-            grid.DrawDebugText();
+            _grid.DrawGridLines();
+            _grid.DrawDebugText();
         }
     }
 
     public void ReplaceGrid(Vector3Int size)
     {
-        if(grid != null) ClearGrid();
+        if(_grid != null) ClearGrid();
         
-        this.size = size;
-        grid = new Grid3D(size.x, size.y, size.z);
+        this._size = size;
+        _grid = new Grid3D(size.x, size.y, size.z);
     }
 
     public void ReplaceGrid(Grid3D grid)
     {
         if(grid != null) ClearGrid();
         
-        this.size = grid.GetSize();
-        this.grid = grid;
+        this._size = grid.GetSize();
+        this._grid = grid;
     }
 
     public bool TryInstantiateBuildingBlock(Vector3Int originPosition, BuildingBlock block)
@@ -41,14 +41,14 @@ public class GridManager : MonoBehaviour
 
         BuildingBlockDisplay blockDisplay = InstantiateBuildingBlock(originPosition, block);
 
-        grid.AddBlock(originPosition, blockDisplay);
+        _grid.AddBlock(originPosition, blockDisplay);
         return true;
     }
 
     // Returns true if the block can be instantiated at the given position 
     private bool InstantiationAllowed(Vector3Int originPosition, BuildingBlock block)
     {
-        if (!grid.IsInsideBuildingLimit(originPosition, block))
+        if (!_grid.IsInsideBuildingLimit(originPosition, block))
         {
             Debug.Log("Placing a block at "+originPosition.ToString() + " is invalid, since it would clip out of the grid");
             return false;
@@ -66,13 +66,13 @@ public class GridManager : MonoBehaviour
     // Returns false if any block inside the specified space is being occupied.
     private bool CanOccupieSpace(Vector3Int position, BuildingBlock block)
     {
-        for (int xOffset = 0; xOffset < block.sizeX; xOffset++)
-            for (int yOffset = 0; yOffset < block.sizeY; yOffset++)
-                for (int zOffset = 0; zOffset < block.sizeZ; zOffset++)
+        for (int xOffset = 0; xOffset < block.SizeX; xOffset++)
+            for (int yOffset = 0; yOffset < block.SizeY; yOffset++)
+                for (int zOffset = 0; zOffset < block.SizeZ; zOffset++)
                 {
                     Vector3Int offset = new Vector3Int(xOffset, yOffset, zOffset);
                     Vector3Int positionWithOffset = position + offset;
-                    if (grid.IsOccupied(positionWithOffset)) return false;
+                    if (_grid.IsOccupied(positionWithOffset)) return false;
                 }
 
         return true;
@@ -81,7 +81,7 @@ public class GridManager : MonoBehaviour
     // Instantiates a new building block as a child of the "BuildingBlocks"-GameObject
     private BuildingBlockDisplay InstantiateBuildingBlock(Vector3Int position, BuildingBlock block)
     {
-        GameObject blockGameObject = Instantiate(block.model, position, Quaternion.identity, BuildingBlocksParent).gameObject;
+        GameObject blockGameObject = Instantiate(block.Model, position, Quaternion.identity, BuildingBlocksParent).gameObject;
         BuildingBlockDisplay blockDisplay = blockGameObject.AddComponent<BuildingBlockDisplay>();
         blockDisplay.UpdateDisplay(position, block);
 
@@ -105,18 +105,18 @@ public class GridManager : MonoBehaviour
 
     public void DestroyBlock(BuildingBlockDisplay target)
     {
-        grid.DeleteBlock(target);
+        _grid.DeleteBlock(target);
         Destroy(target.gameObject);
     }
 
     public Vector3Int GetSize()
     {
-        return size;
+        return _size;
     }
 
     public BuildingBlockDisplay[] GetBlocksInGrid()
     {
-        BuildingBlockDisplay[] blockArray = grid.blocks.ToArray();
+        BuildingBlockDisplay[] blockArray = _grid.Blocks.ToArray();
         return blockArray;
     }
 }

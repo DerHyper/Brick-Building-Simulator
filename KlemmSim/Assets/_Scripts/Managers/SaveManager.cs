@@ -4,9 +4,9 @@ using System.IO;
 
 public class SaveManager : MonoBehaviour
 {
-    public GridManager gridManager;
-    public InventoryManager inventoryManager;
-    public BlockReferenceManager blockReferenceManager;
+    public GridManager GridManager;
+    public InventoryManager InventoryManager;
+    public BlockReferenceManager BlockReferenceManager;
 
     // Filter to only show relevant file extentions
     private readonly ExtensionFilter[] extensions = new ExtensionFilter[] {
@@ -29,8 +29,8 @@ public class SaveManager : MonoBehaviour
             saveData = ReadJsonToString(saveFileLocation);
         #endif
 
-        gridManager.ClearGrid();
-        inventoryManager.ClearInventory();
+        GridManager.ClearGrid();
+        InventoryManager.ClearInventory();
         LoadSaveData(saveData);
     }
 
@@ -54,14 +54,14 @@ public class SaveManager : MonoBehaviour
         JsonData jsonData = JsonUtility.FromJson<JsonData>(saveData); 
 
         // Build all blocks saved in jsonData
-        foreach(JsonData.RelevantBlockData blockInfo in jsonData.jsonDataBlockInfos)
+        foreach(JsonData.RelevantBlockData blockInfo in jsonData.JsonDataBlockInfos)
         {
             // get block information
             Vector3Int position = blockInfo.position;
             string name = blockInfo.name;
-            BuildingBlock blockType = blockReferenceManager.GetBuildingBlockByName(name);
+            BuildingBlock blockType = BlockReferenceManager.GetBuildingBlockByName(name);
             
-            gridManager.TryInstantiateBuildingBlock(position, blockType);
+            GridManager.TryInstantiateBuildingBlock(position, blockType);
         }
     }
 
@@ -110,7 +110,7 @@ public class SaveManager : MonoBehaviour
     private string SaveDataToJSON()
     {
         // Get all Building Blocks
-        BuildingBlockDisplay[] blocks = gridManager.GetBlocksInGrid();
+        BuildingBlockDisplay[] blocks = GridManager.GetBlocksInGrid();
         
         // Put the BuildingBlocks in a format that can be serialized into a JSON file
         JsonData jsonData = new JsonData(blocks);

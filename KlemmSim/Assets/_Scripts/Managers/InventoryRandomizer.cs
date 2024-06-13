@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class InventoryRandomizer : MonoBehaviour
 {
-    public int meanNumberOfBlocks = 40; // Mean amount of blocks of one type
-    public int standardDeviation = 5;
-    public int minBlocks = 2;
-    public int maxBlocks = 20;
-    public int numberOfBlockTypes = 5;
-    public InventoryManager inventoryManager;
-    public BlockReferenceManager blockReferenceManager;
+    public int MeanNumberOfBlocks = 40; // Mean amount of blocks of one type
+    public int StandardDeviation = 5;
+    public int MinBlocks = 2;
+    public int MaxBlocks = 20;
+    public int NumberOfBlockTypes = 5;
+    public InventoryManager InventoryManager;
+    public BlockReferenceManager BlockReferenceManager;
     private void Start()
     {
         InitInventory();
@@ -19,7 +19,7 @@ public class InventoryRandomizer : MonoBehaviour
     private void InitInventory()
     {
         // Generate block types and distrobution
-        List<BuildingBlock> pickedBlockTypes = PickRandomBlocks(blockReferenceManager.GetBuildingBlocks(), numberOfBlockTypes);
+        List<BuildingBlock> pickedBlockTypes = PickRandomBlocks(BlockReferenceManager.GetBuildingBlocks(), NumberOfBlockTypes);
         int[] distribution = GenerateDistrobutionOfBlocks();
         AddAllBlocksToInventory(pickedBlockTypes, distribution);
     }
@@ -39,14 +39,14 @@ public class InventoryRandomizer : MonoBehaviour
     private void AddBlocks(BuildingBlock block, int times)
     {
         for (int i = 0; i < times; i++)
-            inventoryManager.Add(block);
+            InventoryManager.Add(block);
     }
 
     private int[] GenerateDistrobutionOfBlocks()
     {
-        int[] distribution = new int[numberOfBlockTypes];
-        for (int i = 0; i < numberOfBlockTypes; i++)
-            distribution[i] = NormalRange(meanNumberOfBlocks, standardDeviation, minBlocks, maxBlocks);
+        int[] distribution = new int[NumberOfBlockTypes];
+        for (int i = 0; i < NumberOfBlockTypes; i++)
+            distribution[i] = NormalRange(MeanNumberOfBlocks, StandardDeviation, MinBlocks, MaxBlocks);
         
         return distribution;
     }

@@ -5,11 +5,11 @@ using UnityEngine;
 public class BlockReferenceManager : MonoBehaviour
 {
     [SerializeField]
-    private List<BuildingBlock> buildingBlocks;
+    private List<BuildingBlock> _buildingBlocks;
     
     // Dictionary for fast lookup by name
     // Note: Names in a map should never be used twice!
-    private Dictionary<string,BuildingBlock> buildingBlockMap;
+    private Dictionary<string,BuildingBlock> _buildingBlockMap;
 
     private void Awake()
     {
@@ -19,10 +19,10 @@ public class BlockReferenceManager : MonoBehaviour
     // Inialize the Dictionary by mapping from the name of the block to the block 
     private void InializeDictionary()
     {
-        buildingBlockMap = new Dictionary<string, BuildingBlock>();
-        foreach (BuildingBlock buildingBlock in buildingBlocks)
+        _buildingBlockMap = new Dictionary<string, BuildingBlock>();
+        foreach (BuildingBlock buildingBlock in _buildingBlocks)
         {
-            if(!buildingBlockMap.TryAdd(buildingBlock.name, buildingBlock))
+            if(!_buildingBlockMap.TryAdd(buildingBlock.name, buildingBlock))
             {
                 Debug.LogWarning("Could not initilize BuildingBlockMap", this);
             }
@@ -34,11 +34,11 @@ public class BlockReferenceManager : MonoBehaviour
         // If the key is invalid, get an alternative block
         // Note: The first block is not necessarily the first block added since it is a hash map.
         // If alternative block is also not working, create a new one
-        if(!buildingBlockMap.TryGetValue(name, out BuildingBlock block))
+        if(!_buildingBlockMap.TryGetValue(name, out BuildingBlock block))
         {
             Debug.LogWarning("Could get value from key: '"+name+"'.", this);
             
-            BuildingBlock alternativeBlock = buildingBlockMap.First().Value;
+            BuildingBlock alternativeBlock = _buildingBlockMap.First().Value;
 
             if (alternativeBlock != null) block = alternativeBlock;
             else block = new BuildingBlock();
@@ -49,6 +49,6 @@ public class BlockReferenceManager : MonoBehaviour
 
     public List<BuildingBlock> GetBuildingBlocks()
     {
-        return buildingBlocks;
+        return _buildingBlocks;
     }
 }

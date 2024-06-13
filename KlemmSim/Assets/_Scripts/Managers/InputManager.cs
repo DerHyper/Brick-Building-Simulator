@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    public GridManager gridManager;
-    public InventoryManager inventoryManager;
+    public GridManager GridManager;
+    public InventoryManager InventoryManager;
 
     // TODO: This could be exchanged for an event system
     private void Update() 
@@ -36,12 +36,12 @@ public class InputManager : MonoBehaviour
         Debug.Log(gridPosition,this);
 
         // Get the currently selected block
-        BuildingBlock block = inventoryManager.GetSelectedBuildingBlock();
+        BuildingBlock block = InventoryManager.GetSelectedBuildingBlock();
         if (block != null) 
         {
-            if (gridManager.TryInstantiateBuildingBlock(gridPosition, block))
+            if (GridManager.TryInstantiateBuildingBlock(gridPosition, block))
             {
-                inventoryManager.Remove(block);
+                InventoryManager.TryRemove(block);
             }
         }
     }
@@ -71,8 +71,8 @@ public class InputManager : MonoBehaviour
             return;
         } 
 
-        inventoryManager.Add(targetBlock.block);
-        gridManager.DestroyBlock(targetBlock);
+        InventoryManager.Add(targetBlock.Block);
+        GridManager.DestroyBlock(targetBlock);
     }
     
 }

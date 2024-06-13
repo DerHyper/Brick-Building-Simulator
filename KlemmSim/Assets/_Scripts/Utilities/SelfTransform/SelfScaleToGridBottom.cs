@@ -1,16 +1,15 @@
-using System.Threading.Tasks;
 using UnityEngine;
 
 public class SelfScaleToGridBottom : MonoBehaviour
 {
-    public GridManager gridManager;
+    public GridManager GridManager;
     [SerializeField]
-    private float scalingFactor = 0.1f; // Dependent on the dimensions of the object this component is used on (cube:1, plane:0.1, ...)
+    private float _scalingFactor = 0.1f; // Dependent on the dimensions of the object this component is used on (cube:1, plane:0.1, ...)
     [SerializeField]
-    private float yScale = 1;
+    private float _yScale = 1;
     void Start()
     {
-        UpdateScale(gridManager, scalingFactor, yScale);
+        UpdateScale(GridManager, _scalingFactor, _yScale);
     }
 
     public void UpdateScale(GridManager gridManager, float scalingFactor, float yScale)

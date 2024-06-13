@@ -5,12 +5,11 @@ using UnityEngine.UI;
 // All Items should have this script
 public class Item : MonoBehaviour
 {
-    public BuildingBlock block{get; private set;} = null;
-    public int amount {get; private set;} = 1; // amount should only be set via set-methods
-    public InventoryManager inventoryManager;
-
-    private TMP_Text currentNumber;
-    private Image currentIcon;
+    public BuildingBlock Block{get; private set;} = null;
+    public int Amount {get; private set;} = 1; // Amount should only be set via set-methods
+    public InventoryManager InventoryManager;
+    private TMP_Text _currentNumber;
+    private Image _currentIcon;
 
     private void Awake() 
     {
@@ -19,50 +18,50 @@ public class Item : MonoBehaviour
 
     private void SetReferences()
     {
-        inventoryManager = GameObject.FindObjectOfType<InventoryManager>();
-        currentNumber = gameObject.transform.Find("NumberBox/Number")?.GetComponent<TMP_Text>();
-        currentIcon = gameObject.transform.Find("Icon")?.GetComponent<Image>();
+        InventoryManager = GameObject.FindObjectOfType<InventoryManager>();
+        _currentNumber = gameObject.transform.Find("NumberBox/Number")?.GetComponent<TMP_Text>();
+        _currentIcon = gameObject.transform.Find("Icon")?.GetComponent<Image>();
     }
 
     public void SelectThisItem()
     {
-        inventoryManager.SetSelectedItem(this);
+        InventoryManager.SetSelectedItem(this);
     }
 
     private void UpdateAmountDisplay()
     {
-        currentNumber.text = amount.ToString();
+        _currentNumber.text = Amount.ToString();
     }
 
     private void UpdateIconDisplay()
     {
-        if (block.icon != null) currentIcon.sprite = block.icon;
+        if (Block.Icon != null) _currentIcon.sprite = Block.Icon;
     }
 
     public void SetBlock(BuildingBlock block)
     {
-        this.block = block;
+        this.Block = block;
         UpdateIconDisplay();
         UpdateAmountDisplay();
     }
 
     public int IncreaseAmount()
     {
-        amount++;
+        Amount++;
         UpdateAmountDisplay();
-        return amount;
+        return Amount;
     }
 
     public int DecreaseAmount()
     {
-        if (amount > 0) amount--;
+        if (Amount > 0) Amount--;
         UpdateAmountDisplay();
-        return amount;
+        return Amount;
     }
 
     public new string ToString()
     {
-        string info = "{Name: "+name+", BuildingBlock: "+block+", Amount: "+amount+"}";
+        string info = "{Name: "+name+", BuildingBlock: "+Block+", Amount: "+Amount+"}";
         return info;
     }
 }

@@ -30,7 +30,7 @@ public class InventoryManagerTest
         inventoryManager.Add(existingBlock);
         yield return null; // Wait for initialization
 
-        bool successful = inventoryManager.Remove(existingBlock);
+        bool successful = inventoryManager.TryRemove(existingBlock);
 
         Assert.IsTrue(successful);
         yield return null;
@@ -44,7 +44,7 @@ public class InventoryManagerTest
         BuildingBlock notExistingBlock = new BuildingBlock();
         // No item was added
 
-        bool successful = inventoryManager.Remove(notExistingBlock);
+        bool successful = inventoryManager.TryRemove(notExistingBlock);
 
         Assert.IsFalse(successful);
         yield return null;
@@ -60,7 +60,7 @@ public class InventoryManagerTest
         yield return null; // Wait for initialization
         BuildingBlock notExistingBlock = new BuildingBlock(); // This block will not be added
 
-        bool successful = inventoryManager.Remove(notExistingBlock);
+        bool successful = inventoryManager.TryRemove(notExistingBlock);
 
         Assert.IsFalse(successful);
         yield return null;
@@ -79,9 +79,9 @@ public class InventoryManagerTest
         bool[] expectedResults = {true, true, false};
         yield return null; // Wait for initialization
 
-        results[0] = inventoryManager.Remove(blocks[0]);
-        results[1] = inventoryManager.Remove(blocks[1]);
-        results[2] = inventoryManager.Remove(blocks[2]);
+        results[0] = inventoryManager.TryRemove(blocks[0]);
+        results[1] = inventoryManager.TryRemove(blocks[1]);
+        results[2] = inventoryManager.TryRemove(blocks[2]);
 
         Assert.AreEqual(expectedResults, results);
         yield return null;

@@ -31,10 +31,10 @@ public class GridManagerTest
     private BuildingBlock InitiateBuildingBlock(Vector3Int size)
     {
         BuildingBlock block = ScriptableObject.CreateInstance<BuildingBlock>();
-        block.model = new GameObject().transform;
-        block.sizeX = size.x;
-        block.sizeY = size.y;
-        block.sizeZ = size.z;
+        block.Model = new GameObject().transform;
+        block.SizeX = size.x;
+        block.SizeY = size.y;
+        block.SizeZ = size.z;
 
         return block;
     }

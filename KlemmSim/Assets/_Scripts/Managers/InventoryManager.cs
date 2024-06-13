@@ -4,27 +4,26 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
-    private Item selectedItem;
+    public Transform ItemParent; // This should be located in the hierarchy at "Canvases/Inventory/Viewport/Content"
+    public GameObject ItemPrefab; // This should be located in the project at "Assets/Prefabs/Item"
     [SerializeField]
-    private int maxInventorySize = 15;
-    public Transform itemParent; // This should be located in the hierarchy at "Canvases/Inventory/Viewport/Content"
-    public GameObject itemPrefab; // This should be located in the project at "Assets/Prefabs/Item"
-    private Dictionary<BuildingBlock, Item> items;
+    private int _maxInventorySize = 15;
+    private Item _selectedItem;
+    private Dictionary<BuildingBlock, Item> _items;
 
     private void Awake() 
     {
-        items = new Dictionary<BuildingBlock, Item>();
+        _items = new Dictionary<BuildingBlock, Item>();
     }
 
     // Add the block to the inventory as a new item.
     // If the item already exists, increase the current amount
     public void Add(BuildingBlock block)
     {
-        Item item;
-        if(items.TryGetValue(block, out item))
+        if (_items.TryGetValue(block, out Item item))
         {
             item.IncreaseAmount();
-        } 
+        }
         else
         {
             item = AddNewItem(block);
@@ -34,11 +33,11 @@ public class InventoryManager : MonoBehaviour
     // Instantiate new Item and add it to the Dictionary
     private Item AddNewItem(BuildingBlock block)
     {
-        if (items.Count() <= maxInventorySize)
+        if (_items.Count() <= _maxInventorySize)
         {
-            Item newItem = Instantiate(itemPrefab, itemParent).GetComponent<Item>();
+            Item newItem = Instantiate(ItemPrefab, ItemParent).GetComponent<Item>();
             newItem.SetBlock(block);
-            items.Add(block, newItem);
+            _items.Add(block, newItem);
             return newItem;
         }
         else
@@ -51,19 +50,19 @@ public class InventoryManager : MonoBehaviour
     // Decrease the amount in the item to the coresponding block.
     // If amount hits zero, remove the item entirely
     // return true if the removal was successful.
-    public bool Remove(BuildingBlock block)
+    public bool TryRemove(BuildingBlock block)
     {
         Item item;
-        if(items.TryGetValue(block, out item))
+        if(_items.TryGetValue(block, out item))
         {
-            if (item.amount > 1)
+            if (item.Amount > 1)
             {
                 item.DecreaseAmount();
             }
             else 
             {
                 Destroy(item.gameObject);
-                items.Remove(block);
+                _items.Remove(block);
             }
             return true;
         }
@@ -76,15 +75,15 @@ public class InventoryManager : MonoBehaviour
     
     public void SetSelectedItem(Item item)
     {
-        selectedItem = item;
+        _selectedItem = item;
         Debug.Log("Item selected: "+item);
     }
 
     public BuildingBlock GetSelectedBuildingBlock()
     {
-        if (selectedItem != null)
+        if (_selectedItem != null)
         {
-            BuildingBlock selecedBlock = selectedItem.block;
+            BuildingBlock selecedBlock = _selectedItem.Block;
             return selecedBlock;
         }
         else
@@ -96,11 +95,11 @@ public class InventoryManager : MonoBehaviour
     public void ClearInventory()
     {
         // Destory every item in the Dictionary
-        foreach (var pair in items)
+        foreach (var pair in _items)
         {
             Item item = pair.Value;
             Destroy(item.gameObject);
         }
-        items.Clear();
+        _items.Clear();
     }
 }

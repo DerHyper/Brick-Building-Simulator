@@ -2,11 +2,11 @@
 
 static class WorldText
 {
-    static int debugTextSize = 10;
-    static Color debugTextColor = Color.white;
+    private static int s_debugTextSize = 10;
+    private static Color s_debugTextColor = Color.white;
     public static TextMesh CreateDebugText(string text, Vector3 localPosition)
     {
-        TextMesh textMesh = CreateWorldText(text, localPosition, debugTextSize, debugTextColor);
+        TextMesh textMesh = CreateWorldText(text, localPosition, s_debugTextSize, s_debugTextColor);
 
         GameObject debugObjects = Finder.FindOrCreateGameObjectWithTag("DebugObjects");
         textMesh.gameObject.transform.SetParent(debugObjects.transform);

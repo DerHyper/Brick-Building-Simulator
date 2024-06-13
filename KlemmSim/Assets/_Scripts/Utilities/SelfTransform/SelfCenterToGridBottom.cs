@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class SelfCenterToGridBottom : MonoBehaviour
 {
+    public GridManager GridManager;
     [SerializeField]
-    private int distanceFromBottom;
-    public GridManager gridManager;
+    private int _distanceFromBottom;
     void Start()
     {
-        UpdatePosition(gridManager, distanceFromBottom);
+        UpdatePosition(GridManager, _distanceFromBottom);
     }
 
     public void UpdatePosition(GridManager gridManager, int distanceFromBottom)
