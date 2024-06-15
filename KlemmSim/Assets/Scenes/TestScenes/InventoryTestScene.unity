@@ -1035,9 +1035,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3bc720606fe2fd4da2219e81fe3a000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxInventorySize: 15
-  itemParent: {fileID: 2036554295}
-  itemPrefab: {fileID: 5052702666643941984, guid: da42b288469e5bf4f936c186bb190ea4, type: 3}
+  ItemParent: {fileID: 2036554295}
+  ItemPrefab: {fileID: 5052702666643941984, guid: da42b288469e5bf4f936c186bb190ea4, type: 3}
+  _maxInventorySize: 15
 --- !u!1 &2036554294
 GameObject:
   m_ObjectHideFlags: 0

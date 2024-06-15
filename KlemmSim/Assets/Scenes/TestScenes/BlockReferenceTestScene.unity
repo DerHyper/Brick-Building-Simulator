@@ -199,12 +199,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c699fb17d6af14a4084e01d33a31b5f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingBlocks:
+  _buildingBlocks:
   - {fileID: 11400000, guid: 05c9ee2e664f69c4e9df062c3eecc472, type: 2}
-  - {fileID: 11400000, guid: e3f4ba0a498559049a15f8ecd820ab3e, type: 2}
-  - {fileID: 11400000, guid: 717475cee881d334c86e8945d657cdb5, type: 2}
-  - {fileID: 11400000, guid: f94028337ccf6884ca0ca8f1d553aab5, type: 2}
-  - {fileID: 11400000, guid: 37393ab8a2707a644b69013b73302612, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
