@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class InventoryRandomizer : MonoBehaviour
 {
-    public int MeanNumberOfBlocks = 40; // Mean amount of blocks of one type
-    public int StandardDeviation = 5;
-    public int MinBlocks = 2;
-    public int MaxBlocks = 20;
-    public int NumberOfBlockTypes = 5;
     public InventoryManager InventoryManager;
     public BlockReferenceManager BlockReferenceManager;
+    [SerializeField]
+    private int MeanNumberOfBlocks = 40; // Mean amount of blocks per type
+    [SerializeField]
+    private int StandardDeviation = 5;
+    [SerializeField]
+    private int MinBlocks = 2;
+    [SerializeField]
+    private int MaxBlocks = 20;
+    [SerializeField]
+    private int NumberOfBlockTypes = 5;
     private void Start()
     {
         InitInventory();
