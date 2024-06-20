@@ -8,7 +8,8 @@ public class SaveManager : MonoBehaviour
     public InventoryManager InventoryManager;
     public BlockReferenceManager BlockReferenceManager;
 
-    // Filter to only show relevant file extentions
+    private const string StdFilePath = ""; // Note: Standard path depending on OS (Windows: C:\Users\<Username>\Documents)
+    // Filter to only show relevant file extentions (.json)
     private readonly ExtensionFilter[] extensions = new ExtensionFilter[] {
         new ExtensionFilter("Constructions", "json"),
         new ExtensionFilter("All Files", "*" ),
@@ -87,23 +88,21 @@ public class SaveManager : MonoBehaviour
 
     private string OpenImportFileBrowser()
     {
-        // Open file browser for loading the construction with the following settings:
-        // - Use the standard path (Windows: C:\Users\<Username>\Documents) 
-        // - Only show relevant file extentions (.json)
-        // - Only one file can be selected
-        string[] saveFileLocation = StandaloneFileBrowser.OpenFilePanel("Import your construction", "", extensions, false);
+        string ImportTitle = "Import your construction";
+        bool IsMultiselect = false;
+        string[] saveFileLocation = StandaloneFileBrowser.OpenFilePanel(ImportTitle, StdFilePath, extensions, IsMultiselect);
         
-        // Catching errors if no file was selected
+        // Catch if no file was selected
         if(saveFileLocation.Length == 0) return "";
         else return saveFileLocation[0];
     }
 
     private string OpenExportFileBrowser()
     {
-        // Open file browser for saving the construction with the following settings:
-        // - Use the standard path (Windows: C:\Users\<Username>\Documents) 
-        // - Only show relevant file extentions (.json)
-        string saveFileLocation = StandaloneFileBrowser.SaveFilePanel("Export your construction", "", "New Construction", extensions);
+        string ExportTitle = "Export your construction";
+        string DefaultName = "New Construction";
+        string saveFileLocation = StandaloneFileBrowser.SaveFilePanel(ExportTitle, StdFilePath, DefaultName, extensions);
+
         return saveFileLocation;
     }
 

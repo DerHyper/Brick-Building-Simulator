@@ -10,6 +10,8 @@ public class Item : MonoBehaviour
     public InventoryManager InventoryManager;
     private TMP_Text _currentNumber;
     private Image _currentIcon;
+    private const string StdPathCurrentNumber = "NumberBox/Number";
+    private const string StdPathIcon = "Icon";
 
     private void Awake() 
     {
@@ -42,8 +44,8 @@ public class Item : MonoBehaviour
     private void SetReferences()
     {
         InventoryManager = GameObject.FindObjectOfType<InventoryManager>();
-        _currentNumber = gameObject.transform.Find("NumberBox/Number")?.GetComponent<TMP_Text>();
-        _currentIcon = gameObject.transform.Find("Icon")?.GetComponent<Image>();
+        _currentNumber = gameObject.transform.Find(StdPathCurrentNumber)?.GetComponent<TMP_Text>();
+        _currentIcon = gameObject.transform.Find(StdPathIcon)?.GetComponent<Image>();
     }
 
     private void UpdateAmountDisplay()
