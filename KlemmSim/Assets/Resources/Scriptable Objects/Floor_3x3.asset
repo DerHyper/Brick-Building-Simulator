@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 711e3687b6d2bf446a10d9ede41af4eb, type: 3}
   m_Name: Floor_3x3
   m_EditorClassIdentifier: 
-  sizeX: 3
-  sizeY: 1
-  sizeZ: 3
-  model: {fileID: 2839844531585939936, guid: 47334ca9ecb1d4d49ba6f6c8d07b48a6, type: 3}
-  icon: {fileID: 0}
+  SizeX: 3
+  SizeY: 1
+  SizeZ: 3
+  Model: {fileID: 2839844531585939936, guid: 47334ca9ecb1d4d49ba6f6c8d07b48a6, type: 3}
+  Icon: {fileID: 0}

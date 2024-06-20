@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4504159, g: 0.5004238, b: 0.5752256, a: 1}
+  m_IndirectSpecularColor: {r: 0.45041728, g: 0.50042576, b: 0.57522446, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -224,14 +224,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 68465106}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.11902035, y: 0.8780597, z: -0.28734046, w: -0.36370435}
-  m_LocalPosition: {x: 6.7528706, y: 7, z: 6.7528696}
+  m_LocalRotation: {x: 0.30177695, y: -0.22992387, z: 0.07524149, w: 0.9221738}
+  m_LocalPosition: {x: 4.4834538, y: 7, z: -8.432149}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 999935630}
   m_Father: {fileID: 910916507}
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 36.241, y: -135.03, z: 0}
 --- !u!114 &68465108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -706,8 +706,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.11902035, y: 0.8780597, z: -0.28734046, w: -0.36370435}
-  m_LocalPosition: {x: 6.7528706, y: 7, z: 6.7528696}
+  m_LocalRotation: {x: 0.30177695, y: -0.22992387, z: 0.07524149, w: 0.9221738}
+  m_LocalPosition: {x: 4.4834538, y: 7, z: -8.432149}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -807,7 +807,7 @@ MonoBehaviour:
   m_Heading:
     m_Definition: 2
     m_VelocityFilterStrength: 4
-    m_Bias: 45
+    m_Bias: 152
   m_RecenterToTargetHeading:
     m_enabled: 0
     m_WaitTime: 1
@@ -1013,13 +1013,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad873688ac565df44a8fe992fe591a16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meanNumberOfBlocks: 15
-  standardDeviation: 5
-  minBlocks: 2
-  maxBlocks: 40
-  numberOfBlockTypes: 5
-  inventoryManager: {fileID: 1592464874}
-  blockReferenceManager: {fileID: 1902549184}
+  MeanNumberOfBlocks: 10
+  StandardDeviation: 3
+  MinBlocks: 2
+  MaxBlocks: 20
+  NumberOfBlockTypes: 5
+  InventoryManager: {fileID: 1592464874}
+  BlockReferenceManager: {fileID: 1902549184}
 --- !u!1 &1509606462
 GameObject:
   m_ObjectHideFlags: 0
@@ -1198,9 +1198,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3bc720606fe2fd4da2219e81fe3a000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxInventorySize: 15
-  itemParent: {fileID: 1780081689}
-  itemPrefab: {fileID: 5052702666643941984, guid: da42b288469e5bf4f936c186bb190ea4, type: 3}
+  ItemParent: {fileID: 1780081689}
+  ItemPrefab: {fileID: 5052702666643941984, guid: da42b288469e5bf4f936c186bb190ea4, type: 3}
+  _maxInventorySize: 15
 --- !u!1 &1653664511
 GameObject:
   m_ObjectHideFlags: 0
@@ -1655,9 +1655,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc9b2d02ecd0214eb285c79f131eef7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridManager: {fileID: 2108848118}
-  scalingFactor: 0.1
-  yScale: 1
+  GridManager: {fileID: 2108848118}
+  _scalingFactor: 0.1
+  _yScale: 1
 --- !u!114 &1737401648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1670,8 +1670,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b669565d83512a4898c665d48b4b092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceFromBottom: 1
-  gridManager: {fileID: 2108848118}
+  GridManager: {fileID: 2108848118}
+  _distanceFromBottom: 0
 --- !u!1 &1780081688
 GameObject:
   m_ObjectHideFlags: 0
@@ -1910,7 +1910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c699fb17d6af14a4084e01d33a31b5f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingBlocks:
+  _buildingBlocks:
   - {fileID: 11400000, guid: 05c9ee2e664f69c4e9df062c3eecc472, type: 2}
   - {fileID: 11400000, guid: e3f4ba0a498559049a15f8ecd820ab3e, type: 2}
   - {fileID: 11400000, guid: 717475cee881d334c86e8945d657cdb5, type: 2}
@@ -2064,9 +2064,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60815ce7ed3e9bd4f887a1d001d68301, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridManager: {fileID: 2108848118}
-  inventoryManager: {fileID: 1592464874}
-  blockReferenceManager: {fileID: 1902549184}
+  GridManager: {fileID: 2108848118}
+  InventoryManager: {fileID: 1592464874}
+  BlockReferenceManager: {fileID: 1902549184}
 --- !u!1 &1966553778
 GameObject:
   m_ObjectHideFlags: 0
@@ -2111,8 +2111,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19bba44544b48d4fac19a2f4ec2325d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridManager: {fileID: 2108848118}
-  inventoryManager: {fileID: 1592464874}
+  GridManager: {fileID: 2108848118}
+  InventoryManager: {fileID: 1592464874}
 --- !u!1 &2059354304
 GameObject:
   m_ObjectHideFlags: 0
@@ -2157,8 +2157,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b669565d83512a4898c665d48b4b092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceFromBottom: 1
-  gridManager: {fileID: 2108848118}
+  GridManager: {fileID: 2108848118}
+  _distanceFromBottom: 0
 --- !u!1 &2072877900
 GameObject:
   m_ObjectHideFlags: 0
@@ -2238,8 +2238,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BuildingBlocksParent: {fileID: 1401114593}
-  size: {x: 30, y: 20, z: 30}
-  showDebug: 0
+  _size: {x: 30, y: 10, z: 30}
+  _showDebug: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

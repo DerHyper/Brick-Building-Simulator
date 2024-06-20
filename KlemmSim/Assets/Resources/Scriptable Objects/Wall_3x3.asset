@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 711e3687b6d2bf446a10d9ede41af4eb, type: 3}
   m_Name: Wall_3x3
   m_EditorClassIdentifier: 
-  sizeX: 1
-  sizeY: 3
-  sizeZ: 3
-  model: {fileID: 2839844531585939936, guid: 3159adb5e25f69c4faac22f0ba3ce0ac, type: 3}
-  icon: {fileID: 0}
+  SizeX: 1
+  SizeY: 3
+  SizeZ: 3
+  Model: {fileID: 2839844531585939936, guid: 3159adb5e25f69c4faac22f0ba3ce0ac, type: 3}
+  Icon: {fileID: 0}

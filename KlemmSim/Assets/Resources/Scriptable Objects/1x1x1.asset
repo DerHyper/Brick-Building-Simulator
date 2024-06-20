@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 711e3687b6d2bf446a10d9ede41af4eb, type: 3}
   m_Name: 1x1x1
   m_EditorClassIdentifier: 
-  sizeX: 1
-  sizeY: 1
-  sizeZ: 1
-  model: {fileID: 2839844531585939936, guid: 67eb029de9dccba489724abe32c8b80a, type: 3}
+  SizeX: 1
+  SizeY: 1
+  SizeZ: 1
+  Model: {fileID: 2839844531585939936, guid: 67eb029de9dccba489724abe32c8b80a, type: 3}
+  Icon: {fileID: 0}
