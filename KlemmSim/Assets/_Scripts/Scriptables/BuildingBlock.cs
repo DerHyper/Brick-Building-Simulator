@@ -11,7 +11,7 @@ public class BuildingBlock : ScriptableObject
 
     public new string ToString()
     {
-        string info = "{Name: "+name+", Size: ("+SizeX+","+SizeX+","+SizeX+")}";
+        string info = "{Name: "+name+", Size: ("+SizeX+","+SizeY+","+SizeZ+")}";
         return info;
     }
 }
