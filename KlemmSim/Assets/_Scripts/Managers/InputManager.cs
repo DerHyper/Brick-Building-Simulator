@@ -26,18 +26,12 @@ public class InputManager : MonoBehaviour
     // Check if position is valid, if so, place the currently selected block and remove it from inventory
     private void BuildBlockAtMousePoint()
     {
-        // TODO: This should be exchanged for normal error handling
-        // Exceptions use to much memory to be used in one Frame
-        Vector3Int gridPosition;
-        try
+        if(!CameraToWorld.TryGetMouseBlockPlacementPosition(out Vector3Int gridPosition))
         {
-            gridPosition = CameraToWorld.GetMouseBlockPlacementPosition();
-        }
-        catch (OutsideGridException)
-        {
-            Debug.Log("Exception catched: Tried to place BuildingBlock outside the grid.");
+            Debug.LogWarning("Tried to place block outside of grid.");
             return;
         }
+
         Debug.Log(gridPosition,this);
 
         // Get the currently selected block
@@ -53,22 +47,14 @@ public class InputManager : MonoBehaviour
 
     private void DestroyBlockAtMousePoint()
     {
-        // TODO: This should be exchanged for normal error handling
-        // Exceptions use to much memory to be used in one Frame
-        GameObject target;
-        try
+        if(!CameraToWorld.TryGetGameObjectAtMousePosition(out GameObject target))
         {
-            target = CameraToWorld.GetGameObjectAtMousePosition();
-        }
-        catch (OutsideGridException)
-        {
-            Debug.Log("Exception catched: Tried to destroy BuildingBlock outside the grid.");
+            Debug.LogWarning("Tried to destroy BuildingBlock outside the grid.");
             return;
         }
 
         Debug.Log(target,this);
         BuildingBlockDisplay targetBlock = target.GetComponent<BuildingBlockDisplay>();
-
 
         if (targetBlock == null)
         {
