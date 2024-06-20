@@ -143,7 +143,7 @@ public class Grid3D
         string info = "";
         foreach (var block in Blocks)
         {
-            info += block.ToString()+"\n";
+            info += block.ToString()+",\n";
         }
 
         
