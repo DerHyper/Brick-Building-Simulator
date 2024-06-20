@@ -51,14 +51,4 @@ public static class Finder // This class should not be used to find Managers
         }
         return foundGameObject;
     }
-
-    // Finds all BuildingBlocks under the BuildingBlocks parent.
-    // Note: May return an empty Array
-    public static BuildingBlockDisplay[] FindBuildingBlocks()
-    {
-        GameObject buildingblockParent = Finder.FindOrCreateGameObjectWithTag("BuildingBlocks");
-        BuildingBlockDisplay[] blocks = buildingblockParent.GetComponentsInChildren<BuildingBlockDisplay>();
-
-        return blocks;
-    }
 }
