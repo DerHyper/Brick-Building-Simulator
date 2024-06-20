@@ -4,6 +4,7 @@ public class InputManager : MonoBehaviour
 {
     public GridManager GridManager;
     public InventoryManager InventoryManager;
+    private Orientation.Alignment currentAlignment = Orientation.Alignment.North;
 
     // TODO: This could be exchanged for an event system
     private void Update() 
@@ -15,6 +16,10 @@ public class InputManager : MonoBehaviour
         if (Input.GetMouseButtonDown(1)) // Right click
         {
             DestroyBlockAtMousePoint();
+        }
+        if (Input.GetButtonDown("Vertical"))
+        {
+            currentAlignment = Orientation.RotateRight(currentAlignment);
         }
     }
 
@@ -39,7 +44,7 @@ public class InputManager : MonoBehaviour
         BuildingBlock block = InventoryManager.GetSelectedBuildingBlock();
         if (block != null) 
         {
-            if (GridManager.TryInstantiateBuildingBlock(gridPosition, block))
+            if (GridManager.TryInstantiateBuildingBlock(gridPosition, block, currentAlignment))
             {
                 InventoryManager.TryRemove(block);
             }

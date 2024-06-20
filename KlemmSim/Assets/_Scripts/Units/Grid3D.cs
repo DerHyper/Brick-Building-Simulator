@@ -60,35 +60,26 @@ public class Grid3D
     }
 
     // For every voxel, occupied by the BuildingBlockDisplay, set the voxel accordingly 
-    public void AddBlock(Vector3Int position, BuildingBlockDisplay blockDisplay)
+    public void AddBlock(BuildingBlockDisplay blockDisplay)
     {
         Blocks.Add(blockDisplay);
+        Orientation.Alignment alignment = blockDisplay.Alignment;
+
+        Vector3Int startPosition = blockDisplay.Position; 
+        Vector3Int endPosition = Orientation.GetRotatedSize(alignment, blockDisplay);
 
         // Set every voxel covered by the block 
-        BuildingBlock block = blockDisplay.Block;
-        for (int xOffset = 0; xOffset < block.SizeX; xOffset++)
-            for (int yOffset = 0; yOffset < block.SizeY; yOffset++)
-                for (int zOffset = 0; zOffset < block.SizeZ; zOffset++)
-                {
-                    Vector3Int offset = new Vector3Int(xOffset, yOffset, zOffset);
-                    Vector3Int positionWithOffset = position + offset;
-                    SetVoxel(positionWithOffset, blockDisplay);
-                }
+        Helper.DoWithinRange(startPosition, endPosition, SetVoxel, blockDisplay);
     }
 
-    
-    public bool IsInsideBuildingLimit(Vector3Int blockOriginPoint, BuildingBlock block)
+    public bool IsInsideBuildingLimit(Vector3Int blockOriginPoint, BuildingBlock block, Orientation.Alignment alignment)
     {
         // Check for every voxel, that would be covered by the block, if it is inside the building limit
-        for (int xOffset = 0; xOffset < block.SizeX; xOffset++)
-            for (int yOffset = 0; yOffset < block.SizeY; yOffset++)
-                for (int zOffset = 0; zOffset < block.SizeZ; zOffset++)
-                {
-                    Vector3Int offset = new Vector3Int(xOffset, yOffset, zOffset);
-                    Vector3Int positionOfCoveredVoxel = blockOriginPoint + offset;
-                    if (!IsInsideBuildingLimit(positionOfCoveredVoxel)) return false;
-                }
-        return true;
+        Vector3Int endPosition = Orientation.GetRotatedSize(alignment, block);
+        List<bool> inLimit = Helper.DoWithinRange(blockOriginPoint, endPosition, IsInsideBuildingLimit);
+        bool blockInsideLimit = !inLimit.Contains(false);
+
+        return blockInsideLimit;
     }
 
     // returns true if the position is inside the building limit
@@ -102,6 +93,16 @@ public class Grid3D
         if (position.y < 0 || position.y >= yMax) return false;
         if (position.z < 0 || position.z >= zMax) return false;
         return true;
+    }
+
+    // Returns false if any block inside the specified space is being occupied.
+    public bool IsSpaceOccupied(Vector3Int blockOriginPoint, BuildingBlock block, Orientation.Alignment alignment)
+    {
+        Vector3Int endPosition = Orientation.GetRotatedSize(alignment, block);
+        List<bool> voxelOccupied = Helper.DoWithinRange(blockOriginPoint, endPosition, IsOccupied);
+        bool atLeastOneOccupied = voxelOccupied.Contains(true);
+
+        return atLeastOneOccupied;
     }
 
     public bool IsOccupied(Vector3Int position)
@@ -132,17 +133,9 @@ public class Grid3D
     public void DeleteBlock(BuildingBlockDisplay target)
     {
         Blocks.Remove(target);
-        Vector3Int position = target.Position;
-        BuildingBlock block = target.Block;
-
-        for (int xOffset = 0; xOffset < block.SizeX; xOffset++)
-            for (int yOffset = 0; yOffset < block.SizeY; yOffset++)
-                for (int zOffset = 0; zOffset < block.SizeZ; zOffset++)
-                {
-                    Vector3Int offset = new Vector3Int(xOffset, yOffset, zOffset);
-                    Vector3Int positionWithOffset = position + offset;
-                    ResetVoxel(positionWithOffset);
-                }
+        Vector3Int originPosition = target.Position;
+        Vector3Int endPosition = Orientation.GetRotatedSize(target.Alignment, target.Block);
+        Helper.DoWithinRange<Vector3Int>(originPosition, endPosition, ResetVoxel);
     }
 
     public new string ToString()
@@ -163,13 +156,14 @@ public class Grid3D
         return new Vector3(x, y, z);
     }
 
-    private void SetVoxel(Vector3Int position, BuildingBlockDisplay referenceBlock)
+    private void SetVoxel(Vector3Int position, BuildingBlockDisplay blockDisplay)
     {
         int x = position.x;
         int y = position.y;
         int z = position.z;
-        
-        _voxel[x,y,z].UpdateVoxel(referenceBlock.Block, referenceBlock.name, true);
+        string debugText = blockDisplay.name+$"\n({x},{y},{z})";
+
+        _voxel[x,y,z].UpdateVoxel(blockDisplay.Block, debugText, true);
     }
 
     private void ResetVoxel(Vector3Int position)

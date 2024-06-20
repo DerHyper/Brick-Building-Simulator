@@ -5,20 +5,23 @@ public class BuildingBlockDisplay : MonoBehaviour
     public BuildingBlock Block;
     public Vector3Int Position;
     public new string name;
+    public Orientation.Alignment Alignment;
     private BoxCollider _boxCollider;
     
-    public void UpdateDisplay(Vector3Int position, BuildingBlock block)
+    public BuildingBlockDisplay UpdateDisplay(BuildingBlock block, Vector3Int position, Orientation.Alignment alignment)
     {
         this.Block = block;
         this.Position = position;
+        this.Alignment = alignment;
         UpdateVariables();
         UpdateCollider();
         UpdatePosition();
+        return this;
     }
 
     public new string ToString()
     {
-        string info = "{Name: "+name+", BuildingBlock: "+Block+", Position: "+Position+"}";
+        string info = "{Name: "+name+", BuildingBlock: "+Block+", Position: "+Position+", Alignment: "+Alignment+"}";
         return info;
     }
 
@@ -27,12 +30,13 @@ public class BuildingBlockDisplay : MonoBehaviour
         Vector3 dimendions = new Vector3(Block.SizeX, Block.SizeY, Block.SizeZ);
         _boxCollider = Finder.FindOrCreateComponent<BoxCollider>(gameObject);
         _boxCollider.size = dimendions;
+        _boxCollider.center = dimendions/2.0f;
     }
 
     private void UpdatePosition()
     {
-        Vector3 dimendions = new Vector3(Block.SizeX, Block.SizeY, Block.SizeZ);
-        gameObject.transform.localPosition += dimendions*0.5f;
+        Vector3 offset = Orientation.GetRotationOffset(Alignment, Block);
+        gameObject.transform.localPosition += offset;
     }
 
     private void UpdateVariables()

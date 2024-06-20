@@ -8,6 +8,7 @@ public class GridManager : MonoBehaviour
     private Vector3Int _size = new(5,5,5);
     [SerializeField]
     private bool _showDebug = false; 
+    private const Orientation.Alignment StandardAlignment = Orientation.Alignment.North;
     private Grid3D _grid;
     private void Awake()
     {
@@ -35,13 +36,24 @@ public class GridManager : MonoBehaviour
         this._grid = grid;
     }
 
+    public bool TryInstantiateBuildingBlock(Vector3Int originPosition, BuildingBlock block, Orientation.Alignment alignment)
+    {
+        if (!IsInstantiationAllowed(originPosition, block, alignment)) return false;
+
+        BuildingBlockDisplay blockDisplay = InstantiateBuildingBlock(originPosition, block, alignment);
+
+        _grid.AddBlock(blockDisplay);
+        return true;
+    }
+
+    // Using StandardAlignment
     public bool TryInstantiateBuildingBlock(Vector3Int originPosition, BuildingBlock block)
     {
-        if (!IsInstantiationAllowed(originPosition, block)) return false;
+        if (!IsInstantiationAllowed(originPosition, block, StandardAlignment)) return false;
 
-        BuildingBlockDisplay blockDisplay = InstantiateBuildingBlock(originPosition, block);
+        BuildingBlockDisplay blockDisplay = InstantiateBuildingBlock(originPosition, block, StandardAlignment);
 
-        _grid.AddBlock(originPosition, blockDisplay);
+        _grid.AddBlock(blockDisplay);
         return true;
     }
 
@@ -78,15 +90,15 @@ public class GridManager : MonoBehaviour
     }
 
     // Returns true if the block can be instantiated at the given position 
-    private bool IsInstantiationAllowed(Vector3Int originPosition, BuildingBlock block)
+    private bool IsInstantiationAllowed(Vector3Int originPosition, BuildingBlock block, Orientation.Alignment alignment)
     {
-        if (!_grid.IsInsideBuildingLimit(originPosition, block))
+        if (!_grid.IsInsideBuildingLimit(originPosition, block, alignment))
         {
             Debug.Log("Placing a block at "+originPosition.ToString() + " is invalid, since it would clip out of the grid");
             return false;
         }
 
-        if (IsSpaceOccupie(originPosition, block))
+        if (_grid.IsSpaceOccupied(originPosition, block, alignment))
         {
             Debug.Log("Block '" + block.name + "' is overlapping another block at " + originPosition.ToString());
             return false;
@@ -95,28 +107,16 @@ public class GridManager : MonoBehaviour
         return true;
     }
 
-    // Returns false if any block inside the specified space is being occupied.
-    private bool IsSpaceOccupie(Vector3Int position, BuildingBlock block)
-    {
-        for (int xOffset = 0; xOffset < block.SizeX; xOffset++)
-            for (int yOffset = 0; yOffset < block.SizeY; yOffset++)
-                for (int zOffset = 0; zOffset < block.SizeZ; zOffset++)
-                {
-                    Vector3Int offset = new Vector3Int(xOffset, yOffset, zOffset);
-                    Vector3Int positionWithOffset = position + offset;
-                    if (_grid.IsOccupied(positionWithOffset)) return true;
-                }
 
-        return false;
-    }
 
     // Instantiates a new building block as a child of the "BuildingBlocks"-GameObject
-    private BuildingBlockDisplay InstantiateBuildingBlock(Vector3Int position, BuildingBlock block)
+    private BuildingBlockDisplay InstantiateBuildingBlock(Vector3Int position, BuildingBlock block, Orientation.Alignment alignment)
     {
-        GameObject blockGameObject = Instantiate(block.Model, position, Quaternion.identity, BuildingBlocksParent).gameObject;
+        Quaternion direction = Orientation.ToQuaternion(alignment);
+        GameObject blockGameObject = Instantiate(block.Model, position, direction, BuildingBlocksParent).gameObject;
         BuildingBlockDisplay blockDisplay = blockGameObject.AddComponent<BuildingBlockDisplay>();
-        blockDisplay.UpdateDisplay(position, block);
-
+        blockDisplay = blockDisplay.UpdateDisplay(block, position, alignment);
+        Debug.Log("Instantiated: "+blockDisplay.ToString());
         return blockDisplay;
     }
 }
