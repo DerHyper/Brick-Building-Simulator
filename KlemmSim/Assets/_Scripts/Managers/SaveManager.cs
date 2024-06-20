@@ -65,7 +65,6 @@ public class SaveManager : MonoBehaviour
         while(!streamReader.EndOfStream) saveData += streamReader.ReadLine();
         streamReader.Close( ); 
 
-        Debug.Log("Collected Data from file: "+saveData);
         return saveData;
     }
 
@@ -73,16 +72,18 @@ public class SaveManager : MonoBehaviour
     {
         // Deserialize the saveData
         JsonData jsonData = JsonUtility.FromJson<JsonData>(saveData); 
+        Debug.Log("Collected Data from file: "+jsonData.ToString());
 
         // Build all blocks saved in jsonData
         foreach(JsonData.RelevantBlockData blockInfo in jsonData.JsonDataBlockInfos)
         {
             // get block information
-            Vector3Int position = blockInfo.position;
-            string name = blockInfo.name;
+            Vector3Int position = blockInfo.Position;
+            string name = blockInfo.Name;
+            Orientation.Alignment alignment = blockInfo.Alignment;
             BuildingBlock blockType = BlockReferenceManager.GetBuildingBlockByName(name);
             
-            GridManager.TryInstantiateBuildingBlock(position, blockType);
+            GridManager.TryInstantiateBuildingBlock(position, blockType, alignment);
         }
     }
 

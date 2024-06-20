@@ -13,26 +13,47 @@ public class JsonData
         JsonDataBlockInfos = new List<RelevantBlockData>();
         foreach (BuildingBlockDisplay block in blocks)
         {
-            RelevantBlockData jsonDataBlockInfo = new RelevantBlockData(block.name, block.Position);
+            RelevantBlockData jsonDataBlockInfo = new RelevantBlockData(block.name, block.Position, block.Alignment);
             JsonDataBlockInfos.Add(jsonDataBlockInfo);
         }
     }
 
     public List<RelevantBlockData> JsonDataBlockInfos;
 
+    public new string ToString()
+    {
+        string infos = "";
+        foreach (var blockData in JsonDataBlockInfos)
+        {
+            infos += blockData.ToString()+",\n";
+        }
+
+        return "{"+infos+"}";
+    }
+
     // Relevant data for saving and loading blocks into the scene
     [Serializable]
     public class RelevantBlockData
     {
         [SerializeField]
-        public string name;
+        public string Name;
         [SerializeField]
-        public Vector3Int position;
+        public Vector3Int Position;
+        [SerializeField]
+        public Orientation.Alignment Alignment;
 
-        public RelevantBlockData(string name, Vector3Int position)
+        public RelevantBlockData(string name, Vector3Int position, Orientation.Alignment alignment)
         {
-            this.name = name;
-            this.position = position;
+            this.Name = name;
+            this.Position = position;
+            this.Alignment = alignment;
+        }
+
+        public new string ToString()
+        {
+            string infos = "{ name: "+Name+", Position: "+Position+", Alignment: "+Alignment+"}";
+
+            return infos;
         }
     }
 }
