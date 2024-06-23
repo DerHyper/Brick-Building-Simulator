@@ -89,6 +89,14 @@ public class GridManager : MonoBehaviour
         return blockArray;
     }
 
+    // positive values only
+    private void OnValidate ( )
+    {
+        if ( _size.x < 0 ) _size.x = 0;
+        if ( _size.y < 0 ) _size.y = 0;
+        if ( _size.z < 0 ) _size.z = 0;
+    }
+
     // Returns true if the block can be instantiated at the given position 
     private bool IsInstantiationAllowed(Vector3Int originPosition, BuildingBlock block, Orientation.Alignment alignment)
     {
@@ -106,8 +114,6 @@ public class GridManager : MonoBehaviour
 
         return true;
     }
-
-
 
     // Instantiates a new building block as a child of the "BuildingBlocks"-GameObject
     private BuildingBlockDisplay InstantiateBuildingBlock(Vector3Int position, BuildingBlock block, Orientation.Alignment alignment)
