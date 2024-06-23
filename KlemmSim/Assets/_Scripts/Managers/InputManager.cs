@@ -1,13 +1,39 @@
+using System.Numerics;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
     public GridManager GridManager;
     public InventoryManager InventoryManager;
-    private Orientation.Alignment currentAlignment = Orientation.Alignment.North;
+    [SerializeField]
+    private GameObject _blockGhost;
+    private Orientation.Alignment _currentAlignment = Orientation.Alignment.North;
 
     // TODO: This could be exchanged for an event system
-    private void Update() 
+    private void Update()
+    {
+        CheckInput();
+        UpdateGhostPosition();
+    }
+
+    private void UpdateGhostPosition()
+    {
+        if(!CameraToWorld.TryGetMouseBlockPlacementPosition(out Vector3Int gridPosition))
+        {
+            Debug.LogWarning("Tried to place block outside of grid.");
+            return;
+        }
+
+        if (InventoryManager.GetSelectedBuildingBlock() != null)
+        {
+            _blockGhost.transform.position = UnityEngine.Vector3.Lerp(_blockGhost.transform.position, gridPosition + Orientation.GetRotationOffset(_currentAlignment, InventoryManager.GetSelectedBuildingBlock()), 0.12f);
+            UnityEngine.Quaternion direction = Orientation.ToQuaternion(_currentAlignment);
+            _blockGhost.transform.rotation = UnityEngine.Quaternion.Lerp(_blockGhost.transform.rotation, direction, 0.12f);
+        }
+
+    }
+
+    private void CheckInput()
     {
         if (Input.GetMouseButtonDown(0)) // Left click
         {
@@ -17,10 +43,17 @@ public class InputManager : MonoBehaviour
         {
             DestroyBlockAtMousePoint();
         }
-        if (Input.GetButtonDown("Vertical"))
+        if (Input.GetButtonDown("Vertical")) // Arrow keys
         {
-            currentAlignment = Orientation.RotateRight(currentAlignment);
+            SetCurrentRotation(Orientation.RotateRight(_currentAlignment));
         }
+    }
+
+    private void SetCurrentRotation(Orientation.Alignment newAlignment)
+    {
+        _currentAlignment = newAlignment;
+        UnityEngine.Quaternion direction = Orientation.ToQuaternion(newAlignment);
+        _blockGhost.transform.rotation = direction;
     }
 
     // Check if position is valid, if so, place the currently selected block and remove it from inventory
@@ -38,7 +71,7 @@ public class InputManager : MonoBehaviour
         BuildingBlock block = InventoryManager.GetSelectedBuildingBlock();
         if (block != null) 
         {
-            if (GridManager.TryInstantiateBuildingBlock(gridPosition, block, currentAlignment))
+            if (GridManager.TryInstantiateBuildingBlock(gridPosition, block, _currentAlignment))
             {
                 InventoryManager.TryRemove(block);
             }
