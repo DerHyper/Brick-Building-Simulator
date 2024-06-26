@@ -21,8 +21,7 @@ public class SaveManager : MonoBehaviour
 
         // Depending on the current platform either upload or load the file
         #if UNITY_WEBGL && !UNITY_EDITOR
-            throw new NotImplementedException(); // TODO: Add download for WebGL
-
+            return; // TODO: Add download for WebGL
         #else
             string saveFileLocation = OpenImportFileBrowser();
             if (saveFileLocation == "") return; // Cancel: No path was selected
@@ -46,7 +45,7 @@ public class SaveManager : MonoBehaviour
 
         // Depending on the current platform either download or write the file
         #if UNITY_WEBGL && !UNITY_EDITOR
-            throw new NotImplementedException(); // TODO: Add download for WebGL
+            return; // TODO: Add download for WebGL
 
         #else
             File.WriteAllText(saveFileLocation, saveData);
