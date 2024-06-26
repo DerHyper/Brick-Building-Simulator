@@ -1,10 +1,10 @@
-using System.Numerics;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
     public GridManager GridManager;
     public InventoryManager InventoryManager;
+    public MenuManager MenuManager;
     [SerializeField]
     private GameObject _blockGhost;
     private Orientation.Alignment _currentAlignment = Orientation.Alignment.North;
@@ -46,6 +46,10 @@ public class InputManager : MonoBehaviour
         if (Input.GetButtonDown("Vertical")) // Arrow keys
         {
             SetCurrentRotation(Orientation.RotateRight(_currentAlignment));
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            MenuManager.SwitchExitCanvasAvailability();
         }
     }
 
