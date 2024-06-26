@@ -26,7 +26,7 @@ public class MenuManager : MonoBehaviour
     /// </summary>
     public void SwitchExitCanvasAvailability()
     {
-        #if !UNITY_WEBGL
+        #if !UNITY_WEBGL || UNITY_EDITOR
             bool availability = ExitCanvas.activeSelf;
             ExitCanvas.SetActive(!availability);
         #endif
