@@ -83,18 +83,23 @@ public class InventoryRandomizer : MonoBehaviour
         return pickedBlocks;
     }
 
-    // Generates a pick from a normal distrubution using the Box–Muller transform for one dimension
-    // Reference: https://de.wikipedia.org/wiki/Box-Muller-Methode
+    /// <summary>
+    /// Generates a pick from a normal distribution  using the Box–Muller transform for one dimension
+    /// Reference: https://de.wikipedia.org/wiki/Box-Muller-Methode
+    /// </summary>
+    /// <param name="mean">Increasing this value will increase the likelihood, that the returned value is higher.</param>
+    /// <param name="standardDeviation">Increasing this value will make the result more random.</param>
+    /// <returns>A random number, picked from a normal distribution</returns>
     private double PickNormalDistribution(float mean, float standardDeviation)
     {
-        // Generate two random numbers [0,1]
-        float u1 = UnityEngine.Random.Range(0,1.0f); 
-        float u2 = UnityEngine.Random.Range(0,1.0f);
+        // Generate two random numbers (0,1)
+        float u1 = UnityEngine.Random.Range(float.Epsilon, 1.0f-float.Epsilon);
+        float u2 = UnityEngine.Random.Range(float.Epsilon, 1.0f-float.Epsilon); 
 
         // Generate a random number from normal distrubution
-        float z0 =  (float)(Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Cos(2.0 * Math.PI * u2));
-        double x0 = mean + standardDeviation * z0;
+        float x1 =  (float)(Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Cos(2.0 * Math.PI * u2));
+        double scaledX1 = mean + standardDeviation * x1;
 
-        return x0;
+        return scaledX1;
     }
 }
