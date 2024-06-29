@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
+    public GhostManager GhostManager;
     public Transform ItemParent; // This should be located in the hierarchy at "Canvases/Inventory/Viewport/Content"
     public GameObject ItemPrefab; // This should be located in the project at "Assets/Prefabs/Item"
     [SerializeField]
     private int _maxInventorySize = 15;
-    [SerializeField]
-    private GameObject _blockGhost;
-    [SerializeField]
-    private Material _ghostMaterial;
     private Item _selectedItem;
     private Dictionary<BuildingBlock, Item> _items;
 
@@ -65,13 +62,8 @@ public class InventoryManager : MonoBehaviour
         _selectedItem = item;
         Debug.Log("Item selected: "+item);
     
-        for (int i = 0; i < _blockGhost.transform.childCount; i++)
-        {
-            Destroy(_blockGhost.transform.GetChild(i).gameObject);
-        }
-
-        Transform newChild = Instantiate(item.Block.Model, _blockGhost.transform);
-        newChild.GetComponentInChildren<MeshRenderer>().material = _ghostMaterial;
+        Transform newModel = item.Block.Model;
+        GhostManager.ReplaceCurrentGhost(newModel);
     }
 
     public BuildingBlock GetSelectedBuildingBlock()

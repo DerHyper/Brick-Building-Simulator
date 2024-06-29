@@ -562,6 +562,7 @@ Transform:
   - {fileID: 1592464873}
   - {fileID: 1902549183}
   - {fileID: 2012311272}
+  - {fileID: 1840677970}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &593355707
@@ -1112,37 +1113,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1012286186
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1012286187}
-  m_Layer: 0
-  m_Name: BlockGhost
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1012286187
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1012286186}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2072877901}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1313741330
 GameObject:
   m_ObjectHideFlags: 0
@@ -1868,11 +1838,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3bc720606fe2fd4da2219e81fe3a000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GhostManager: {fileID: 1840677971}
   ItemParent: {fileID: 1780081689}
   ItemPrefab: {fileID: 5052702666643941984, guid: da42b288469e5bf4f936c186bb190ea4, type: 3}
   _maxInventorySize: 15
-  _blockGhost: {fileID: 1012286186}
-  _ghostMaterial: {fileID: 2100000, guid: 2a6c2a35388ad4c40bafb810c61a616a, type: 2}
 --- !u!1 &1596399847
 GameObject:
   m_ObjectHideFlags: 0
@@ -2619,6 +2588,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1839205313}
   m_CullTransparentMesh: 1
+--- !u!1 &1840677969
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1840677970}
+  - component: {fileID: 1840677971}
+  m_Layer: 0
+  m_Name: GhostManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1840677970
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1840677969}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 555727480}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1840677971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1840677969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b64ca3f9d172df6448e812bbd3b751db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InventoryManager: {fileID: 1592464874}
+  InputManager: {fileID: 1966553780}
+  _ghostMaterial: {fileID: 2100000, guid: 2a6c2a35388ad4c40bafb810c61a616a, type: 2}
 --- !u!1 &1863052869
 GameObject:
   m_ObjectHideFlags: 0
@@ -3002,7 +3018,7 @@ MonoBehaviour:
   GridManager: {fileID: 2108848118}
   InventoryManager: {fileID: 1592464874}
   MenuManager: {fileID: 2012311271}
-  _blockGhost: {fileID: 1012286186}
+  GhostManager: {fileID: 1840677971}
 --- !u!1 &1999420664
 GameObject:
   m_ObjectHideFlags: 0
@@ -3264,7 +3280,6 @@ Transform:
   - {fileID: 1737401643}
   - {fileID: 1401114593}
   - {fileID: 337628533}
-  - {fileID: 1012286187}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2081086467
@@ -3446,7 +3461,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BuildingBlocksParent: {fileID: 1401114593}
   _size: {x: 30, y: 10, z: 30}
-  _showDebug: 1
+  _showDebug: 0
 --- !u!1 &2147066353
 GameObject:
   m_ObjectHideFlags: 0
