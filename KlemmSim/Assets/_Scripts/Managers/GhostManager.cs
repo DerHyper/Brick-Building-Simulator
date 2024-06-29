@@ -1,5 +1,3 @@
-using Codice.Client.Common;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class GhostManager : MonoBehaviour
