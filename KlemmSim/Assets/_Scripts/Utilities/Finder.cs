@@ -33,7 +33,7 @@ public static class Finder // This class should not be used to find Managers
         if (foundGameObject == null)
         {
             GameObject newGameObject = GameObject.Instantiate(new GameObject());
-            newGameObject.name = tag.ToString()+"Object";
+            newGameObject.name = tag+"Object";
             newGameObject.tag = tag;
             return newGameObject;
         }

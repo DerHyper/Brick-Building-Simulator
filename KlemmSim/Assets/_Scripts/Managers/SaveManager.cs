@@ -71,7 +71,7 @@ public class SaveManager : MonoBehaviour
     {
         // Deserialize the saveData
         JsonData jsonData = JsonUtility.FromJson<JsonData>(saveData); 
-        Debug.Log("Collected Data from file: "+jsonData.ToString());
+        Debug.Log("Collected Data from file: "+jsonData);
 
         // Build all blocks saved in jsonData
         foreach(JsonData.RelevantBlockData blockInfo in jsonData.JsonDataBlockInfos)

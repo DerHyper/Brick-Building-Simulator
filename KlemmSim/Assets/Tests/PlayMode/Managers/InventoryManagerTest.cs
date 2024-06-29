@@ -93,7 +93,7 @@ public class InventoryManagerTest
         BuildingBlock[] blocks = new BuildingBlock[amount];
         for (int i=0; i<amount; i++)
         {
-            blocks[i] = new BuildingBlock{name = "Block" + i.ToString()};
+            blocks[i] = new BuildingBlock{name = "Block" + i};
         }
 
         return blocks;

@@ -20,15 +20,15 @@ public class JsonData
 
     public List<RelevantBlockData> JsonDataBlockInfos;
 
-    public new string ToString()
+    public override string ToString()
     {
         string infos = "";
         foreach (var blockData in JsonDataBlockInfos)
         {
-            infos += blockData.ToString()+",\n";
+            infos += $"{blockData},\n";
         }
 
-        return "{"+infos+"}";
+        return $"{{{infos}}}";
     }
 
     // Relevant data for saving and loading blocks into the scene
@@ -49,9 +49,9 @@ public class JsonData
             this.Alignment = alignment;
         }
 
-        public new string ToString()
+        public override string ToString()
         {
-            string infos = "{ name: "+Name+", Position: "+Position+", Alignment: "+Alignment+"}";
+            string infos = $"{{Name: {Name}, Position: {Position}, Alignment: {Alignment}}}";
 
             return infos;
         }

@@ -9,9 +9,9 @@ public class BuildingBlock : ScriptableObject
     public Transform Model;
     public Sprite Icon;
 
-    public new string ToString()
+    public override string ToString()
     {
-        string info = "{Name: "+name+", Size: ("+SizeX+","+SizeY+","+SizeZ+")}";
+        string info = $"{{Name: {name}, Size: ({SizeX},{SizeY},{SizeZ})}}";
         return info;
     }
 }

@@ -19,9 +19,9 @@ public class BuildingBlockDisplay : MonoBehaviour
         return this;
     }
 
-    public new string ToString()
+    public override string ToString()
     {
-        string info = "{Name: "+name+", BuildingBlock: "+Block+", Position: "+Position+", Alignment: "+Alignment+"}";
+        string info = $"{{Name: {name}, BuildingBlock: {Block}, Position: {Position}, Alignment: {Alignment}}}";
         return info;
     }
 

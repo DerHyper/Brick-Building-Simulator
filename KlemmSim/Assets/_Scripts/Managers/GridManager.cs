@@ -102,13 +102,13 @@ public class GridManager : MonoBehaviour
     {
         if (!_grid.IsInsideBuildingLimit(originPosition, block, alignment))
         {
-            Debug.Log("Placing a block at "+originPosition.ToString() + " is invalid, since it would clip out of the grid");
+            Debug.Log($"Placing a block at {originPosition} is invalid, since it would clip out of the grid");
             return false;
         }
 
         if (_grid.IsSpaceOccupied(originPosition, block, alignment))
         {
-            Debug.Log("Block '" + block.name + "' is overlapping another block at " + originPosition.ToString());
+            Debug.Log($"Block '{block.name}' is overlapping another block at {originPosition}");
             return false;
         }
 
@@ -122,7 +122,7 @@ public class GridManager : MonoBehaviour
         GameObject blockGameObject = Instantiate(block.Model, position, direction, BuildingBlocksParent).gameObject;
         BuildingBlockDisplay blockDisplay = blockGameObject.AddComponent<BuildingBlockDisplay>();
         blockDisplay = blockDisplay.UpdateDisplay(block, position, alignment);
-        Debug.Log("Instantiated: "+blockDisplay.ToString());
+        Debug.Log("Instantiated: "+blockDisplay);
         return blockDisplay;
     }
 }

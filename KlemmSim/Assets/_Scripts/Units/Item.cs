@@ -36,9 +36,9 @@ public class Item : MonoBehaviour
         return Amount;
     }
 
-    public new string ToString()
+    public override string ToString()
     {
-        string info = "{Name: "+name+", BuildingBlock: "+Block+", Amount: "+Amount+"}";
+        string info = $"{{Name: {name}, BuildingBlock: {Block}, Amount: {Amount}}}";
         return info;
     }
     private void SetReferences()

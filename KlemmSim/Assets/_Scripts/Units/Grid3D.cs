@@ -138,16 +138,16 @@ public class Grid3D
         Helper.DoWithinRange<Vector3Int>(originPosition, endPosition, ResetVoxel);
     }
 
-    public new string ToString()
+    public override string ToString()
     {
         string info = "";
         foreach (var block in Blocks)
         {
-            info += block.ToString()+",\n";
+            info += $"{block},\n";
         }
 
         
-        return "{"+info+"}";
+        return $"{{{info}}}";
     }
 
     // Converts the index of the grid to the position in the scene
