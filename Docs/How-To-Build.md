@@ -1,5 +1,5 @@
 # How to build the Brick-Building Simulator
-If you want to use the Brick-Building Simulator on a platform of your choice, you first need to build it. Some Builds can already be found at [Builds](/../KlemmSim/Builds/)
+If you want to use the Brick-Building Simulator on a platform of your choice, you first need to build it. Some Builds can already be found at [Builds](/../Brick-Building-Simulator/Builds/)
 
 ### 1. Open the project in the Unity Editor
 For more details on how to open the project in the Unity Editor, please look [here](Open-In-Unity.md).
@@ -22,4 +22,4 @@ In the Submenu **Platform** select the platform you want to export to. When sele
 ### 4. Switch platform and build
 If you have not already, switch the platform. This can be done my clicking on the button **Switch Platform**. 
 
-Now you can select where to build the project by pressing the button **Build** or **Build and Run**. Other Builds can be found at [KlemmSim/Builds/](/../KlemmSim/Builds/)
+Now you can select where to build the project by pressing the button **Build** or **Build and Run**. Other Builds can be found at [Brick-Building-Simulator/Builds/](/../Brick-Building-Simulator/Builds/)
