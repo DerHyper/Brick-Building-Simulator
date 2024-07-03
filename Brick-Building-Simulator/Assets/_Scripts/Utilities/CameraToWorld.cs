@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Helper class for Camera-Input related purposes
+/// Helper class for Camera-Input related purposes.
 /// </summary>
 public static class CameraToWorld
 {

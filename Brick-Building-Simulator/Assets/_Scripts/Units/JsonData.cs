@@ -14,10 +14,10 @@ public class JsonData
     /// </summary>
     public JsonData(BuildingBlockDisplay[] blocks)
     {
-        JsonDataBlockInfos = new List<RelevantBlockData>();
+        JsonDataBlockInfos = new();
         foreach (BuildingBlockDisplay block in blocks)
         {
-            RelevantBlockData jsonDataBlockInfo = new RelevantBlockData(block.name, block.Position, block.Alignment);
+            RelevantBlockData jsonDataBlockInfo = new(block.name, block.Position, block.Alignment);
             JsonDataBlockInfos.Add(jsonDataBlockInfo);
         }
     }
@@ -26,11 +26,7 @@ public class JsonData
 
     public override string ToString()
     {
-        string infos = "";
-        foreach (var blockData in JsonDataBlockInfos)
-        {
-            infos += $"{blockData},\n";
-        }
+        string infos = string.Join("\n",JsonDataBlockInfos);
 
         return $"{{{infos}}}";
     }
