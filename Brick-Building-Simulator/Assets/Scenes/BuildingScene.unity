@@ -3465,7 +3465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BuildingBlocksParent: {fileID: 1401114593}
-  _size: {x: 30, y: 10, z: 30}
+  _size: {x: 30, y: 20, z: 30}
   _showDebug: 0
 --- !u!1 &2147066353
 GameObject:
