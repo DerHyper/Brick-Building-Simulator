@@ -1,10 +1,17 @@
 using UnityEngine;
 
+/// <summary>
+/// Helper class for Camera-Input related purposes
+/// </summary>
 public static class CameraToWorld
 {
     private const float s_distanceMultiplier = 0.1f;
 
-    // Calculate the position of the block adjacent to the face of the block the mouse is pointing towards
+    /// <summary>
+    /// Calculate the position of the block adjacent to the face of the block the mouse is pointing towards
+    /// </summary>
+    /// <param name="mouseBlockPlacementPosition">Position of the block adjacent to the face of the block the mouse is pointing towards.</param>
+    /// <returns>False if the mouse is not pointing towards any Collider.</returns>
     public static bool TryGetMouseBlockPlacementPosition(out Vector3Int mouseBlockPlacementPosition)
     {
         RaycastHit mouseHit = GetMouseRaycastHit();
@@ -12,7 +19,7 @@ public static class CameraToWorld
         // Check Error
         if (mouseHit.collider == null)
         {
-            mouseBlockPlacementPosition = new Vector3Int();
+            mouseBlockPlacementPosition = new();
             return false;
         }
 
@@ -22,14 +29,11 @@ public static class CameraToWorld
         return true;
     }
 
-    public static Vector3 GetMousePosition()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Physics.Raycast(ray, out RaycastHit raycastHit);
-        Vector3 raycastHitPoint = raycastHit.point;
-        return raycastHitPoint;
-    }
-
+    /// <summary>
+    /// Gets the GameObject at the current mouse position, if there is any.
+    /// </summary>
+    /// <param name="raycastHitGameObject">GameObject at the current mouse position.</param>
+    /// <returns>True if there is an Object.</returns>
     public static bool TryGetGameObjectAtMousePosition(out GameObject raycastHitGameObject)
     {
         RaycastHit mouseHit = GetMouseRaycastHit();
@@ -37,15 +41,14 @@ public static class CameraToWorld
         // Check Error
         if (mouseHit.collider == null)
         {
-            raycastHitGameObject = new GameObject();
+            raycastHitGameObject = new();
             return false;
         }
-        
+
         raycastHitGameObject = mouseHit.collider.gameObject;
         return true;
     }
 
-    // May return null
     private static RaycastHit GetMouseRaycastHit()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
