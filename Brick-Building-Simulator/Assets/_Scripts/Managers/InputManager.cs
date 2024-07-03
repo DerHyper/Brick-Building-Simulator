@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Cinemachine;
 
 public class InputManager : MonoBehaviour
 {
@@ -7,6 +9,13 @@ public class InputManager : MonoBehaviour
     public MenuManager MenuManager;
     public GhostManager GhostManager;
     public Orientation.Alignment CurrentAlignment{get; private set;} = Orientation.Alignment.North;
+    public CinemachineVirtualCamera VirtualCamera;
+    [SerializeField]
+    private float _zoomSpeed = 0.1f;
+    [SerializeField]
+    private float _minZoom = 2.0f;
+    [SerializeField]
+    private float _maxZoom = 20.0f;
 
     // TODO: This could be exchanged for an event system
     private void Update()
@@ -25,7 +34,11 @@ public class InputManager : MonoBehaviour
         {
             DestroyBlockAtMousePoint();
         }
-        if (Input.GetButtonDown("Vertical")) // Arrow keys
+        if (Input.GetButton("Vertical")) // Arrow Up/Down keys
+        {
+            ZoomCamera();
+        }
+        if (Input.GetKeyDown(KeyCode.R))
         {
             RotateRight();
         }
@@ -33,6 +46,19 @@ public class InputManager : MonoBehaviour
         {
             MenuManager.SwitchExitCanvasAvailability();
         }
+    }
+
+    private void ZoomCamera()
+    {
+        var transposer = VirtualCamera.GetCinemachineComponent<CinemachineTransposer>();
+        Vector3 offsetDifference = new Vector3(0, Input.GetAxis("Vertical"), Input.GetAxis("Vertical"))*_zoomSpeed;
+        Vector3 rawOffset = transposer.m_FollowOffset + offsetDifference;
+        
+        float clipedY = Math.Max(_minZoom, Math.Min(rawOffset.y, _maxZoom));
+        float clipedZ = Math.Max(_minZoom, Math.Min(rawOffset.z, _maxZoom));
+        Vector3 clipedOffset = new(rawOffset.x, clipedY, clipedZ);
+        
+        transposer.m_FollowOffset = clipedOffset;
     }
 
     private void RotateRight()
@@ -76,7 +102,7 @@ public class InputManager : MonoBehaviour
 
         if (targetBlock == null)
         {
-            Debug.Log("Tried to destroy GameObject, that is not a BuildingBlock.");
+            Debug.LogWarning("Tried to destroy GameObject, that is not a BuildingBlock.");
             return;
         } 
 

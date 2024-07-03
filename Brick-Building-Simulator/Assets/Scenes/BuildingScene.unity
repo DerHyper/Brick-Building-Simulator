@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45041728, g: 0.50042576, b: 0.57522446, a: 1}
+  m_IndirectSpecularColor: {r: 0.44837904, g: 0.49841326, b: 0.5756168, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -224,8 +224,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 68465106}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.30177695, y: -0.22992387, z: 0.07524149, w: 0.9221738}
-  m_LocalPosition: {x: 4.4834538, y: 7, z: -8.432149}
+  m_LocalRotation: {x: 0.37131608, y: -0.2235067, z: 0.0925795, w: 0.8964364}
+  m_LocalPosition: {x: 3.2863011, y: 7, z: -6.180633}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -944,8 +944,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.30177695, y: -0.22992387, z: 0.07524149, w: 0.9221738}
-  m_LocalPosition: {x: 4.4834538, y: 7, z: -8.432149}
+  m_LocalRotation: {x: 0.37131608, y: -0.22350669, z: 0.0925795, w: 0.8964364}
+  m_LocalPosition: {x: 3.2863011, y: 7, z: -6.180633}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1033,10 +1033,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 7, z: 9.55}
-  m_XDamping: 1
-  m_YDamping: 1
-  m_ZDamping: 1
+  m_FollowOffset: {x: 0, y: 7, z: 7}
+  m_XDamping: 0.3
+  m_YDamping: 0.3
+  m_ZDamping: 0.3
   m_AngularDampingMode: 0
   m_PitchDamping: 0
   m_YawDamping: 0
@@ -3019,6 +3019,10 @@ MonoBehaviour:
   InventoryManager: {fileID: 1592464874}
   MenuManager: {fileID: 2012311271}
   GhostManager: {fileID: 1840677971}
+  VirtualCamera: {fileID: 68465108}
+  _zoomSpeed: 0.05
+  _minZoom: 2
+  _maxZoom: 20
 --- !u!1 &1999420664
 GameObject:
   m_ObjectHideFlags: 0
