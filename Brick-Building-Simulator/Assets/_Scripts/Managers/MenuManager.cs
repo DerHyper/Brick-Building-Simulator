@@ -12,10 +12,10 @@ public class MenuManager : MonoBehaviour
 
     private void InitiateExitMenu()
     {
-        #if UNITY_WEBGL && !UNITY_EDITOR
-            ExitButton.SetActive(false); // No exit on WebGL
-        #endif
-            ExitCanvas.SetActive(false);
+#if UNITY_WEBGL && !UNITY_EDITOR
+        ExitButton.SetActive(false); // No exit on WebGL
+#endif
+        ExitCanvas.SetActive(false);
     }
 
     /// <summary>
@@ -24,10 +24,10 @@ public class MenuManager : MonoBehaviour
     /// </summary>
     public void SwitchExitCanvasAvailability()
     {
-        #if !UNITY_WEBGL || UNITY_EDITOR
-            bool availability = ExitCanvas.activeSelf;
-            ExitCanvas.SetActive(!availability);
-        #endif
+#if !UNITY_WEBGL || UNITY_EDITOR
+        bool availability = ExitCanvas.activeSelf;
+        ExitCanvas.SetActive(!availability);
+#endif
     }
 
     /// <summary>
