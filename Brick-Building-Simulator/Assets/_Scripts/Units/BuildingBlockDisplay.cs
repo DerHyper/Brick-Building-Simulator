@@ -7,7 +7,7 @@ public class BuildingBlockDisplay : MonoBehaviour
     public new string name;
     public Orientation.Alignment Alignment;
     private BoxCollider _boxCollider;
-    
+
     public BuildingBlockDisplay UpdateDisplay(BuildingBlock block, Vector3Int position, Orientation.Alignment alignment)
     {
         this.Block = block;
@@ -27,10 +27,10 @@ public class BuildingBlockDisplay : MonoBehaviour
 
     private void UpdateCollider()
     {
-        Vector3 dimendions = new Vector3(Block.SizeX, Block.SizeY, Block.SizeZ);
+        Vector3 dimendions = new(Block.SizeX, Block.SizeY, Block.SizeZ);
         _boxCollider = Finder.FindOrCreateComponent<BoxCollider>(gameObject);
         _boxCollider.size = dimendions;
-        _boxCollider.center = dimendions/2.0f;
+        _boxCollider.center = dimendions / 2.0f;
     }
 
     private void UpdatePosition()
