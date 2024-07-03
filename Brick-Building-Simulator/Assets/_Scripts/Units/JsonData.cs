@@ -2,12 +2,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-// List of information that needs to be saved for every block
+/// <summary>
+/// Serializable class containung information that needs to be saved as a .json.
+/// </summary>
 [Serializable]
 public class JsonData
 {
-    // Constructor creates a List entry for every BuildingBlockDisplay in the given Array.
-    // Each entry contains data, relevant for saving and loading blocks into the scene
+    /// <summary>
+    /// Creates a entry for every BuildingBlockDisplay in the given Array.
+    /// Each entry contains data, relevant for saving and loading blocks into the scene.
+    /// </summary>
     public JsonData(BuildingBlockDisplay[] blocks)
     {
         JsonDataBlockInfos = new List<RelevantBlockData>();
@@ -31,7 +35,9 @@ public class JsonData
         return $"{{{infos}}}";
     }
 
-    // Relevant data for saving and loading blocks into the scene
+    /// <summary>
+    /// Relevant data for saving and loading blocks into the scene
+    /// </summary>
     [Serializable]
     public class RelevantBlockData
     {
