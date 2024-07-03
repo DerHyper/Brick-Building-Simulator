@@ -7,7 +7,6 @@ public class InputManager : MonoBehaviour
     public GridManager GridManager;
     public InventoryManager InventoryManager;
     public MenuManager MenuManager;
-    public GhostManager GhostManager;
     public Orientation.Alignment CurrentAlignment{get; private set;} = Orientation.Alignment.North;
     public CinemachineVirtualCamera VirtualCamera;
     [SerializeField]
@@ -57,14 +56,13 @@ public class InputManager : MonoBehaviour
         float clipedY = Math.Max(_minZoom, Math.Min(rawOffset.y, _maxZoom));
         float clipedZ = Math.Max(_minZoom, Math.Min(rawOffset.z, _maxZoom));
         Vector3 clipedOffset = new(rawOffset.x, clipedY, clipedZ);
-        
+
         transposer.m_FollowOffset = clipedOffset;
     }
 
     private void RotateRight()
     {
         CurrentAlignment = Orientation.RotateRight(CurrentAlignment);
-        GhostManager.SetGhostRotation(CurrentAlignment);
     }
 
     // Check if position is valid, if so, place the currently selected block and remove it from inventory

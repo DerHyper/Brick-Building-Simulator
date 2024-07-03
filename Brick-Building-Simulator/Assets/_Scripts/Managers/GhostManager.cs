@@ -6,6 +6,10 @@ public class GhostManager : MonoBehaviour
     public InputManager InputManager;
     [SerializeField]
     private Material _ghostMaterial;
+    [SerializeField]
+    private float _repositionSpeed = 0.12f;
+    [SerializeField]
+    private float _rotationSpeed = 0.12f;
     private GameObject _blockGhost;
 
     private void Start()
@@ -13,16 +17,15 @@ public class GhostManager : MonoBehaviour
         _blockGhost = CreateBlockGhost();
     }
 
-    private void Update() {
+    private void Update()
+    {
         UpdateGhostTransform();
     }
 
-    public void SetGhostRotation(Orientation.Alignment alignment)
-    {
-        Quaternion direction = Orientation.ToQuaternion(alignment);
-        _blockGhost.transform.rotation = direction;
-    }
-
+    /// <summary>
+    /// Replaces the current BlockGhost model with a new one.
+    /// </summary>
+    /// <param name="newModel">The new BlockGhost model</param>
     public void ReplaceCurrentGhost(Transform newModel)
     {
         for (int i = 0; i < _blockGhost.transform.childCount; i++)
@@ -36,24 +39,27 @@ public class GhostManager : MonoBehaviour
     private GameObject CreateBlockGhost()
     {
         Transform parent = Finder.FindOrCreateGameObjectWithName("Environment").transform;
-        GameObject blockGhost = GameObject.Instantiate(new GameObject(), parent);
+        GameObject blockGhost = Instantiate(new GameObject() { name = "BlockGhost" }, parent);
         return blockGhost;
     }
 
     private void UpdateGhostTransform()
     {
-        if(!CameraToWorld.TryGetMouseBlockPlacementPosition(out Vector3Int gridPosition))
+        if (!CameraToWorld.TryGetMouseBlockPlacementPosition(out Vector3Int gridPosition))
         {
-            Debug.LogWarning("Tried to place block outside of grid.");
             return;
         }
 
         if (InventoryManager.GetSelectedBuildingBlock() != null)
         {
+            // Transform position over multiple frames
             Orientation.Alignment currentAlignment = InputManager.CurrentAlignment;
-            _blockGhost.transform.position = Vector3.Lerp(_blockGhost.transform.position, gridPosition + Orientation.GetRotationOffset(currentAlignment, InventoryManager.GetSelectedBuildingBlock()), 0.12f);
-            Quaternion direction = Orientation.ToQuaternion(currentAlignment);
-            _blockGhost.transform.rotation = Quaternion.Lerp(_blockGhost.transform.rotation, direction, 0.12f);
+            Vector3 newPosition = gridPosition + Orientation.GetRotationOffset(currentAlignment, InventoryManager.GetSelectedBuildingBlock());
+            _blockGhost.transform.position = Vector3.Lerp(_blockGhost.transform.position, newPosition, _repositionSpeed);
+
+            // Transform rotation over multiple frames
+            Quaternion newDirection = Orientation.ToQuaternion(currentAlignment);
+            _blockGhost.transform.rotation = Quaternion.Lerp(_blockGhost.transform.rotation, newDirection, _rotationSpeed);
         }
 
     }
