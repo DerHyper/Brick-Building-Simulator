@@ -12,13 +12,15 @@ public class InventoryManager : MonoBehaviour
     private Item _selectedItem;
     private Dictionary<BuildingBlock, Item> _items;
 
-    private void Awake() 
+    private void Awake()
     {
-        _items = new Dictionary<BuildingBlock, Item>();
+        _items = new();
     }
 
-    // Add the block to the inventory as a new item.
-    // If the item already exists, increase the current amount
+    /// <summary>
+    /// Add the BuildingBlock to the inventory, either as a new item, or if the item already exists, increase the current amount
+    /// </summary>
+    /// <param name="block">Block that will be added to the inventory</param>
     public void Add(BuildingBlock block)
     {
         if (_items.TryGetValue(block, out Item item))
@@ -27,64 +29,64 @@ public class InventoryManager : MonoBehaviour
         }
         else
         {
-            item = AddNewItem(block);
+            AddNewItem(block);
         }
     }
 
-    // Decrease the amount in the item to the coresponding block.
-    // If amount hits zero, remove the item entirely
-    // return true if the removal was successful.
+    /// <summary>
+    /// Decreases the amount in the item to the coresponding block.
+    /// If amount hits zero, remove the item entirely
+    /// </summary>
+    /// <param name="block">Block that will be removed to the inventory</param>
+    /// <returns>True if the removal was successful.</returns>
     public bool TryRemove(BuildingBlock block)
     {
-        Item item;
-        if(_items.TryGetValue(block, out item))
+        if (!_items.TryGetValue(block, out Item item))
         {
-            if (item.Amount > 1)
-            {
-                item.DecreaseAmount();
-            }
-            else 
-            {
-                Destroy(item.gameObject);
-                _items.Remove(block);
-            }
-            return true;
+            Debug.LogWarning("Could not find " + block.name + "in inventory");
+            return false;
+        }
+
+        if (item.Amount > 1)
+        {
+            item.DecreaseAmount();
         }
         else
         {
-            Debug.LogWarning("Could not find "+block.name+"in inventory");
-            return false;
+            Destroy(item.gameObject);
+            _items.Remove(block);
         }
+        return true;
+
     }
-    
+
+    /// <summary>
+    /// Selects a new item and replace the current ghost block (A preview of the currently selected block).
+    /// </summary>
+    /// <param name="item">Item that will be selected.</param>
     public void SetSelectedItem(Item item)
     {
         _selectedItem = item;
-        Debug.Log("Item selected: "+item);
-    
+        Debug.Log("Item selected: " + item);
+
         Transform newModel = item.Block.Model;
         GhostManager.ReplaceCurrentGhost(newModel);
     }
 
     public BuildingBlock GetSelectedBuildingBlock()
     {
-        if (_selectedItem != null)
-        {
-            BuildingBlock selecedBlock = _selectedItem.Block;
-            return selecedBlock;
-        }
-        else
-        {
-            return null;
-        }
+        BuildingBlock selecedBlock = (_selectedItem != null) ? _selectedItem.Block : null;
+        
+        return selecedBlock;
     }
 
+    /// <summary>
+    /// Removes every item from the inventory. 
+    /// </summary>
     public void ClearInventory()
     {
-        // Destory every item in the Dictionary
-        foreach (var pair in _items)
+        foreach (var item in _items.Values)
         {
-            Item item = pair.Value;
             Destroy(item.gameObject);
         }
         _items.Clear();
