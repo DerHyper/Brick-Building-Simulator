@@ -76,7 +76,7 @@ public class InventoryManager : MonoBehaviour
     public BuildingBlock GetSelectedBuildingBlock()
     {
         BuildingBlock selecedBlock = (_selectedItem != null) ? _selectedItem.Block : null;
-        
+
         return selecedBlock;
     }
 
