@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Adding this class to a GameObject will scale it depending on the grid bottoms size.
+/// </summary>
 public class SelfScaleToGridBottom : MonoBehaviour
 {
     public GridManager GridManager;
@@ -12,6 +15,9 @@ public class SelfScaleToGridBottom : MonoBehaviour
         UpdateScale(GridManager, _scalingFactor, _yScale);
     }
 
+    /// <summary>
+    /// Scales the holders GameObject depending on the grid bottoms size.
+    /// </summary>
     public void UpdateScale(GridManager gridManager, float scalingFactor, float yScale)
     {
         Vector3Int gridSize = gridManager.GetSize();

@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Adding this class to a GameObject will center it to the bottom of the grid.
+/// </summary>
 public class SelfCenterToGridBottom : MonoBehaviour
 {
     public GridManager GridManager;
@@ -10,6 +13,9 @@ public class SelfCenterToGridBottom : MonoBehaviour
         UpdatePosition(GridManager, _distanceFromBottom);
     }
 
+    /// <summary>
+    /// Centers the holders GameObject to the bottom of the grid.
+    /// </summary>
     public void UpdatePosition(GridManager gridManager, int distanceFromBottom)
     {
         // Get designated position
