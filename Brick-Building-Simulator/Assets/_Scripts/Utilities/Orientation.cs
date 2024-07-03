@@ -1,5 +1,9 @@
 using UnityEngine;
 
+/// <summary>
+/// Orientation in 4 directions called Alignment.
+/// Also contains methods to work with different Alignments.
+/// </summary>
 public static class Orientation
 {
     public enum Alignment
@@ -10,95 +14,87 @@ public static class Orientation
         West
     }
 
+    /// <summary>
+    /// Return the given Alignment rotated to the right.
+    /// </summary>
     public static Alignment RotateRight(Alignment direction)
     {
-        switch (direction)
+        return direction switch
         {
-            default:
-            case Alignment.North: 
-                return Alignment.East;
-            case Alignment.East: 
-                return Alignment.South;
-            case Alignment.South: 
-                return Alignment.West;
-            case Alignment.West: 
-                return Alignment.North;
-        }
+            Alignment.East => Alignment.South,
+            Alignment.South => Alignment.West,
+            Alignment.West => Alignment.North,
+            _ => Alignment.East,
+        };
     }
 
+    /// <summary>
+    /// Return the given Alignment rotated to the left.
+    /// </summary>
     public static Alignment RotateLeft(Alignment direction)
     {
-        switch (direction)
+        return direction switch
         {
-            default:
-            case Alignment.North: 
-                return Alignment.West;
-            case Alignment.East: 
-                return Alignment.North;
-            case Alignment.South: 
-                return Alignment.East;
-            case Alignment.West: 
-                return Alignment.South;
-        }
+            Alignment.East => Alignment.North,
+            Alignment.South => Alignment.East,
+            Alignment.West => Alignment.South,
+            _ => Alignment.West,
+        };
     }
 
+    /// <summary>
+    /// Returns the given alignment as a Quaternion.
+    /// </summary>
     public static Quaternion ToQuaternion(Alignment direction)
     {
-        switch (direction)
+        return direction switch
         {
-            default:
-            case Alignment.North: 
-                return Quaternion.Euler(0,0,0);
-            case Alignment.East: 
-                return Quaternion.Euler(0,90,0);
-            case Alignment.South: 
-                return Quaternion.Euler(0,180,0);
-            case Alignment.West: 
-                return Quaternion.Euler(0,270,0);
-        }
+            Alignment.East => Quaternion.Euler(0, 90, 0),
+            Alignment.South => Quaternion.Euler(0, 180, 0),
+            Alignment.West => Quaternion.Euler(0, 270, 0),
+            _ => Quaternion.Euler(0, 0, 0),
+        };
     }
 
+    /// <summary>
+    /// Calculates the offset that has to be added to the current position to realign a block with its original position on the grid.
+    /// </summary>
+    /// <param name="direction">Tageted rotation.</param>
+    /// <param name="block">Block that will be rotated.</param>
+    /// <returns>Offset that has to be added.</returns>
     public static Vector3Int GetRotationOffset(Alignment direction, BuildingBlock block)
     {
-        switch (direction)
+        return direction switch
         {
-            default:
-            case Alignment.North: 
-                return new Vector3Int(0,0,0)/block.SizeX;
-            case Alignment.East: 
-                return new Vector3Int(0,0,block.SizeX)/block.SizeX;
-            case Alignment.South: 
-                return new Vector3Int(block.SizeX,0,block.SizeX)/block.SizeX;
-            case Alignment.West: 
-                return new Vector3Int(block.SizeX,0,0)/block.SizeX;
-        }
+            Alignment.East => new Vector3Int(0, 0, block.SizeX) / block.SizeX,
+            Alignment.South => new Vector3Int(block.SizeX, 0, block.SizeX) / block.SizeX,
+            Alignment.West => new Vector3Int(block.SizeX, 0, 0) / block.SizeX,
+            _ => new Vector3Int(0, 0, 0) / block.SizeX,
+        };
     }
 
+    /// <inheritdoc />
+    /// <param name="blockDisplay">Block that will be rotated.</param>
     public static Vector3Int GetRotatedSize(Alignment alignment, BuildingBlockDisplay blockDisplay)
     {
         return GetRotatedSize(alignment, blockDisplay.Block);
     }
 
+    /// <summary>
+    /// Calculates the size of a block after being rotated.
+    /// </summary>
+    /// <param name="alignment">Tageted rotation.</param>
+    /// <param name="block">Block that will be rotated.</param>
+    /// <returns>Size the rotated block.</returns>
     public static Vector3Int GetRotatedSize(Alignment alignment, BuildingBlock block)
     {
-        Vector3Int coveredVoxels;
-        switch (alignment)
+        var coveredVoxels = alignment switch
         {
-            default:
-            case Orientation.Alignment.North:
-                coveredVoxels = new Vector3Int(block.SizeX, block.SizeY, block.SizeZ);
-                break;
-            case Orientation.Alignment.East:
-                coveredVoxels = new Vector3Int(block.SizeZ, block.SizeY, -block.SizeX);
-                break;
-            case Orientation.Alignment.South:
-                coveredVoxels = new Vector3Int(-block.SizeX, block.SizeY, -block.SizeZ);
-                break;
-            case Orientation.Alignment.West:
-                coveredVoxels = new Vector3Int(-block.SizeZ, block.SizeY, block.SizeX);
-                break;
-        }
-
+            Alignment.East => new Vector3Int(block.SizeZ, block.SizeY, -block.SizeX),
+            Alignment.South => new Vector3Int(-block.SizeX, block.SizeY, -block.SizeZ),
+            Alignment.West => new Vector3Int(-block.SizeZ, block.SizeY, block.SizeX),
+            _ => new Vector3Int(block.SizeX, block.SizeY, block.SizeZ),
+        };
         return coveredVoxels;
     }
 }
