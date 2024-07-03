@@ -1,5 +1,9 @@
 using UnityEngine;
 
+/// <summary>
+/// Script that has to be attatched to an GameObject.
+/// Used to display the information stored in a BuildingBlock ScriptableObject.
+/// </summary>
 public class BuildingBlockDisplay : MonoBehaviour
 {
     public BuildingBlock Block;

@@ -53,7 +53,6 @@ public class GridManager : MonoBehaviour
     }
 
     /// <inheritdoc cref="TryInstantiateBuildingBlock(Vector3Int, BuildingBlock, Orientation.Alignment)"/>
-    // Using StandardAlignment
     public bool TryInstantiateBuildingBlock(Vector3Int position, BuildingBlock block)
     {
         if (!IsInstantiationAllowed(position, block, StandardAlignment)) return false;

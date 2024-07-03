@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Data container that stores general information about a block type.
+/// </summary>
 [CreateAssetMenu(fileName = "BuildingBlock", menuName = "ScriptableObjects/BuildingBlock", order = 1)]
 public class BuildingBlock : ScriptableObject
 {
