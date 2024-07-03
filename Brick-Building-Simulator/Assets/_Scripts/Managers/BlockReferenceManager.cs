@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,29 +7,34 @@ public class BlockReferenceManager : MonoBehaviour
 {
     [SerializeField]
     private List<BuildingBlock> _buildingBlocks;
-    
-    // Dictionary for fast lookup by name
-    // Note: Names in a map should never be used twice!
-    private Dictionary<string,BuildingBlock> _buildingBlockMap;
+    private Dictionary<string, BuildingBlock> _buildingBlockMap; // Dictionary for fast lookup by name
 
     private void Awake()
     {
-        InializeDictionary();
+        InitializeDictionary();
     }
 
+    /// <summary>
+    /// Get the BuildingBlock using its name.
+    /// If the name is invalid, get an alternative BuildingBlock.
+    /// This method should be used for deserialization purposes.  
+    /// </summary>
+    /// <param name="name">The name of the BuildingBlock.</param>
+    /// <returns>The BuildingBlock with the same name.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">Could neither get the original nor any alternative BuildingBlock.</exception>
     public BuildingBlock GetBuildingBlockByName(string name)
     {
         // If the key is invalid, get an alternative block
         // Note: The first block is not necessarily the first block added since it is a hash map.
-        // If alternative block is also not working, create a new one
-        if(!_buildingBlockMap.TryGetValue(name, out BuildingBlock block))
+        if (!_buildingBlockMap.TryGetValue(name, out BuildingBlock block))
         {
-            Debug.LogWarning("Could get value from key: '"+name+"'.", this);
-            
+            Debug.LogWarning($"Could not get value from key: '{name}'.", this);
+
             BuildingBlock alternativeBlock = _buildingBlockMap.First().Value;
 
-            if (alternativeBlock != null) block = alternativeBlock;
-            else block = new BuildingBlock();
+            if (alternativeBlock == null) throw new ArgumentOutOfRangeException();
+
+            block = alternativeBlock;
         }
 
         return block;
@@ -40,12 +46,12 @@ public class BlockReferenceManager : MonoBehaviour
     }
 
     // Inialize the Dictionary by mapping from the name of the block to the block 
-    private void InializeDictionary()
+    private void InitializeDictionary()
     {
-        _buildingBlockMap = new Dictionary<string, BuildingBlock>();
+        _buildingBlockMap = new();
         foreach (BuildingBlock buildingBlock in _buildingBlocks)
         {
-            if(!_buildingBlockMap.TryAdd(buildingBlock.name, buildingBlock))
+            if (!_buildingBlockMap.TryAdd(buildingBlock.name, buildingBlock))
             {
                 Debug.LogWarning("Could not initilize BuildingBlockMap", this);
             }
