@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class GhostManager : MonoBehaviour
 {
-    public InventoryManager InventoryManager;
     public InputManager InputManager;
     [SerializeField]
     private Material _ghostMaterial;
@@ -11,6 +10,7 @@ public class GhostManager : MonoBehaviour
     [SerializeField]
     private float _rotationSpeed = 0.12f;
     private GameObject _blockGhost;
+    private BuildingBlock _blockGhostBlock;
 
     private void Start()
     {
@@ -23,17 +23,18 @@ public class GhostManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Replaces the current BlockGhost model with a new one.
+    /// Replaces the current BlockGhost with a new one.
     /// </summary>
-    /// <param name="newModel">The new BlockGhost model</param>
-    public void ReplaceCurrentGhost(Transform newModel)
+    /// <param name="block">The new BlockGhost BuildingBlock</param>
+    public void ReplaceCurrentGhost(BuildingBlock block)
     {
+        _blockGhostBlock = block;
         for (int i = 0; i < _blockGhost.transform.childCount; i++)
         {
             Destroy(_blockGhost.transform.GetChild(i).gameObject);
         }
 
-        Transform newChild = Instantiate(newModel, _blockGhost.transform);
+        Transform newChild = Instantiate(block.Model, _blockGhost.transform);
         newChild.GetComponentInChildren<MeshRenderer>().material = _ghostMaterial;
     }
     private GameObject CreateBlockGhost()
@@ -50,17 +51,18 @@ public class GhostManager : MonoBehaviour
             return;
         }
 
-        if (InventoryManager.GetSelectedBuildingBlock() != null)
+        if (_blockGhostBlock == null)
         {
-            // Transform position over multiple frames
-            Orientation.Alignment currentAlignment = InputManager.CurrentAlignment;
-            Vector3 newPosition = gridPosition + Orientation.GetRotationOffset(currentAlignment, InventoryManager.GetSelectedBuildingBlock());
-            _blockGhost.transform.position = Vector3.Lerp(_blockGhost.transform.position, newPosition, _repositionSpeed);
-
-            // Transform rotation over multiple frames
-            Quaternion newDirection = Orientation.ToQuaternion(currentAlignment);
-            _blockGhost.transform.rotation = Quaternion.Lerp(_blockGhost.transform.rotation, newDirection, _rotationSpeed);
+            return;
         }
 
+        // Transform position over multiple frames
+        Orientation.Alignment currentAlignment = InputManager.CurrentAlignment;
+        Vector3 newPosition = gridPosition + Orientation.GetRotationOffset(currentAlignment, _blockGhostBlock);
+        _blockGhost.transform.position = Vector3.Lerp(_blockGhost.transform.position, newPosition, _repositionSpeed);
+
+        // Transform rotation over multiple frames
+        Quaternion newDirection = Orientation.ToQuaternion(currentAlignment);
+        _blockGhost.transform.rotation = Quaternion.Lerp(_blockGhost.transform.rotation, newDirection, _rotationSpeed);
     }
 }

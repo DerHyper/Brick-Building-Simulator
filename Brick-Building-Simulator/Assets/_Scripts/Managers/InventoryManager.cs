@@ -69,8 +69,7 @@ public class InventoryManager : MonoBehaviour
         _selectedItem = item;
         Debug.Log("Item selected: " + item);
 
-        Transform newModel = item.Block.Model;
-        GhostManager.ReplaceCurrentGhost(newModel);
+        GhostManager.ReplaceCurrentGhost(item.Block);
     }
 
     public BuildingBlock GetSelectedBuildingBlock()
