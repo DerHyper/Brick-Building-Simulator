@@ -2,15 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEditor;
 
 public class BlockReferenceManager : MonoBehaviour
 {
-    [SerializeField]
     private List<BuildingBlock> _buildingBlocks;
     private Dictionary<string, BuildingBlock> _buildingBlockMap; // Dictionary for fast lookup by name
 
     private void Awake()
     {
+        InitializeList();
         InitializeDictionary();
     }
 
@@ -40,12 +41,19 @@ public class BlockReferenceManager : MonoBehaviour
         return block;
     }
 
-    public List<BuildingBlock> GetBuildingBlocks()
+    public List<BuildingBlock> GetBuildingBlocksCopy()
     {
-        return _buildingBlocks;
+        List<BuildingBlock> listcopy = new(_buildingBlocks);
+        return listcopy;
     }
 
-    // Inialize the Dictionary by mapping from the name of the block to the block 
+    private void InitializeList()
+    {
+        PlayerSettings.WebGL.useEmbeddedResources = true; // Add Resources support to WebGL
+        BuildingBlock[] buildingBlockArray = Resources.LoadAll<BuildingBlock>("Scriptable Objects/");
+        _buildingBlocks = new List<BuildingBlock>(buildingBlockArray);
+    }
+
     private void InitializeDictionary()
     {
         _buildingBlockMap = new();
