@@ -4901,8 +4901,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b64ca3f9d172df6448e812bbd3b751db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryManager: {fileID: 1592464874}
-  InputManager: {fileID: 1966553780}
+  CurrentAlignment: 0
   _ghostMaterial: {fileID: 2100000, guid: 2a6c2a35388ad4c40bafb810c61a616a, type: 2}
   _repositionSpeed: 0.12
   _rotationSpeed: 0.05
@@ -5155,6 +5154,7 @@ MonoBehaviour:
   GridManager: {fileID: 2108848118}
   InventoryManager: {fileID: 1592464874}
   MenuManager: {fileID: 2012311271}
+  GhostManager: {fileID: 1840677971}
   VirtualCamera: {fileID: 68465108}
   _zoomSpeed: 0.05
   _minZoom: 2

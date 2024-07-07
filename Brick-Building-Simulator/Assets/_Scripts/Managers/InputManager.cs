@@ -7,6 +7,7 @@ public class InputManager : MonoBehaviour
     public GridManager GridManager;
     public InventoryManager InventoryManager;
     public MenuManager MenuManager;
+    public GhostManager GhostManager;
     public Orientation.Alignment CurrentAlignment{get; private set;} = Orientation.Alignment.North;
     public CinemachineVirtualCamera VirtualCamera;
     [SerializeField]
@@ -40,6 +41,7 @@ public class InputManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             RotateRight();
+            GhostManager.CurrentAlignment = CurrentAlignment;
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -60,9 +62,10 @@ public class InputManager : MonoBehaviour
         transposer.m_FollowOffset = clipedOffset;
     }
 
-    private void RotateRight()
+    private Orientation.Alignment RotateRight()
     {
         CurrentAlignment = Orientation.RotateRight(CurrentAlignment);
+        return CurrentAlignment;
     }
 
     // Check if position is valid, if so, place the currently selected block and remove it from inventory

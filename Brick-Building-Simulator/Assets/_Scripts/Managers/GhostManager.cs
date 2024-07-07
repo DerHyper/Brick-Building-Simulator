@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GhostManager : MonoBehaviour
 {
-    public InputManager InputManager;
+    public Orientation.Alignment CurrentAlignment;
     [SerializeField]
     private Material _ghostMaterial;
     [SerializeField]
@@ -57,12 +57,11 @@ public class GhostManager : MonoBehaviour
         }
 
         // Transform position over multiple frames
-        Orientation.Alignment currentAlignment = InputManager.CurrentAlignment;
-        Vector3 newPosition = gridPosition + Orientation.GetRotationOffset(currentAlignment, _blockGhostBlock);
+        Vector3 newPosition = gridPosition + Orientation.GetRotationOffset(CurrentAlignment, _blockGhostBlock);
         _blockGhost.transform.position = Vector3.Lerp(_blockGhost.transform.position, newPosition, _repositionSpeed);
 
         // Transform rotation over multiple frames
-        Quaternion newDirection = Orientation.ToQuaternion(currentAlignment);
+        Quaternion newDirection = Orientation.ToQuaternion(CurrentAlignment);
         _blockGhost.transform.rotation = Quaternion.Lerp(_blockGhost.transform.rotation, newDirection, _rotationSpeed);
     }
 }
