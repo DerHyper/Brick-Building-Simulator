@@ -29,14 +29,28 @@ public class GhostManager : MonoBehaviour
     public void ReplaceCurrentGhost(BuildingBlock block)
     {
         _blockGhostBlock = block;
+        DestroyGhostChildren();
+        InstantiateGhostChild(block);
+    }
+
+    private void InstantiateGhostChild(BuildingBlock block)
+    {
+        Transform newChild = Instantiate(block.Model, _blockGhost.transform);
+        MeshRenderer[] meshRenderers = newChild.GetComponentsInChildren<MeshRenderer>();
+        foreach (MeshRenderer meshRenderer in meshRenderers)
+        {
+            meshRenderer.material = _ghostMaterial;
+        }
+    }
+
+    private void DestroyGhostChildren()
+    {
         for (int i = 0; i < _blockGhost.transform.childCount; i++)
         {
             Destroy(_blockGhost.transform.GetChild(i).gameObject);
         }
-
-        Transform newChild = Instantiate(block.Model, _blockGhost.transform);
-        newChild.GetComponentInChildren<MeshRenderer>().material = _ghostMaterial;
     }
+
     private GameObject CreateBlockGhost()
     {
         Transform parent = Finder.FindOrCreateGameObjectWithName("Environment").transform;
