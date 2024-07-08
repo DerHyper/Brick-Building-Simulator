@@ -49,7 +49,9 @@ public class BlockReferenceManager : MonoBehaviour
 
     private void InitializeList()
     {
+#if UNITY_EDITOR
         PlayerSettings.WebGL.useEmbeddedResources = true; // Add Resources support to WebGL
+#endif
         BuildingBlock[] buildingBlockArray = Resources.LoadAll<BuildingBlock>("Scriptable Objects/");
         _buildingBlocks = new List<BuildingBlock>(buildingBlockArray);
     }

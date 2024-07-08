@@ -3,6 +3,9 @@ using SFB;
 using System.IO;
 using System.Text;
 
+/// <summary>
+/// Manager that contains Methods for exporting and importing .json Data
+/// </summary>
 public class SaveManager : MonoBehaviour
 {
     public GridManager GridManager;
@@ -24,7 +27,7 @@ public class SaveManager : MonoBehaviour
     /// Clears the grid and the inventory.
     /// Loads the .json file onto the grid.
     /// </summary>
-    public void Import()
+    public void ImportWithFileBrowser()
     {
         string saveData;
 
@@ -38,6 +41,15 @@ public class SaveManager : MonoBehaviour
         saveData = ReadJsonToString(saveFileLocation);
 #endif
 
+        ImportWithText(saveData);
+    }
+
+    /// <summary>
+    /// Uses the given .json text as import data. Clears grid and inventory first.
+    /// </summary>
+    /// <param name="saveData">.json text containing a serialized JsonData text file</param>
+    public void ImportWithText(string saveData)
+    {
         GridManager.ClearGrid();
         InventoryManager.ClearInventory();
         LoadSaveData(saveData);
@@ -48,7 +60,7 @@ public class SaveManager : MonoBehaviour
     /// Opens a file browser to select a .json file.
     /// Serializes the blocks on the grid into a JSON-String and saves it. 
     /// </summary>
-    public void Export()
+    public void ExportWithFileBrowser()
     {
         // Open save panle and get save path
         string saveFileLocation = OpenExportFileBrowser();
@@ -65,7 +77,23 @@ public class SaveManager : MonoBehaviour
         File.WriteAllText(saveFileLocation, saveData);
 
 #endif
+    }
 
+    /// <summary>
+    /// Collects data about blocks from the grid and serializes it.
+    /// </summary>
+    /// <returns>text in .json format</returns>
+    public string SaveDataToJSON()
+    {
+        // Get all Building Blocks
+        BuildingBlockDisplay[] blocks = GridManager.GetBlocksInGrid();
+
+        // Put the BuildingBlocks in a format that can be serialized into a JSON file
+        JsonData jsonData = new(blocks);
+        string jsonText = JsonUtility.ToJson(jsonData);
+        Debug.Log("Collected Block Data: " + jsonText);
+
+        return jsonText;
     }
 
     // Deserialize the JSON file in a format readable to C#
@@ -122,18 +150,5 @@ public class SaveManager : MonoBehaviour
         string saveFileLocation = StandaloneFileBrowser.SaveFilePanel(ExportTitle, StdFilePath, DefaultName, extensions);
 
         return saveFileLocation;
-    }
-
-    private string SaveDataToJSON()
-    {
-        // Get all Building Blocks
-        BuildingBlockDisplay[] blocks = GridManager.GetBlocksInGrid();
-
-        // Put the BuildingBlocks in a format that can be serialized into a JSON file
-        JsonData jsonData = new(blocks);
-        string jsonText = JsonUtility.ToJson(jsonData);
-        Debug.Log("Collected Block Data: " + jsonText);
-
-        return jsonText;
     }
 }
