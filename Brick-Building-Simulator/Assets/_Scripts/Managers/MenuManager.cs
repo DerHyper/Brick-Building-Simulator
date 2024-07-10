@@ -21,7 +21,7 @@ public class MenuManager : MonoBehaviour
     /// </summary>
     public void SwitchExitCanvasAvailability()
     {
-#if !UNITY_WEBGL || UNITY_EDITOR
+#if UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN || UNITY_STANDALONE_LINUX || UNITY_EDITOR
         bool availability = ExitCanvas.activeSelf;
         ExitCanvas.SetActive(!availability);
 #endif
@@ -60,7 +60,7 @@ public class MenuManager : MonoBehaviour
     /// </summary>
     public void Import()
     {
-#if !UNITY_WEBGL || UNITY_EDITOR
+#if UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN || UNITY_STANDALONE_LINUX || UNITY_EDITOR
         SaveManager.ImportWithFileBrowser();
 #else
         SwitchImportCanvasAvailability();
@@ -72,7 +72,7 @@ public class MenuManager : MonoBehaviour
     /// </summary>
     public void Export()
     {
-#if !UNITY_WEBGL || UNITY_EDITOR
+#if UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN || UNITY_STANDALONE_LINUX || UNITY_EDITOR
         SaveManager.ExportWithFileBrowser();
 #else
         SwitchExportCanvasAvailability();
@@ -81,18 +81,18 @@ public class MenuManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Start import process for WebGL.
+    /// Start import process for text.
     /// </summary>
-    public void ImportWebGL()
+    public void ImportWithText()
     {
         string saveData = ImportCanvas.GetComponentInChildren<TMP_InputField>().text;
         SaveManager.ImportWithText(saveData);
     }
 
     /// <summary>
-    /// Start export process for WebGL.
+    /// Start export process for text.
     /// </summary>
-    public void ExportWebGL()
+    public void ExportWithText()
     {
         string saveData = SaveManager.SaveDataToJSON();
         ExportCanvas.GetComponentInChildren<TMP_InputField>().text = saveData;
