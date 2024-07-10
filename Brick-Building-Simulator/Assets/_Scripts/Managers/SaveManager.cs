@@ -15,11 +15,17 @@ public class SaveManager : MonoBehaviour
 
     /// <summary>
     /// Filter to only show relevant file extentions (.json)
+    /// Note: Exporting as ".json" in Linux can sometimes not work, ".txt" is reccomendet instead then.
     /// </summary>
     private readonly ExtensionFilter[] extensions = new ExtensionFilter[] {
+#if UNITY_STANDALONE_LINUX && !UNITY_EDITOR
+        new("Constructions", "json", "txt"),
+#else
         new("Constructions", "json"),
+#endif
         new("All Files", "*" ),
     };
+
 
     /// <summary>
     /// Starts an import process:
