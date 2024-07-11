@@ -7,8 +7,6 @@ public class InventoryManager : MonoBehaviour
     public GhostManager GhostManager;
     public Transform ItemParent; // This should be located in the hierarchy at "Canvases/Inventory/Viewport/Content"
     public GameObject ItemPrefab; // This should be located in the project at "Assets/Prefabs/Item"
-    [SerializeField]
-    private int _maxInventorySize = 15;
     private Item _selectedItem;
     private Dictionary<BuildingBlock, Item> _items;
 
@@ -94,17 +92,9 @@ public class InventoryManager : MonoBehaviour
     // Instantiate new Item and add it to the Dictionary
     private Item AddNewItem(BuildingBlock block)
     {
-        if (_items.Count() <= _maxInventorySize)
-        {
-            Item newItem = Instantiate(ItemPrefab, ItemParent).GetComponent<Item>();
-            newItem.SetBlock(block);
-            _items.Add(block, newItem);
-            return newItem;
-        }
-        else
-        {
-            Debug.LogWarning("Inventory full!");
-            return null;
-        }
+        Item newItem = Instantiate(ItemPrefab, ItemParent).GetComponent<Item>();
+        newItem.SetBlock(block);
+        _items.Add(block, newItem);
+        return newItem;
     }
 }
