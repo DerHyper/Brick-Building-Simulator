@@ -158,7 +158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.03}
   m_AnchorMax: {x: 0.19, y: 0.9}
-  m_AnchoredPosition: {x: 12.150391, y: -13.5}
+  m_AnchoredPosition: {x: 12.150391, y: -13.5000305}
   m_SizeDelta: {x: 3.7000732, y: -6.0999756}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8028863
@@ -3637,11 +3637,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 1592464874}
   BlockReferenceManager: {fileID: 1902549184}
-  MeanNumberOfBlocks: 10
+  MeanNumberOfBlocks: 7
   StandardDeviation: 3
   MinBlocks: 2
   MaxBlocks: 20
-  NumberOfBlockTypes: 5
+  NumberOfBlockTypes: 8
 --- !u!1 &1502111865
 GameObject:
   m_ObjectHideFlags: 0
@@ -3959,7 +3959,6 @@ MonoBehaviour:
   GhostManager: {fileID: 1840677971}
   ItemParent: {fileID: 1780081689}
   ItemPrefab: {fileID: 5052702666643941984, guid: da42b288469e5bf4f936c186bb190ea4, type: 3}
-  _maxInventorySize: 15
 --- !u!1 &1596399847
 GameObject:
   m_ObjectHideFlags: 0
