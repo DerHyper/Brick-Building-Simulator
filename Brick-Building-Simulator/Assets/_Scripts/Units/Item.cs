@@ -30,7 +30,7 @@ public class Item : MonoBehaviour
     }
 
     /// <summary>
-    /// Increases the current amout stored inside this Item.
+    /// Increases the current amout stored inside this Item and updates the number showing it.
     /// </summary>
     /// <returns>The current amount.</returns>
     public int IncreaseAmount()
@@ -41,7 +41,7 @@ public class Item : MonoBehaviour
     }
 
     /// <summary>
-    /// Decreases the current amout stored inside this Item.
+    /// Decreases the current amout stored inside this Item and updates the number showing it.
     /// </summary>
     /// <returns>The current amount.</returns>
     public int DecreaseAmount()
