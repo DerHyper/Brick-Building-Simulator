@@ -93,8 +93,9 @@ public class InventoryRandomizer : MonoBehaviour
     private float PickNormalDistribution(float mean, float standardDeviation)
     {
         // Generate two random numbers (0,1)
-        float u1 = UnityEngine.Random.Range(float.Epsilon, 1.0f - float.Epsilon);
-        float u2 = UnityEngine.Random.Range(float.Epsilon, 1.0f - float.Epsilon);
+        const float EpsilonOffset = 0.0001f;
+        float u1 = UnityEngine.Random.Range(EpsilonOffset, 1.0f - EpsilonOffset);
+        float u2 = UnityEngine.Random.Range(EpsilonOffset, 1.0f - EpsilonOffset);
 
         // Generate a random number from normal distrubution
         float x1 = (float)(Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Cos(2.0 * Math.PI * u2));

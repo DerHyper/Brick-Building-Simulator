@@ -5,7 +5,7 @@ using UnityEngine;
 /// </summary>
 public static class CameraToWorld
 {
-    private const float s_distanceMultiplier = 0.1f;
+    private const float DistanceMultiplier = 0.1f;
 
     /// <summary>
     /// Calculate the position of the block adjacent to the face of the block the mouse is pointing towards
@@ -23,7 +23,7 @@ public static class CameraToWorld
             return false;
         }
 
-        Vector3 positionAdjacentToBlock = mouseHit.point + s_distanceMultiplier * mouseHit.normal;
+        Vector3 positionAdjacentToBlock = mouseHit.point + DistanceMultiplier * mouseHit.normal;
         Vector3Int flooredPosition = Vector3Int.FloorToInt(positionAdjacentToBlock);
         mouseBlockPlacementPosition = flooredPosition;
         return true;
