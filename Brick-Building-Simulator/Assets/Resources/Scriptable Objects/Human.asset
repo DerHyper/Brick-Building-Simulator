@@ -16,4 +16,4 @@ MonoBehaviour:
   SizeY: 2
   SizeZ: 1
   Model: {fileID: 3472137490891613417, guid: 0d07a6e2b72aed441b94d3bc5ae6ac1b, type: 3}
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 212096121d63f4c49820c47124bafbc4, type: 3}
