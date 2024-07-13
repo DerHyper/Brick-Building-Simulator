@@ -73,7 +73,7 @@ public static class Orientation
         };
     }
 
-    /// <inheritdoc />
+    /// <inheritdoc cref="Orientation.GetRotatedSize(Alignment, BuildingBlock)"/>
     /// <param name="blockDisplay">Block that will be rotated.</param>
     public static Vector3Int GetRotatedSize(Alignment alignment, BuildingBlockDisplay blockDisplay)
     {
