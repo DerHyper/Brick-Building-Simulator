@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.EventSystems;
 
 public class InputManager : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class InputManager : MonoBehaviour
     public InventoryManager InventoryManager;
     public MenuManager MenuManager;
     public GhostManager GhostManager;
-    public Orientation.Alignment CurrentAlignment{get; private set;} = Orientation.Alignment.North;
+    public Orientation.Alignment CurrentAlignment { get; private set; } = Orientation.Alignment.North;
     public CinemachineVirtualCamera VirtualCamera;
     [SerializeField]
     private float _zoomSpeed = 0.1f;
@@ -26,11 +27,11 @@ public class InputManager : MonoBehaviour
 
     private void CheckInput()
     {
-        if (Input.GetMouseButtonDown(0)) // Left click
+        if (Input.GetMouseButtonDown(0) && !isMouseOverUI()) // Left click
         {
             BuildBlockAtMousePoint();
         }
-        if (Input.GetMouseButtonDown(1)) // Right click
+        if (Input.GetMouseButtonDown(1) && !isMouseOverUI()) // Right click
         {
             DestroyBlockAtMousePoint();
         }
@@ -49,12 +50,17 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    private bool isMouseOverUI()
+    {
+        return EventSystem.current.IsPointerOverGameObject();
+    }
+
     private void ZoomCamera()
     {
         var transposer = VirtualCamera.GetCinemachineComponent<CinemachineTransposer>();
-        Vector3 offsetDifference = new Vector3(0, Input.GetAxis("Vertical"), Input.GetAxis("Vertical"))*_zoomSpeed;
+        Vector3 offsetDifference = new Vector3(0, Input.GetAxis("Vertical"), Input.GetAxis("Vertical")) * _zoomSpeed;
         Vector3 rawOffset = transposer.m_FollowOffset + offsetDifference;
-        
+
         float clipedY = Math.Max(_minZoom, Math.Min(rawOffset.y, _maxZoom));
         float clipedZ = Math.Max(_minZoom, Math.Min(rawOffset.z, _maxZoom));
         Vector3 clipedOffset = new(rawOffset.x, clipedY, clipedZ);
@@ -71,17 +77,17 @@ public class InputManager : MonoBehaviour
     // Check if position is valid, if so, place the currently selected block and remove it from inventory
     private void BuildBlockAtMousePoint()
     {
-        if(!CameraToWorld.TryGetMouseBlockPlacementPosition(out Vector3Int gridPosition))
+        if (!CameraToWorld.TryGetMouseBlockPlacementPosition(out Vector3Int gridPosition))
         {
             Debug.LogWarning("Tried to place block outside of grid.");
             return;
         }
 
-        Debug.Log(gridPosition,this);
+        Debug.Log(gridPosition, this);
 
         // Get the currently selected block
         BuildingBlock block = InventoryManager.GetSelectedBuildingBlock();
-        if (block != null) 
+        if (block != null)
         {
             if (GridManager.TryInstantiateBuildingBlock(gridPosition, block, CurrentAlignment))
             {
@@ -92,23 +98,23 @@ public class InputManager : MonoBehaviour
 
     private void DestroyBlockAtMousePoint()
     {
-        if(!CameraToWorld.TryGetGameObjectAtMousePosition(out GameObject target))
+        if (!CameraToWorld.TryGetGameObjectAtMousePosition(out GameObject target))
         {
             Debug.LogWarning("Tried to destroy BuildingBlock outside the grid.");
             return;
         }
 
-        Debug.Log(target,this);
+        Debug.Log(target, this);
         BuildingBlockDisplay targetBlock = target.GetComponent<BuildingBlockDisplay>();
 
         if (targetBlock == null)
         {
             Debug.LogWarning("Tried to destroy GameObject, that is not a BuildingBlock.");
             return;
-        } 
+        }
 
         InventoryManager.Add(targetBlock.Block);
         GridManager.DestroyBlock(targetBlock);
     }
-    
+
 }
