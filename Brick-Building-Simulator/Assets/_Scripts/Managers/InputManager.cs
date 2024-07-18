@@ -11,11 +11,11 @@ public class InputManager : MonoBehaviour
     public GhostManager GhostManager;
     public Orientation.Alignment CurrentAlignment { get; private set; } = Orientation.Alignment.North;
     public CinemachineVirtualCamera VirtualCamera;
-    [SerializeField]
+    [SerializeField, Min(0.001f)]
     private float _zoomSpeed = 0.1f;
-    [SerializeField]
+    [SerializeField, Min(0)]
     private float _minZoom = 2.0f;
-    [SerializeField]
+    [SerializeField, Min(0)]
     private float _maxZoom = 20.0f;
 
     // TODO: This could be exchanged for an event system

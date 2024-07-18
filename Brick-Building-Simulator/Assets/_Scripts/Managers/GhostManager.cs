@@ -5,9 +5,9 @@ public class GhostManager : MonoBehaviour
     public Orientation.Alignment CurrentAlignment;
     [SerializeField]
     private Material _ghostMaterial;
-    [SerializeField]
+    [SerializeField, Min(0)]
     private float _repositionSpeed = 0.12f;
-    [SerializeField]
+    [SerializeField, Min(0)]
     private float _rotationSpeed = 0.12f;
     private GameObject _blockGhost;
     private BuildingBlock _blockGhostBlock;

@@ -4,7 +4,7 @@ public class GridManager : MonoBehaviour
 {
     public Transform BuildingBlocksParent; // This should be located in the hierarchy at "Environment/Building Blocks"
 
-    [SerializeField]
+    [SerializeField, Min(1)]
     private Vector3Int _size = new(5, 5, 5);
     [SerializeField]
     private bool _showDebug = false;

@@ -6,16 +6,16 @@ public class InventoryRandomizer : MonoBehaviour
 {
     public InventoryManager InventoryManager;
     public BlockReferenceManager BlockReferenceManager;
-    [SerializeField]
-    private int MeanNumberOfBlocks = 40; // Mean amount of blocks per type
-    [SerializeField]
-    private int StandardDeviation = 5;
-    [SerializeField]
-    private int MinBlocks = 2;
-    [SerializeField]
-    private int MaxBlocks = 20;
-    [SerializeField]
-    private int NumberOfBlockTypes = 5;
+    [SerializeField, Min(0)]
+    private int _meanNumberOfBlocksPerType = 40; // Mean amount of blocks per type
+    [SerializeField, Min(0)]
+    private float _standardDeviation = 5f;
+    [SerializeField, Min(0)]
+    private int _minBlocks = 2;
+    [SerializeField, Min(0)]
+    private int _maxBlocks = 20;
+    [SerializeField, Min(0), Tooltip("Should not be grater, than the total number of block types (BuildingBlocks).")]
+    private int _numberOfItemTypes = 5; // Should not be grater, than the total number of block types (BuildingBlocks).
     private void Start()
     {
         InitInventory();
@@ -24,7 +24,7 @@ public class InventoryRandomizer : MonoBehaviour
     private void InitInventory()
     {
         // Generate block types and distribution
-        List<BuildingBlock> pickedBlockTypes = PickRandomBlocks(BlockReferenceManager.GetBuildingBlocksCopy(), NumberOfBlockTypes);
+        List<BuildingBlock> pickedBlockTypes = PickRandomBlocks(BlockReferenceManager.GetBuildingBlocksCopy(), _numberOfItemTypes);
         int[] distribution = GenerateDistributionOfBlocks();
         AddAllBlocksToInventory(pickedBlockTypes, distribution);
     }
@@ -49,9 +49,9 @@ public class InventoryRandomizer : MonoBehaviour
 
     private int[] GenerateDistributionOfBlocks()
     {
-        int[] distribution = new int[NumberOfBlockTypes];
-        for (int i = 0; i < NumberOfBlockTypes; i++)
-            distribution[i] = NormalRange(MeanNumberOfBlocks, StandardDeviation, MinBlocks, MaxBlocks);
+        int[] distribution = new int[_numberOfItemTypes];
+        for (int i = 0; i < _numberOfItemTypes; i++)
+            distribution[i] = NormalRange(_meanNumberOfBlocksPerType, _standardDeviation, _minBlocks, _maxBlocks);
 
         return distribution;
     }
