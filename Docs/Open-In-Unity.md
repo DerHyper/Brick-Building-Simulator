@@ -9,7 +9,7 @@ This can be done inside the Unity Hub via the tab **Installs**. Press the button
 If the version is not listed, you can find it in the [Unity download archive](https://unity.com/releases/editor/archive).
 
 ### 3. Get the Brick-Building-Simulator project
-At the home directory [Brick-Building-Simulator/](/../Brick-Building-Simulator/) you can either clone, fork or download the project. For further information on how to do that, please see [this](https://docs.github.com/get-started/start-your-journey/downloading-files-from-github) article from GitHub.
+At the home directory [Brick-Building-Simulator/](/Brick-Building-Simulator/) you can either clone, fork or download the project. For further information on how to do that, please see [this](https://docs.github.com/get-started/start-your-journey/downloading-files-from-github) article from GitHub.
 
 ### 4. Open the project in Unity
 This can be done inside the Unity Hub via the tab **Projects**. Press the button **Add** and select the previously downloaded repository or folder.
