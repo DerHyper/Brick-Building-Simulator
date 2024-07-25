@@ -58,7 +58,7 @@ public class InputManager : MonoBehaviour
     private void ZoomCamera()
     {
         var transposer = VirtualCamera.GetCinemachineComponent<CinemachineTransposer>();
-        Vector3 offsetDifference = new Vector3(0, Input.GetAxis("Vertical"), Input.GetAxis("Vertical")) * _zoomSpeed;
+        Vector3 offsetDifference = new Vector3(0, -Input.GetAxis("Vertical"), -Input.GetAxis("Vertical")) * _zoomSpeed;
         Vector3 rawOffset = transposer.m_FollowOffset + offsetDifference;
 
         float clipedY = Math.Max(_minZoom, Math.Min(rawOffset.y, _maxZoom));
