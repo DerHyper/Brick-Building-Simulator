@@ -57,6 +57,7 @@ public class MenuManager : MonoBehaviour
 
     /// <summary>
     /// Start import process.
+    /// Note: When using import via text, ImportWithText should be called after pressing the import button.
     /// </summary>
     public void Import()
     {
@@ -76,7 +77,7 @@ public class MenuManager : MonoBehaviour
         SaveManager.ExportWithFileBrowser();
 #else
         SwitchExportCanvasAvailability();
-        ExportWebGL();
+        ExportWithText();
 #endif
     }
 

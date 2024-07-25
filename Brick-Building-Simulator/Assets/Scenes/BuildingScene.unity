@@ -158,7 +158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.03}
   m_AnchorMax: {x: 0.19, y: 0.9}
-  m_AnchoredPosition: {x: 12.150391, y: -13.5000305}
+  m_AnchoredPosition: {x: 12.150391, y: -13.5}
   m_SizeDelta: {x: 3.7000732, y: -6.0999756}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8028863
@@ -446,7 +446,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2012311271}
         m_TargetAssemblyTypeName: MenuManager, _Scripts
-        m_MethodName: ImportWebGL
+        m_MethodName: ImportWithText
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3637,11 +3637,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 1592464874}
   BlockReferenceManager: {fileID: 1902549184}
-  MeanNumberOfBlocks: 7
-  StandardDeviation: 3
-  MinBlocks: 2
-  MaxBlocks: 20
-  NumberOfBlockTypes: 8
+  _meanNumberOfBlocksPerType: 40
+  _standardDeviation: 5
+  _minBlocks: 2
+  _maxBlocks: 20
+  _numberOfItemTypes: 5
 --- !u!1 &1502111865
 GameObject:
   m_ObjectHideFlags: 0
