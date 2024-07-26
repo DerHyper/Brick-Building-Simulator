@@ -1,7 +1,11 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// - Queries blocks from BlockReference Manager
+/// - Generates a distribution of blocks
+/// - Gives instructions for adding blocks to the InventoryManager
+/// </summary>
 public class InventoryRandomizer : MonoBehaviour
 {
     public InventoryManager InventoryManager;

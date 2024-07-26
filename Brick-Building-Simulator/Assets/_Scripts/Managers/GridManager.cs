@@ -1,5 +1,7 @@
 using UnityEngine;
-
+/// <summary>
+/// Instantiates and manages access to a Grid3D instance.
+/// </summary>
 public class GridManager : MonoBehaviour
 {
     public Transform BuildingBlocksParent; // This should be located in the hierarchy at "Environment/Building Blocks"

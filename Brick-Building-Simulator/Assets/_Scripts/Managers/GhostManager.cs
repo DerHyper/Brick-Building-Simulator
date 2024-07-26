@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Controls the block block ghost, a transparent block indicating the position a block will be placed.
+/// </summary>
 public class GhostManager : MonoBehaviour
 {
     public Orientation.Alignment CurrentAlignment;

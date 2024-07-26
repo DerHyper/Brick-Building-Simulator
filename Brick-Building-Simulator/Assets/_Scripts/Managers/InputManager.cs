@@ -3,6 +3,9 @@ using UnityEngine;
 using Cinemachine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// Controls input and calls other managers.
+/// </summary>
 public class InputManager : MonoBehaviour
 {
     public GridManager GridManager;

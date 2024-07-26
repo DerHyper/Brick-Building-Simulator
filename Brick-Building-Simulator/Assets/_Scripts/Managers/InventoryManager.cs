@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// Instantiates and manages items as children of an ItemParent. Stores an item prefab so that memory does not have to be accessed directly.
+/// </summary>
 public class InventoryManager : MonoBehaviour
 {
     public GhostManager GhostManager;

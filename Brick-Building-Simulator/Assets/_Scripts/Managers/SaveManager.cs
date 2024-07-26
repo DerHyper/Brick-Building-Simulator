@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 
 /// <summary>
-/// Manager that contains Methods for exporting and importing .json Data
+/// Manager that contains Methods for exporting and importing .json data
 /// </summary>
 public class SaveManager : MonoBehaviour
 {

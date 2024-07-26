@@ -1,6 +1,9 @@
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// provides a wrapper for access to and from menus. He takes care of opening and closing panels within the software.
+/// </summary>
 public class MenuManager : MonoBehaviour
 {
     public GameObject ExitCanvas;

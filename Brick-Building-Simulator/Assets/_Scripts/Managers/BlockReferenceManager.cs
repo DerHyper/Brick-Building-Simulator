@@ -4,6 +4,9 @@ using System.Linq;
 using UnityEngine;
 using UnityEditor;
 
+/// <summary>
+/// Stores BuildingBlock Scriptable Objects (DataContainers) so that storage does not have to be accessed directly. Manages access to the BuildingBlocks.
+/// </summary>
 public class BlockReferenceManager : MonoBehaviour
 {
     private List<BuildingBlock> _buildingBlocks;
