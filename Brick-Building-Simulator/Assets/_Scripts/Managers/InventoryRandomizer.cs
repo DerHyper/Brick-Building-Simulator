@@ -2,9 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
-/// - Queries blocks from BlockReference Manager
-/// - Generates a distribution of blocks
-/// - Gives instructions for adding blocks to the InventoryManager
+/// Generates a random distribution of blocks and adds it to the inventory
+/// using blocks from BlockReference Manager
 /// </summary>
 public class InventoryRandomizer : MonoBehaviour
 {
