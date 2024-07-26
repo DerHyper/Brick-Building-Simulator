@@ -57,7 +57,8 @@ public class GhostManager : MonoBehaviour
     private GameObject CreateBlockGhost()
     {
         Transform parent = Finder.FindOrCreateGameObjectWithName("Environment").transform;
-        GameObject blockGhost = Instantiate(new GameObject() { name = "BlockGhost" }, parent);
+        GameObject blockGhost = new() { name = "BlockGhost" };
+        blockGhost.transform.parent = parent;
         return blockGhost;
     }
 
@@ -75,10 +76,10 @@ public class GhostManager : MonoBehaviour
 
         // Transform position over multiple frames
         Vector3 newPosition = gridPosition + Orientation.GetRotationOffset(CurrentAlignment, _blockGhostBlock);
-        _blockGhost.transform.position = Vector3.Lerp(_blockGhost.transform.position, newPosition, Time.deltaTime*_repositionSpeed);
+        _blockGhost.transform.position = Vector3.Lerp(_blockGhost.transform.position, newPosition, Time.deltaTime * _repositionSpeed);
 
         // Transform rotation over multiple frames
         Quaternion newDirection = Orientation.ToQuaternion(CurrentAlignment);
-        _blockGhost.transform.rotation = Quaternion.Lerp(_blockGhost.transform.rotation, newDirection, Time.deltaTime*_rotationSpeed);
+        _blockGhost.transform.rotation = Quaternion.Lerp(_blockGhost.transform.rotation, newDirection, Time.deltaTime * _rotationSpeed);
     }
 }
