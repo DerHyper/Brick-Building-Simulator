@@ -75,10 +75,10 @@ public class GhostManager : MonoBehaviour
 
         // Transform position over multiple frames
         Vector3 newPosition = gridPosition + Orientation.GetRotationOffset(CurrentAlignment, _blockGhostBlock);
-        _blockGhost.transform.position = Vector3.Lerp(_blockGhost.transform.position, newPosition, _repositionSpeed);
+        _blockGhost.transform.position = Vector3.Lerp(_blockGhost.transform.position, newPosition, Time.deltaTime*_repositionSpeed);
 
         // Transform rotation over multiple frames
         Quaternion newDirection = Orientation.ToQuaternion(CurrentAlignment);
-        _blockGhost.transform.rotation = Quaternion.Lerp(_blockGhost.transform.rotation, newDirection, _rotationSpeed);
+        _blockGhost.transform.rotation = Quaternion.Lerp(_blockGhost.transform.rotation, newDirection, Time.deltaTime*_rotationSpeed);
     }
 }

@@ -5208,8 +5208,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentAlignment: 0
   _ghostMaterial: {fileID: 2100000, guid: 2a6c2a35388ad4c40bafb810c61a616a, type: 2}
-  _repositionSpeed: 0.12
-  _rotationSpeed: 0.05
+  _repositionSpeed: 12
+  _rotationSpeed: 12
 --- !u!1 &1902549182
 GameObject:
   m_ObjectHideFlags: 0
