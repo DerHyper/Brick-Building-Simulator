@@ -1,29 +1,24 @@
-# KlemmSim
-Backelorarbeit: Entwicklung eines Klemmbaustein-Simulators
-Bachelor thesis: Development of a Brick-Building Simulator
+# Brick-Building Simulator
 
-## Motivation
+You can download this software [here](https://github.com/DerHyper/Brick-Building-Simulator/releases/).
 
-Um ein Problem zu lösen, kann es manchmal hilfreich sein, es aus einer anderen Perspektive zu betrachten. Ein möglicher Ansatz dafür ist es, mithilfe von Serious Play spielerisch ein Problem zugänglicher zu machen. Insbesondere hat es sich bewährt, eine Momentaufnahme mit einer Reihe zufälliger Klemmbausteine zu erstellen. Diese Methode findet bereits Anwendung bei der persönlichen Weiterentwicklung, Teambuildingmaßnahmen oder, wie hier an der HHU, bei der Veranschaulichung des momentanen Fortschritts einer Bachelorarbeit.
+## What was this Software made for?
+This software was developed as a part of my bachelor thesis: _"Development of a Brick-Building Simulator"_.
 
-Allerdings gibt es momentan keine Software, die auf Serious Play mit Klemmbausteinen ausgelegt ist, was einige Schwierigkeiten mit sich bringt. Remote ist es nur schwer möglich, die Konstrukte zu veranschaulichen. In unserer Universität wird es beispielsweise umgangen, indem der Erbauer Fotos aus verschiedenen Winkeln macht und diese dann seinem Betreuer zum nachbauen sendet, was einen Erheblichen mehraufwand verursacht. 
+This is a serious game where you can build constructs using digital building blocks. The focus lies on digitizing the serious play method used for analyzing scientific theses at the Heinrich-Heine-Universität Düsseldorf.
 
-## Ziele des Projekts
+## Documentation and Guids
++ [How to run the Brick-Building Simulator](/Docs/How-To-Run.md)
++ [How to build this software for a platform of your choice](/Docs/How-To-Build.md)
++ [How to open the Brick-Building Simulator in Unity](/Docs/Open-In-Unity.md)
++ [How to add new building blocks](/Docs/Add-New-Blocks.md)
++ [How to change parameters](/Docs/Changing-Parameters.md)
++ [Architecture](/Docs/Architecture.md)
 
-Ziel meiner Bachelorarbeit soll es sein, ein Programm zu schreiben, das es einem ermöglicht, digital  Konstrukte für Serious Play zu bauen. Diese sollen dann exportieren, versendet und wieder importiert werden können. 
-
-## Minimale Anforderungen
-
-- Entwicklung einer Software zum Erbauen von Konstrukten aus digitalen Klemmbausteinen
-- Exportieren und Importierung von Konstrukten
-- Interaktion mithilfe von Inventar und User Interface
-
-## Mögliche weitere Schritte
-
-- Starten der Anwendung im Browser
-- Generierung einer zufälligen Sammlung von Steinen aus 10-20 rechteckigen Steinen, welche zum Bauen benutzt werden können
-- Ermöglichen des Hinzufügens einer Beschreibung zu einem Konstrukt
-- Rotation der Steine in 4 Ausrichtungen
-- Weitere Steine, z.B. Rundungen, Fahnen, humanoide Figuren
-- „freier Modus“, ohne Begrenzung von Bauteilen
-- Bewegbare Teile
+## Features
++ Building with blocks inside a three-dimensional grid
++ Rotation of blocks in four directions
++ Exporting and importing constructions
++ Randomly generated Inventory
++ Camera movement and zoom
++ Colorblind friendly colors
