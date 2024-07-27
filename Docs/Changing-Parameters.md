@@ -28,11 +28,11 @@ Reading about [normal distribution](https://en.wikipedia.org/wiki/Normal_distrib
 You can change the following parameters:
 | Parameter Name | Meaning |
 | - | - |
-| meanNumberOfBlocksPerType | Mean number of blocky you will receive of each type. It is equivalent to the μ-parameter of a normal distribution. |
+| meanNumberOfBlocksPerType | Mean number of block you will receive of each type. It is equivalent to the μ-parameter of a normal distribution. |
 | standardDeviation | Corresponds to the randomness of the result. It is equivalent to the σ-parameter of a normal distribution. |
 | minBlocks | Corresponds to the minimum number of blocks received per type. |
 | maxBlocks | Corresponds to the maximum number of blocks received per type. |
-| numberOfItemTypes | Sets how many items-types will be added to the inventory. Should __not__ be grater, then the total number of [Scriptable Objects](</Brick-Building-Simulator/Assets/Resources/Scriptable Objects/>) (BuildingBlocks). |
+| numberOfItemTypes | Sets how many items-types will be added to the inventory. Should __not__ be greater, then the total number of [Scriptable Objects](</Brick-Building-Simulator/Assets/Resources/Scriptable Objects/>) (BuildingBlocks). |
 
 ### Change block ghost (transparent block near mouse pointer) speed
 Open the _GhostManager_ from the [BuildingScene](/Brick-Building-Simulator/Assets/Scenes/BuildingScene.unity) in the Inspector.
