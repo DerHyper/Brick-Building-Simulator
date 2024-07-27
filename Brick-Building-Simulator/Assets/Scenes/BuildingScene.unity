@@ -3637,11 +3637,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InventoryManager: {fileID: 1592464874}
   BlockReferenceManager: {fileID: 1902549184}
-  _meanNumberOfBlocksPerType: 40
+  _meanNumberOfBlocksPerType: 8
   _standardDeviation: 5
   _minBlocks: 2
   _maxBlocks: 20
-  _numberOfItemTypes: 5
+  _numberOfItemTypes: 9
 --- !u!1 &1502111865
 GameObject:
   m_ObjectHideFlags: 0
