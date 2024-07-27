@@ -17,12 +17,12 @@ Unzip the downloaded file using a program like [7-Zip](https://7-zip.com/downloa
 
 ### <a name="run"></a> 3. Run
 
-To run the Brick-Building Simulator now, simply execute the binary file located inside the dictionary. It should be called _Brick-Building-Simulator.exe_, or similarly, depending on your platform.
+To run the Brick-Building Simulator, simply execute the binary file located inside the directory. It should be called _Brick-Building-Simulator.exe_, or similarly, depending on your platform.
 
-> When using __Linux__ it is also nessecary to make the file executable. \
-To do this, simply open a new terminal inside the dictionary and write `chmod +x Linux.x86_64`.
+>**_Note:_** When using __Linux__ it is also nessecary to make the file executable. \
+To do this, simply open a new terminal inside the directory and write `chmod +x Linux.x86_64`.
 
-> If you want to use the __WebGL__ version on your __browser__ you need to start a server inside the dictinary. A tutorial on how to do this using _Python_ can be found [here](https://www.youtube.com/watch?v=Ceqbmm7ydS8).
+>**_Note:_** If you want to use the __WebGL__ version on your __browser__ you need to hoast a server. Using [Python](https://www.python.org/) you can start a local server with `python -m http.server --cgi 8080` inside the WebGL directory. You can then access it via [http://localhost:8080/index.html](http://localhost:8080/index.html). A detaild video tutorial can be found [here](https://www.youtube.com/watch?v=Ceqbmm7ydS8).
 
 ## Build the newest version
 If you want to use the newest version of the Brick-Building Simulator on a platform of your choice, you first need to build it. A tutorial on how to do this can be found [here](/Docs/How-To-Build.md).
