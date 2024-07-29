@@ -1,5 +1,7 @@
 # Brick-Building Simulator
 
+You can try the demo [here](https://www.hyperstudios.de/Brick-Building-Simulator.html).
+
 You can download this software [here](https://github.com/DerHyper/Brick-Building-Simulator/releases/).
 
 ## What was this Software made for?
