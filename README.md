@@ -4,6 +4,14 @@ You can try the demo [here](https://www.hyperstudios.de/Brick-Building-Simulator
 
 You can download this software [here](https://github.com/DerHyper/Brick-Building-Simulator/releases/).
 
+## Controls
++ Zoom `↑`, `↓`, `W`, `S`
++ Rotate Camera `←`, `→`, `A`, `D`
++ Rotate Block `R`
++ Place Block `Left-Click`
++ Destroy Block `Right-Click`
+
+
 ## What was this software made for?
 This software was developed as a part of my bachelor thesis: _"Development of a Brick-Building Simulator"_.
 
