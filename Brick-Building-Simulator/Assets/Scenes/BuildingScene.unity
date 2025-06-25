@@ -1459,7 +1459,7 @@ GameObject:
   - component: {fileID: 426149201}
   - component: {fileID: 426149200}
   m_Layer: 0
-  m_Name: Export
+  m_Name: Yes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1529,7 +1529,43 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 426149201}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2012311271}
+        m_TargetAssemblyTypeName: MenuManager, _Scripts
+        m_MethodName: ImportWithText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2012311271}
+        m_TargetAssemblyTypeName: MenuManager, _Scripts
+        m_MethodName: SwitchImportCanvasAvailability
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2012311271}
+        m_TargetAssemblyTypeName: MenuManager, _Scripts
+        m_MethodName: SwitchOptionCanvasAvailability
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &426149201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2324,7 +2360,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 649889247}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2012311271}
+        m_TargetAssemblyTypeName: MenuManager, _Scripts
+        m_MethodName: SwitchExportCanvasAvailability
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2012311271}
+        m_TargetAssemblyTypeName: MenuManager, _Scripts
+        m_MethodName: SwitchOptionCanvasAvailability
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &649889247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2898,7 +2958,7 @@ GameObject:
   - component: {fileID: 726886584}
   - component: {fileID: 726886583}
   m_Layer: 0
-  m_Name: Import
+  m_Name: Abort
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2968,7 +3028,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 726886584}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2012311271}
+        m_TargetAssemblyTypeName: MenuManager, _Scripts
+        m_MethodName: SwitchImportCanvasAvailability
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2012311271}
+        m_TargetAssemblyTypeName: MenuManager, _Scripts
+        m_MethodName: SwitchOptionCanvasAvailability
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &726886584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3378,7 +3462,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 798412141}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2012311271}
+        m_TargetAssemblyTypeName: MenuManager, _Scripts
+        m_MethodName: SwitchOptionCanvasAvailability
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &798412141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4192,12 +4288,12 @@ GameObject:
   - component: {fileID: 1143733986}
   - component: {fileID: 1143733985}
   m_Layer: 0
-  m_Name: Export
+  m_Name: Copy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1143733984
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4262,7 +4358,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1143733986}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2012311271}
+        m_TargetAssemblyTypeName: MenuManager, _Scripts
+        m_MethodName: CopyExportText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1143733986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4358,7 +4466,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a65c5d852b0932d4da1545726f82d70d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7cbb901bae2423c498e2fe847cfda3c6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6128,7 +6236,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1665290439}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2012311271}
+        m_TargetAssemblyTypeName: MenuManager, _Scripts
+        m_MethodName: Import
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1665290439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6252,7 +6372,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2012311271}
         m_TargetAssemblyTypeName: MenuManager, _Scripts
-        m_MethodName: SwitchExitCanvasAvailability
+        m_MethodName: SwitchOptionCanvasAvailability
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7281,7 +7401,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1926212656}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2012311271}
+        m_TargetAssemblyTypeName: MenuManager, _Scripts
+        m_MethodName: Export
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1926212656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7914,8 +8046,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ExitCanvas: {fileID: 593355707}
-  ImportCanvas: {fileID: 0}
-  ExportCanvas: {fileID: 0}
+  ImportCanvas: {fileID: 427166221}
+  ExportCanvas: {fileID: 1317134066}
+  OptionsCanvas: {fileID: 1157029580}
   ExitButton: {fileID: 2081086467}
   SaveManager: {fileID: 1946154133}
 --- !u!4 &2012311272

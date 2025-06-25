@@ -9,6 +9,7 @@ public class MenuManager : MonoBehaviour
     public GameObject ExitCanvas;
     public GameObject ImportCanvas;
     public GameObject ExportCanvas;
+    public GameObject OptionsCanvas;
     public GameObject ExitButton;
     public SaveManager SaveManager;
     void Start()
@@ -28,6 +29,16 @@ public class MenuManager : MonoBehaviour
         bool availability = ExitCanvas.activeSelf;
         ExitCanvas.SetActive(!availability);
 #endif
+    }
+
+    /// <summary>
+    /// If the OptionCanvas is open, calling this funktion closes it. 
+    /// If the OptionCanvas is closed, calling this funktion opens it.
+    /// </summary>
+    public void SwitchOptionCanvasAvailability()
+    {
+        bool availability = OptionsCanvas.activeSelf;
+        OptionsCanvas.SetActive(!availability);
     }
 
     /// <summary>
@@ -67,6 +78,7 @@ public class MenuManager : MonoBehaviour
 #if UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN || UNITY_STANDALONE_LINUX || UNITY_EDITOR
         SaveManager.ImportWithFileBrowser();
 #else
+        SwitchOptionCanvasAvailability();
         SwitchImportCanvasAvailability();
 #endif
     }
@@ -79,6 +91,7 @@ public class MenuManager : MonoBehaviour
 #if UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN || UNITY_STANDALONE_LINUX || UNITY_EDITOR
         SaveManager.ExportWithFileBrowser();
 #else
+        SwitchOptionCanvasAvailability();
         SwitchExportCanvasAvailability();
         ExportWithText();
 #endif
@@ -100,6 +113,14 @@ public class MenuManager : MonoBehaviour
     {
         string saveData = SaveManager.SaveDataToJSON();
         ExportCanvas.GetComponentInChildren<TMP_InputField>().text = saveData;
+    }
+
+    /// <summary>
+    /// Copy content of export menu text field to clipboard.
+    /// </summary>
+    public void CopyExportText()
+    {
+        // TODO: Implement
     }
 
     private void InitiateExitMenu()
