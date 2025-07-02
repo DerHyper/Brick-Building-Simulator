@@ -153,7 +153,7 @@ public class MenuManager : MonoBehaviour
         {
             Vector2 currentResolution = canvas.GetComponent<CanvasScaler>().referenceResolution;
 
-#if (!UNITY_IOS && !UNITY_ANDROID) || UNITY_EDITOR // Not Mobile
+#if !(UNITY_ANDROID || UNITY_IOS) // No Mobile
             canvas.GetComponent<CanvasScaler>().referenceResolution = currentResolution * StandaloneReferenceResolutionFactor;
 #endif
         }
