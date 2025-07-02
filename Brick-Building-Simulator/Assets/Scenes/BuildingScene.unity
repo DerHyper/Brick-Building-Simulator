@@ -8050,7 +8050,9 @@ MonoBehaviour:
   ExportCanvas: {fileID: 1317134066}
   OptionsCanvas: {fileID: 1157029580}
   ExitButton: {fileID: 2081086467}
+  MainCanvas: {fileID: 1937895040}
   SaveManager: {fileID: 1946154133}
+  StandaloneReferenceResolutionFactor: 1.5
 --- !u!4 &2012311272
 Transform:
   m_ObjectHideFlags: 0
