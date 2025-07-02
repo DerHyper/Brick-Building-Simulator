@@ -125,8 +125,8 @@ public class MenuManager : MonoBehaviour
 
     private void InitiateExitMenu()
     {
-#if UNITY_WEBGL && !UNITY_EDITOR
-        ExitButton.SetActive(false); // No exit on WebGL
+#if (UNITY_WEBGL || UNITY_IOS || UNITY_ANDROID) && !UNITY_EDITOR
+        ExitButton.SetActive(false); // No exit on WebGL, Mobile
 #endif
         ExitCanvas.SetActive(false);
     }
